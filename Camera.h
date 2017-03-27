@@ -2,7 +2,9 @@
 #ifndef _CAMERA_H
 #define _CAMERA_H
 
-enum CAMERA_STATE {CAMERA_VIEW, CAMERA_BROWSE};
+#include "Camera_View.h"
+#include "Camera_Photos.h"
+#include "Data_Types.h"
 
 void Camera_initalise(void);
 

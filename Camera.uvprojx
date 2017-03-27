@@ -420,16 +420,6 @@
               <FilePath>.\Camera_Defines.h</FilePath>
             </File>
             <File>
-              <FileName>Camera_Browse.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Camera_Browse.h</FilePath>
-            </File>
-            <File>
-              <FileName>Camera_Browse.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Camera_Browse.c</FilePath>
-            </File>
-            <File>
               <FileName>Data_types.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Data_types.c</FilePath>
@@ -443,6 +433,16 @@
               <FileName>Touch_Handler.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Touch_Handler.c</FilePath>
+            </File>
+            <File>
+              <FileName>Camera_Photos.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Camera_Photos.c</FilePath>
+            </File>
+            <File>
+              <FileName>Camera_Photos.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Camera_Photos.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -482,7 +482,17 @@
             <File>
               <FileName>Icon_Browse.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\Icon_Browse.c</FilePath>
+              <FilePath>.\Icons\Icon_Browse.c</FilePath>
+            </File>
+            <File>
+              <FileName>Icon_Camera.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Icons\Icon_Camera.c</FilePath>
+            </File>
+            <File>
+              <FileName>Icon_Photos.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Icons\Icon_Photos.c</FilePath>
             </File>
           </Files>
         </Group>

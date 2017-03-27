@@ -2,6 +2,8 @@
 #ifndef _DATA_TYPES_H
 #define _DATA_TYPES_H
 
+enum CAMERA_STATE {CAMERA_VIEW, CAMERA_PHOTOS};
+
 typedef struct
 {
 	unsigned int  	 width;

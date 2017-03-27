@@ -1,15 +1,8 @@
 /* GIMP RGBA C-Source image dump (Icon_Browse.c) */
 
-#include "Data_Types.h"
+#include "../Data_Types.h"
 
 static Icon Icon_Browse = {
-
-//static const struct {
-//  unsigned int  	 width;
-//  unsigned int  	 height;
-//  unsigned int  	 bytes_per_pixel; /* 2:RGB16, 3:RGB, 4:RGBA */ 
-//  unsigned char 	 *pixel_data;//pixel_data[24 * 24 * 2 + 1];
-//} Icon_Browse = {
   24, 24, 2,
   "\000\061\200\030\200\030\200\030\200\030\200\030\200\030\200\030\200\030\200\030\200"
   "\030\200\030\200\030\200\030hZ\311b\200\030\200\030\301\040\200\030\200\030\200\030"

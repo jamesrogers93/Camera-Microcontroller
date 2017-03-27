@@ -5,8 +5,6 @@
 #include "Board_Touch.h"
 #include "Camera_Defines.h"
 #include "SDCard_Module.h"
-#include "Camera_View.h"
-#include "Camera_Browse.h"
 
 extern GLCD_FONT     GLCD_Font_16x24;
 
@@ -17,7 +15,7 @@ enum CAMERA_STATE Camera_State = CAMERA_VIEW;
 void Camera_initalise(void)
 {
 	Camera_View_Initalise();
-	Camera_Browse_Initalise();
+	Camera_Photos_Initalise();
 }
 
 void Camera_run(void)
@@ -41,12 +39,12 @@ void Camera_run(void)
 			{
 				// Go to the camera view state.
 				case CAMERA_VIEW:
-					Camera_StateView();
+					Camera_State = Camera_View_Run();
 					break;
 					
 				// Go to the camera browse state
-				case CAMERA_BROWSE:
-					//Camera_StateBrowse();
+				case CAMERA_PHOTOS:
+					Camera_State = Camera_Photos_Run();
 					break;
 				
 				// No state has been defined. Display message and terminate
@@ -56,7 +54,7 @@ void Camera_run(void)
 					GLCD_DrawString(100, 100, "ERROR: State not specified");
 					RUN = 0;
 					break;
-			}	
+			}
 		}
 		else
 		{
@@ -74,6 +72,10 @@ void Camera_run(void)
 				SDCardPrompted = 1;
 			}
 		}
+		
+		// Update the touch handler
+		Touch_Handler_Update();
+		
 	}
 }
 

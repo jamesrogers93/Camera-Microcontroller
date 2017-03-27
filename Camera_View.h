@@ -4,6 +4,6 @@
 
 void Camera_View_Initalise(void);
 
-void Camera_StateView(void);
+enum CAMERA_STATE Camera_View_Run(void);
 
 #endif /* _CAMERA_VIEW_H */
