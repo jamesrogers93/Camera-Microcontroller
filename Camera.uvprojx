@@ -399,6 +399,51 @@
               <FileType>1</FileType>
               <FilePath>.\Camera.c</FilePath>
             </File>
+            <File>
+              <FileName>Data_Types.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Data_Types.h</FilePath>
+            </File>
+            <File>
+              <FileName>Camera_View.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Camera_View.h</FilePath>
+            </File>
+            <File>
+              <FileName>Camera_View.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Camera_View.c</FilePath>
+            </File>
+            <File>
+              <FileName>Camera_Defines.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Camera_Defines.h</FilePath>
+            </File>
+            <File>
+              <FileName>Camera_Browse.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Camera_Browse.h</FilePath>
+            </File>
+            <File>
+              <FileName>Camera_Browse.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Camera_Browse.c</FilePath>
+            </File>
+            <File>
+              <FileName>Data_types.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Data_types.c</FilePath>
+            </File>
+            <File>
+              <FileName>Touch_Handler.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Touch_Handler.h</FilePath>
+            </File>
+            <File>
+              <FileName>Touch_Handler.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Touch_Handler.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -428,6 +473,16 @@
               <FileName>SDCard_Module.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\SDCard_Module.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Bitmaps</GroupName>
+          <Files>
+            <File>
+              <FileName>Icon_Browse.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Icon_Browse.c</FilePath>
             </File>
           </Files>
         </Group>
