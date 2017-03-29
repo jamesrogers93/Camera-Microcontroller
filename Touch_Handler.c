@@ -1,6 +1,6 @@
 #include "Touch_Handler.h"
 
-#define TOUCH_DELAY 1000
+#define TOUCH_DELAY 500000
 static unsigned int Touch_Delay = TOUCH_DELAY;
 
 void Touch_Handler_Update(void)

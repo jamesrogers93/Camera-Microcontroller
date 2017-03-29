@@ -1,16 +1,32 @@
 #include "Camera.h"
 
+// GLCD
 #include "Board_GLCD.h"
 #include "GLCD_Config.h"
+
+// Touch
 #include "Board_Touch.h"
-#include "Camera_Defines.h"
+#include "Touch_Handler.h"
+
+// SDCard
 #include "SDCard_Module.h"
 
+// Camera application
+#include "Camera_Defines.h"
+#include "Camera_Globals.h"
+#include "Camera_View.h"
+#include "Camera_Photos.h"
+#include "Data_Types.h"
+
+
 extern GLCD_FONT     GLCD_Font_16x24;
+extern int Camera_Global_DrawToScreen;
 
 int RUN = 1;
 int SDCardPrompted = 0;
 enum CAMERA_STATE Camera_State = CAMERA_VIEW;
+
+void Camera_PromptSDCard(void);
 
 void Camera_initalise(void)
 {
@@ -32,6 +48,12 @@ void Camera_run(void)
 				
 				// Release the SDCardPrompted flag
 				SDCardPrompted = 0;
+				
+				// Enable the app to draw to screen
+				Camera_Global_DrawToScreen = 1;
+				
+				// Reset the SDCard Configuration
+				SDCard_Config();
 			}
 
 			// Now go into the cameras current state
