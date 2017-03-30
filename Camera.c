@@ -38,9 +38,14 @@ void Camera_run(void)
 {
 	while(RUN)
 	{
+		// Check if the SDCard is inserted
 		if(SDCard_IsDetected())
 		{
+			// An SDCard is inserted.
+			
 			// Check if we just prompted the user to insert the SDCard
+			// I.E. The card has just been inserted, now we need to prepare
+			// for the camera states and reconfigure the SDCard.
 			if(SDCardPrompted)
 			{
 				// Clear the screen for camera
@@ -48,9 +53,6 @@ void Camera_run(void)
 				
 				// Release the SDCardPrompted flag
 				SDCardPrompted = 0;
-				
-				// Enable the app to draw to screen
-				Camera_Global_DrawToScreen = 1;
 				
 				// Reset the SDCard Configuration
 				SDCard_Config();
@@ -64,7 +66,7 @@ void Camera_run(void)
 					Camera_State = Camera_View_Run();
 					break;
 					
-				// Go to the camera browse state
+				// Go to the camera photos state
 				case CAMERA_PHOTOS:
 					Camera_State = Camera_Photos_Run();
 					break;
@@ -80,6 +82,8 @@ void Camera_run(void)
 		}
 		else
 		{
+			// No SDCard is inserted.
+			
 			// If we have already prompted the user to insert the SDCard,
 			// there is no need to draw the prompt to screen again
 			if(!SDCardPrompted)
@@ -92,6 +96,9 @@ void Camera_run(void)
 				
 				// Indicate that the user has been prompted to insert the SDCard
 				SDCardPrompted = 1;
+				
+				// Enable the app to draw to screen once the SDCard is inserted
+				Camera_Global_DrawToScreen = CAMERA_GLOBAL_DRAWON;
 			}
 		}
 		

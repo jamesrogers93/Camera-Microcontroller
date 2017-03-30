@@ -38,8 +38,11 @@ Entity Camera_PhotosEntities[1];
 unsigned int num_PhotosEntities;
 
 char* rowPreviewFiles[PHOTO_PREVIEW_MAX_COLUMN];
-
 unsigned int Camera_Photos_Page;
+
+int displayPreviews = 1;
+int numPreviewsOnScreen = 0;
+int imageTouched = 0;
 
 void Camera_Photos_Initalise(void)
 {
@@ -65,43 +68,109 @@ void Camera_Photos_Initalise(void)
 enum CAMERA_STATE Camera_Photos_Run(void)
 {
 	
-	if(Camera_Global_DrawToScreen)
+	// Check what to display.
+	if(displayPreviews)
 	{
-		Camera_Global_DrawToScreen = 0;
+		// Display the image previews.
 		
-		// Draw the state string to the screen
-		GLCD_SetForegroundColor(GLCD_COLOR_BLACK);
-		GLCD_SetFont (&GLCD_Font_16x24);
-		GLCD_DrawString(GLCD_CAMERA_EDGE_PADDING, GLCD_CAMERA_EDGE_PADDING, "Photos State");
-		
-		// Draw the photos icon to the screen
-		GLCD_DrawBitmap( 
-										Camera_PhotosEntities[0].position.x, 
-										Camera_PhotosEntities[0].position.y, 
-										Camera_PhotosEntities[0].image->width,
-										Camera_PhotosEntities[0].image->height, 
-										Camera_PhotosEntities[0].image->pixel_data);
-		
-		// Draw the preview photos
-		if(!Camera_Photos_DrawPreviewPhotos(Camera_Photos_Page))
+		// Check if we can draw to screen.
+		// This prevents us from drawing the same thing to the screen every cycle.
+		if(Camera_Global_DrawToScreen == CAMERA_GLOBAL_DRAWON)
 		{
-			Error_DisplayMessage("Failed to draw previews");
+			// Lock the draw to screen flag.
+			Camera_Global_DrawToScreen = CAMERA_GLOBAL_DRAWOFF;
+			
+			// Draw the state string to the screen.
+			GLCD_SetForegroundColor(GLCD_COLOR_BLACK);
+			GLCD_SetFont (&GLCD_Font_16x24);
+			GLCD_DrawString(GLCD_CAMERA_EDGE_PADDING, GLCD_CAMERA_EDGE_PADDING, "Photos State");
+			
+			// Draw the photos icon to the screen.
+			GLCD_DrawBitmap( 
+											Camera_PhotosEntities[0].position.x, 
+											Camera_PhotosEntities[0].position.y, 
+											Camera_PhotosEntities[0].image->width,
+											Camera_PhotosEntities[0].image->height, 
+											Camera_PhotosEntities[0].image->pixel_data);
+			
+			// Draw the preview photos.
+			if(!Camera_Photos_DrawPreviewPhotos(Camera_Photos_Page))
+			{
+				Error_DisplayMessage("Failed to draw previews");
+			}
+		}
+		
+		
+		// Check if screen is touched.
+		Point_2D point;
+		if(Screen_Touched(&point))
+		{
+			// Check if entity is touched
+			if(Point_Entity_Collision(&point, Camera_PhotosEntities, num_PhotosEntities) != 0)
+			{
+				GLCD_ClearScreen();
+				
+				// Release the draw to screen flag, enabling items to be drawn again.
+				Camera_Global_DrawToScreen = CAMERA_GLOBAL_DRAWON;
+				
+				return CAMERA_VIEW;
+			}
+			
+			// Check if picture is touched.
+			int x = point.x / PHOTO_PREVIEWSIZE+1;
+			if(point.y > PHOTO_PREVIEW_HEIGHT_PADDING)
+			{
+				int y = ((point.y - PHOTO_PREVIEW_HEIGHT_PADDING) / PHOTO_PREVIEWSIZE);
+				if(y < PHOTO_PREVIEW_MAX_ROW)
+				{
+					// Touched in the preview zone.
+					
+					// Now check if touched a image.
+					int imgTouched = PHOTO_PREVIEW_MAX_COLUMN * y + x;
+					if(imgTouched <= numPreviewsOnScreen)
+					{
+						// Collision with image.
+						
+						// Store the image touched.
+						imageTouched = imgTouched;
+						
+						// Release the draw to screen flag, enabling items to be drawn again.
+						Camera_Global_DrawToScreen = CAMERA_GLOBAL_DRAWON;
+						
+						GLCD_ClearScreen();
+						
+						// Switch to diaplying a full image.
+						displayPreviews = 0;
+					}						
+				}
+			}
 		}
 	}
-	
-	
-	// Check if the photos icon has been pressed
-	Point_2D point;
-	if(Screen_Touched(&point))
+	else
 	{
-		if(Point_Entity_Collision(&point, Camera_PhotosEntities, num_PhotosEntities) != 0)
+		// Display the full image.
+		
+		// Check if we can draw to screen.
+		// This prevents us from drawing the same thing to the screen every cycle.
+		if(Camera_Global_DrawToScreen == CAMERA_GLOBAL_DRAWON)
 		{
+			// Lock the draw to screen flag.
+			Camera_Global_DrawToScreen = CAMERA_GLOBAL_DRAWOFF;
+			
+			
+		}
+		
+		// Check if screen is touched.
+		Point_2D point;
+		if(Screen_Touched(&point))
+		{
+			// Release the draw to screen flag, enabling items to be drawn again.
+			Camera_Global_DrawToScreen = CAMERA_GLOBAL_DRAWON;
+						
 			GLCD_ClearScreen();
-			
-			// Release the draw to screen flag, enabling items to be drawn again
-			Camera_Global_DrawToScreen = 1;
-			
-			return CAMERA_VIEW;
+		
+			// Switch back to displaying the previews.
+			displayPreviews = 1;
 		}
 	}
 
@@ -110,7 +179,10 @@ enum CAMERA_STATE Camera_Photos_Run(void)
 
 int Camera_Photos_DrawPreviewPhotos(const unsigned int page)
 {
-
+	// Set the number of preview images on screen to 0.
+	// Ready to count the preview images on screen.
+	numPreviewsOnScreen = 0;
+	
 	// Loop over all rows and columns
 	int i, j;
 	for(i = 0; i < PHOTO_PREVIEW_MAX_ROW; i++)
@@ -122,6 +194,9 @@ int Camera_Photos_DrawPreviewPhotos(const unsigned int page)
 		unsigned int startIndex = PHOTO_PREVIEW_MAX_COLUMN*i;
 		unsigned int numPreviewsInRow;
 		numPreviewsInRow = SDCard_GetBMPFileName(PHOTO_ICONDIRECTORY, rowPreviewFiles, PHOTO_PREVIEW_MAX_COLUMN, MAX_PHOTOFILENAME, startIndex);
+		
+		// Count the total number of previews loaded 
+		numPreviewsOnScreen += numPreviewsInRow;
 		
 		// Loop over all elements in row
 		for(j = 0; j < numPreviewsInRow; j++)
