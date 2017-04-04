@@ -120,6 +120,9 @@ int main (void) {
 	Camera_Config();
 	SDCard_Config();
 	
+	// 
+	//	load and display JPEG image from SDCard here
+	//
 	uint16_t width, height;
 	SDCard_loadJPEG(buffer, "Media/image1.jpg", &width, &height);
 	GLCD_DrawBitmap(0, 
@@ -127,6 +130,7 @@ int main (void) {
 									width, 
 									height, 
 									buffer);
+	
 	while(1)
 	{}
 	
