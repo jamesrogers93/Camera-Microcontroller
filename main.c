@@ -27,6 +27,11 @@
 #include "SDCard_Module.h"
 #include "main.h"
 
+/// TEST
+#include "Camera_Globals.h"
+extern unsigned char *buffer;
+/// END TEST
+
 #ifdef RTE_CMSIS_RTOS_RTX
 extern uint32_t os_time;
 
@@ -82,9 +87,9 @@ static void SystemClock_Config (void) {
 
 static void GLCD_Config()
 {
-	GLCD_Initialize ();
+	GLCD_Initialize();
   GLCD_SetBackgroundColor (GLCD_COLOR_WHITE);
-  GLCD_ClearScreen (); 
+  GLCD_ClearScreen(); 
 }
 
 /**
@@ -115,9 +120,19 @@ int main (void) {
 	Camera_Config();
 	SDCard_Config();
 	
+	uint16_t width, height;
+	SDCard_loadJPEG(buffer, "Media/image1.jpg", &width, &height);
+	GLCD_DrawBitmap(0, 
+									0, 
+									width, 
+									height, 
+									buffer);
+	while(1)
+	{}
+	
 	// Camera
-	Camera_initalise();
-	Camera_run();
+	//Camera_initalise();
+	//Camera_run();
 	
 	
 	for (;;) {					/* loop forever */

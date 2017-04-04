@@ -33,6 +33,7 @@
 
 extern GLCD_FONT     GLCD_Font_16x24;
 extern int Camera_Global_DrawToScreen;
+extern unsigned char *buffer;
 
 Entity Camera_PhotosEntities[1];
 unsigned int num_PhotosEntities;
@@ -139,7 +140,7 @@ enum CAMERA_STATE Camera_Photos_Run(void)
 						
 						GLCD_ClearScreen();
 						
-						// Switch to diaplying a full image.
+						// Switch to displaying a full image.
 						displayPreviews = 0;
 					}						
 				}
@@ -157,7 +158,11 @@ enum CAMERA_STATE Camera_Photos_Run(void)
 			// Lock the draw to screen flag.
 			Camera_Global_DrawToScreen = CAMERA_GLOBAL_DRAWOFF;
 			
-			
+			// Draw the photo
+			if(!Camera_Photos_DrawPhoto(imageTouched-1))
+			{
+				Error_DisplayMessage("Failed to draw photo");
+			}
 		}
 		
 		// Check if screen is touched.
@@ -202,11 +207,10 @@ int Camera_Photos_DrawPreviewPhotos(const unsigned int page)
 		for(j = 0; j < numPreviewsInRow; j++)
 		{
 			uint8_t str[30];
-			uint32_t uwBmplen = 0;
 			sprintf ((char*)str, "Media/Icons/%-11.11s", rowPreviewFiles[j]);
 					
 			// Load the bmp buffer into memory from SDCard
-			unsigned char *buffer = (unsigned char*)0xC0260000;
+			//unsigned char *buffer = (unsigned char*)0xC0260000;
 			if(!SDCard_loadBMP(buffer, (const char*)str))
 			{
 				return 0;
@@ -224,5 +228,48 @@ int Camera_Photos_DrawPreviewPhotos(const unsigned int page)
 		}
 	}
 
+	return 1;
+}
+
+int Camera_Photos_DrawPhoto(const unsigned int index)
+{
+	// Load the bmp buffer into memory from SDCard
+	
+	// Get the file name of the imageTouched bmp
+	unsigned int numPreviewsInRow;
+	numPreviewsInRow = SDCard_GetBMPFileName(PHOTO_ICONDIRECTORY, rowPreviewFiles, 1, MAX_PHOTOFILENAME, index);
+	
+	if(numPreviewsInRow != 1)
+		return 0;
+	
+	// Change file extension to jpg
+	char *charPtr = rowPreviewFiles[0];
+	while (*(charPtr) != 0x2E) // . 
+  {
+		charPtr++;
+  }
+  *(++charPtr) = 'j'; 
+	*(++charPtr) = 'p';
+	*(++charPtr) = 'g';
+	
+	// Format the string to point to the jpg file
+	uint8_t str[30];
+  sprintf ((char*)str, "Media/Photos/%-11.11s", rowPreviewFiles[0]);
+	
+	uint16_t width, height;
+	// Load JPEG image into bitmap buffer 
+	//if(!SDCard_loadJPEG(buffer, (const char*)str))
+	if(!SDCard_loadJPEG(buffer, (const char*)"Media/image1.jpg", &width, &height))
+	{
+		return 0;
+	}
+	
+	// Draw the buffer to screen
+	GLCD_DrawBitmap(0, 
+									0, 
+									width, 
+									height, 
+									buffer);
+	
 	return 1;
 }

@@ -86,7 +86,7 @@ typedef struct tagBITMAPINFOHEADER
     DWORD biClrImportant;  //number of colors that are important
 }BITMAPINFOHEADER;*/
 
-#pragma pack(push, 1)
+/*#pragma pack(push, 1)
 typedef struct BitMap
 {
     short Signature;
@@ -107,7 +107,7 @@ typedef struct BitMap
     long ColorsImportant;
     unsigned char *pixel_data;
 }BitMap;
-#pragma pack(pop)
+#pragma pack(pop)*/
 // From http://stackoverflow.com/questions/15022924/reading-writing-a-bmp-file
 
 /** @addtogroup STM32756G_EVAL_FAT_FS
@@ -142,18 +142,19 @@ typedef struct BitMap
 /** @defgroup FAT_FS_STORAGE_Exported_Functions
   * @{
   */
-uint32_t Storage_Init (void);
-uint32_t Storage_OpenReadFile(unsigned char *Address, const char* BmpName);
-uint32_t Storage_GetDirectoryBitmapFiles (const char* DirName, char* Files[], const unsigned int maxFiles, const unsigned int maxFileName);
-uint32_t Storage_CheckBitmapFile(const char* BmpName, uint32_t *FileLen);
-uint8_t Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferLength);
+//uint32_t Storage_Init (void);
+//uint32_t Storage_OpenReadFile(unsigned char *Address, const char* BmpName);
+//uint32_t Storage_GetDirectoryBitmapFiles (const char* DirName, char* Files[], const unsigned int maxFiles, const unsigned int maxFileName);
+//uint32_t Storage_CheckBitmapFile(const char* BmpName, uint32_t *FileLen);
+//uint8_t Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferLength);
 
 //#define MAX_BMP_FILES     25
 //#define MAX_BMP_FILE_NAME 11
 
 // MINE
-int SDCard_loadBMP(unsigned char *buffer, const char* filePath);
-int SDCard_GetBMPFileName(const char* DirName, char* Files[], const unsigned int maxFiles, const unsigned int maxFileName, const unsigned int startIndex);
+//int SDCard_loadBMP(unsigned char *buffer, const char* filePath);
+//int SDCard_GetBMPFileName(const char* DirName, char* Files[], const unsigned int maxFiles, const unsigned int maxFileName, const unsigned int startIndex);
+//int SDCard_loadJPEG(unsigned char *buffer, const char* filePath);
 
 #ifdef __cplusplus
 }

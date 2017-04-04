@@ -83,7 +83,7 @@
 /** @defgroup FATFS_STORAGE_Private_Variables
   * @{
   */
-uint8_t sector[512];
+/*uint8_t sector[512];
 FATFS fs;
 FILINFO fno;
 DIR dir;
@@ -92,7 +92,7 @@ const uint8_t SlidesCheck[2] =
   {
     0x42, 0x4D
   };
-uint32_t BytesRead = 0;
+uint32_t BytesRead = 0;*/
 
 /**
   * @}
@@ -115,17 +115,17 @@ uint32_t BytesRead = 0;
   * @param  None
   * @retval err : Error status (0=> success, 1=> fail)
   */
-uint32_t Storage_Init(void)
-{
-  BSP_SD_Init();
+//uint32_t Storage_Init(void)
+//{
+//  BSP_SD_Init();
   
   /****************** FatFs Volume Access ******************************/
-  if(f_mount(&fs, (TCHAR const*)"",0))
-  {
-    return 1;
-  }
-  return 0;
-}
+//  if(f_mount(&fs, (TCHAR const*)"",0))
+//  {
+//    return 1;
+//  }
+//  return 0;
+//}
 
 /**
   * @brief  Open a file and copy its content to a buffer
@@ -135,7 +135,7 @@ uint32_t Storage_Init(void)
   * @param  FileLen: the File lenght
   * @retval err: Error status (0=> success, 1=> fail)
   */
-uint32_t Storage_OpenReadFile(unsigned char *Address, const char* BmpName)
+/*uint32_t Storage_OpenReadFile(unsigned char *Address, const char* BmpName)
 {
   uint32_t index = 0, size = 0, i1 = 0;
   uint32_t BmpAddress;
@@ -156,11 +156,11 @@ uint32_t Storage_OpenReadFile(unsigned char *Address, const char* BmpName)
   
   BmpAddress = (uint32_t)sector;
 
-  /* Read bitmap size */
+  // Read bitmap size 
   size = *(uint16_t *) (BmpAddress + 2);
   size |= (*(uint16_t *) (BmpAddress + 4)) << 16;  
  
-  /* Get bitmap data address offset */
+  // Get bitmap data address offset 
   index = *(uint16_t *) (BmpAddress + 10);
   index |= (*(uint16_t *) (BmpAddress + 12)) << 16;  
   
@@ -196,7 +196,7 @@ uint32_t Storage_OpenReadFile(unsigned char *Address, const char* BmpName)
   f_close (&F1);
   
   return 1;
-}
+}*/
 
 /**
   * @brief  Open a file and copy its content to a buffer
@@ -206,7 +206,7 @@ uint32_t Storage_OpenReadFile(unsigned char *Address, const char* BmpName)
   * @param  FileLen: the File lenght
   * @retval err: Error status (0=> success, 1=> fail)
   */
-uint32_t Storage_CheckBitmapFile(const char* BmpName, uint32_t *FileLen)
+/*uint32_t Storage_CheckBitmapFile(const char* BmpName, uint32_t *FileLen)
 {
   if(f_mount(&fs, (TCHAR const*)"",0))
   {
@@ -224,14 +224,14 @@ uint32_t Storage_CheckBitmapFile(const char* BmpName, uint32_t *FileLen)
     return 3;
   }
   return 0;
-}
+}*/
 
 /**
   * @brief  List up to 25 file on the root directory with extension .BMP
   * @param  None
   * @retval The number of the found files
   */
-uint32_t Storage_GetDirectoryBitmapFiles (const char* DirName, char* Files[], const unsigned int maxFiles, const unsigned int maxFileName)
+/*uint32_t Storage_GetDirectoryBitmapFiles (const char* DirName, char* Files[], const unsigned int maxFiles, const unsigned int maxFileName)
 {
   FATFS fs;
   FILINFO fno;
@@ -239,13 +239,13 @@ uint32_t Storage_GetDirectoryBitmapFiles (const char* DirName, char* Files[], co
   uint32_t counter = 0, index = 0;
   FRESULT res;
 
-  /* Open filesystem */
+  // Open filesystem 
   if(f_mount(&fs, (TCHAR const*)"",0) != FR_OK)
   {
     return 0;
   }
 
-  /* Open directory */
+  // Open directory 
   res = f_opendir(&dir, (TCHAR const*)DirName);
   
   if (res == FR_OK)
@@ -269,7 +269,7 @@ uint32_t Storage_GetDirectoryBitmapFiles (const char* DirName, char* Files[], co
         {
           counter++;
         }
-        while (fno.fname[counter] != 0x2E); /* . */
+        while (fno.fname[counter] != 0x2E); // . //
 
 				// Check if the max number of files has been reached
         if (index < maxFiles)
@@ -291,7 +291,7 @@ uint32_t Storage_GetDirectoryBitmapFiles (const char* DirName, char* Files[], co
   }
   f_mount(NULL, (TCHAR const*)"",0);
   return index;
-}
+}*/
 
 /**
   * @brief  Compares two buffers.
@@ -300,7 +300,7 @@ uint32_t Storage_GetDirectoryBitmapFiles (const char* DirName, char* Files[], co
   * @retval  0: pBuffer1 identical to pBuffer2
   *          1: pBuffer1 differs from pBuffer2
   */
-uint8_t Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferLength)
+/*uint8_t Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferLength)
 {
   while (BufferLength--)
   {
@@ -314,7 +314,7 @@ uint8_t Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferLength)
   }
 
   return 0;
-}
+}*/
 
 /**
   * @}
@@ -329,7 +329,7 @@ uint8_t Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferLength)
   */
 
 
-int SDCard_loadBMP(unsigned char *buffer, const char* filePath)
+/*int SDCard_loadBMP(unsigned char *buffer, const char* filePath)
 {
   FIL F1;
 	BitMap bitMapHeader;
@@ -399,9 +399,9 @@ int SDCard_loadBMP(unsigned char *buffer, const char* filePath)
 	f_close (&F1);
 	f_mount(NULL, (TCHAR const*)"",0);
 	return status;
-}
+}*/
 
-int SDCard_GetBMPFileName(const char* DirName, char* Files[], const unsigned int maxFiles, const unsigned int maxFileName, const unsigned int startIndex)
+/*int SDCard_GetBMPFileName(const char* DirName, char* Files[], const unsigned int maxFiles, const unsigned int maxFileName, const unsigned int startIndex)
 {
 	FATFS fs;
   FILINFO fno;
@@ -411,13 +411,13 @@ int SDCard_GetBMPFileName(const char* DirName, char* Files[], const unsigned int
 	
 	unsigned int bmpCount = 0;
 
-  /* Open filesystem */
+  // Open filesystem 
   if(f_mount(&fs, (TCHAR const*)"",0) != FR_OK)
   {
     return 0;
   }
 
-  /* Open directory */
+  // Open directory 
   res = f_opendir(&dir, (TCHAR const*)DirName);
   
   if (res == FR_OK)
@@ -441,7 +441,7 @@ int SDCard_GetBMPFileName(const char* DirName, char* Files[], const unsigned int
         {
           counter++;
         }
-        while (fno.fname[counter] != 0x2E); /* . */
+        while (fno.fname[counter] != 0x2E); // . //
 
 				// Check if the max number of files has been reached
         if (index < maxFiles)
@@ -472,6 +472,33 @@ int SDCard_GetBMPFileName(const char* DirName, char* Files[], const unsigned int
 	
   f_mount(NULL, (TCHAR const*)"",0);
   return index;
-}
+}*/
 
+
+/*int SDCard_loadJPEG(unsigned char *buff, const char* filePath)
+{
+	FIL file;
+
+  // Open filesystem 
+  if(f_mount(&fs, (TCHAR const*)"",0) != FR_OK)
+  {
+    return 0;
+  }
+	
+	FRESULT res = f_open(&file, (TCHAR const*)filePath, FA_READ);
+	if( res != FR_OK)
+  {
+		return 0;
+	}
+
+	
+	return 1;
+}*/
+
+
+
+/*static uint8_t processBuffer(uint8_t* Row, uint32_t DataLength)
+{
+
+}*/
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
