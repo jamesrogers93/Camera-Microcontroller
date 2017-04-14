@@ -23,43 +23,13 @@
 #include "ff_gen_drv.h"
 #include "sd_diskio.h"
 
-// LibJpeg
-#include "decode.h"
-
-#pragma pack(push, 1)
-typedef struct BitMap
-{
-    short Signature;
-    long Reserved1;
-    long Reserved2;
-    long DataOffSet;
-
-    long Size;
-    long Width;
-    long Height;
-    short Planes;
-    short BitsPerPixel;
-    long Compression;
-    long SizeImage;
-    long XPixelsPreMeter;
-    long YPixelsPreMeter;
-    long ColorsUsed;
-    long ColorsImportant;
-    unsigned char *pixel_data;
-}BitMap;
-#pragma pack(pop)
 
 void SDCard_Config(void);
-
 int SDCard_IsDetected(void);
-
-int SDCard_loadBMP(unsigned char *buffer, const char* filePath);
-int SDCard_GetBMPFileName(const char* DirName, char* Files[], const unsigned int maxFiles, const unsigned int maxFileName, const unsigned int startIndex);
-//int SDCard_loadJPEG(unsigned char *buff, const char* filePath, uint16_t *imgWidth,uint16_t *imgHeight);
-
-// NEW
 int SDCard_OpenFile(FIL *file, const char *filePath);
 int SDCard_CloseFile(FIL *file);
+
+int SDCard_GetBMPFileName(const char* DirName, char* Files[], const unsigned int maxFiles, const unsigned int maxFileName, const unsigned int startIndex);
 	
 
 #endif /* _SDCARD_MODULE_H */

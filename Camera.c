@@ -18,7 +18,6 @@
 #include "Camera_Photos.h"
 #include "Data_Types.h"
 
-
 extern GLCD_FONT     GLCD_Font_16x24;
 extern int Camera_Global_DrawToScreen;
 
