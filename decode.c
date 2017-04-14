@@ -46,13 +46,13 @@
   */
 
 /* Includes ------------------------------------------------------------------*/
-#include "decode.h"
+//#include "decode.h"
 
-/* Private typedef -----------------------------------------------------------*/
-  /* This struct contains the JPEG decompression parameters */
-  struct jpeg_decompress_struct cinfo;
-  /* This struct represents a JPEG error handler */
-  struct jpeg_error_mgr jerr;
+///* Private typedef -----------------------------------------------------------*/
+//  /* This struct contains the JPEG decompression parameters */
+//  struct jpeg_decompress_struct cinfo;
+//  /* This struct represents a JPEG error handler */
+//  struct jpeg_error_mgr jerr;
   
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
@@ -68,57 +68,58 @@
   * @param  buff:     pointer to the image line    
   * @retval None
   */
-void jpeg_decode(JFILE *file, uint16_t *img_width, uint16_t *img_height, uint8_t * buff, uint8_t (*callback)(uint8_t*, uint32_t, uint16_t, uint16_t))
-{ 
-    
-  /* Decode JPEG Image */
-  JSAMPROW jBuffer[2] = {0}; /* Output row buffer */
-  uint32_t row_stride = 0; /* physical row width in image buffer */
-  
-  jBuffer[0] = buff;
-	
-  /* Step 1: allocate and initialize JPEG decompression object */
-  cinfo.err = jpeg_std_error(&jerr);
-	
-  /* Initialize the JPEG decompression object */  
-  jpeg_create_decompress(&cinfo);
-  
-  jpeg_stdio_src (&cinfo, file);
+//void jpeg_decode(JFILE *file, uint16_t *img_width, uint16_t *img_height, uint8_t * buff, uint8_t (*callback)(uint8_t*, uint32_t, uint16_t, uint16_t))
+//{ 
+//    
+//  /* Decode JPEG Image */
+//  JSAMPROW jBuffer[2] = {0}; /* Output row buffer */
+//  uint32_t row_stride = 0; /* physical row width in image buffer */
+//  
+//  /* Step 1: allocate and initialize JPEG decompression object */
+//  cinfo.err = jpeg_std_error(&jerr);
+//	
+//  /* Initialize the JPEG decompression object */  
+//  jpeg_create_decompress(&cinfo);
+//  
+//  jpeg_stdio_src (&cinfo, file);
 
-  /* Step 3: read image parameters with jpeg_read_header() */
-  jpeg_read_header(&cinfo, TRUE);
+//  /* Step 3: read image parameters with jpeg_read_header() */
+//  jpeg_read_header(&cinfo, TRUE);
 
-  /* TBC */
-  /* Step 4: set parameters for decompression */
-  cinfo.dct_method = JDCT_FLOAT;
+//  /* TBC */
+//  /* Step 4: set parameters for decompression */
+//  cinfo.dct_method = JDCT_FLOAT;
 
-  /* Step 5: start decompressor */
-  jpeg_start_decompress(&cinfo);
+//  /* Step 5: start decompressor */
+//  jpeg_start_decompress(&cinfo);
+//	
+//	row_stride = cinfo.output_width * cinfo.output_components;
+//	jBuffer[0] = (JSAMPROW)malloc(sizeof(JSAMPLE) * row_stride);
 
-	uint32_t line_counter = 0;
-  while (cinfo.output_scanline < cinfo.output_height)
-  {
-    (void) jpeg_read_scanlines(&cinfo, jBuffer, 1);
-    
-    /* TBC */
-    if (callback(jBuffer[0], line_counter, cinfo.output_width, cinfo.output_height) == 0)
-    {
-      break;
-    }
-		
-		line_counter++;
-  }
+//	uint32_t line_counter = 0;
+//  while (cinfo.output_scanline < cinfo.output_height)
+//  {
+//    (void) jpeg_read_scanlines(&cinfo, jBuffer, 1);
+//    
+//    /* TBC */
+//    if (callback(jBuffer[0], line_counter, cinfo.output_width, cinfo.output_height) == 0)
+//    {
+//      break;
+//    }
+//		
+//		line_counter++;
+//  }
 
-	// Save the image dimensions
-	*(img_width) = cinfo.output_width;
-	*(img_height) = cinfo.output_height;
-	
-  /* Step 6: Finish decompression */
-  jpeg_finish_decompress(&cinfo);
+//	// Save the image dimensions
+//	*(img_width) = cinfo.output_width;
+//	*(img_height) = cinfo.output_height;
+//	
+//  /* Step 6: Finish decompression */
+//  jpeg_finish_decompress(&cinfo);
 
-  /* Step 7: Release JPEG decompression object */
-  jpeg_destroy_decompress(&cinfo);
-    
-}
+//  /* Step 7: Release JPEG decompression object */
+//  jpeg_destroy_decompress(&cinfo);
+//    
+//}
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

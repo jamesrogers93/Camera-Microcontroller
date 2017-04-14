@@ -10,6 +10,9 @@
 // SDCard
 #include "SDCard_Module.h"
 
+// JPEG
+#include "Jpeg_Decode.h"
+
 // Camera application
 #include "Camera_Defines.h"
 #include "Camera_Globals.h"
@@ -256,20 +259,41 @@ int Camera_Photos_DrawPhoto(const unsigned int index)
 	uint8_t str[30];
   sprintf ((char*)str, "Media/Photos/%-11.11s", rowPreviewFiles[0]);
 	
-	uint16_t width, height;
-	// Load JPEG image into bitmap buffer 
-	//if(!SDCard_loadJPEG(buffer, (const char*)str))
-	if(!SDCard_loadJPEG(buffer, (const char*)"Media/image1.jpg", &width, &height))
+	// Open File
+	FIL file;
+	if(!SDCard_OpenFile(&file, "Media/test.jpg"))
 	{
 		return 0;
 	}
 	
-	// Draw the buffer to screen
+	// Decode jpeg image and store in buffer
+	uint16_t width, height;
+	jpeg_decode(&file, buffer, &width, &height);
+	
+	// Close File
+	SDCard_CloseFile(&file);
+	
+	// Draw Buffer
 	GLCD_DrawBitmap(0, 
 									0, 
 									width, 
 									height, 
 									buffer);
+									
+	//uint16_t width, height;
+	// Load JPEG image into bitmap buffer 
+	//if(!SDCard_loadJPEG(buffer, (const char*)str))
+	//if(!SDCard_loadJPEG(buffer, (const char*)"Media/image1.jpg", &width, &height))
+	//{
+	//	return 0;
+	//}
+	
+	// Draw the buffer to screen
+//	GLCD_DrawBitmap(0, 
+//									0, 
+//									width, 
+//									height, 
+//									buffer);
 	
 	return 1;
 }

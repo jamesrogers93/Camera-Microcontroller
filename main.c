@@ -28,8 +28,9 @@
 #include "main.h"
 
 /// TEST
-#include "Camera_Globals.h"
-extern unsigned char *buffer;
+//#include "Camera_Globals.h"
+//#include "Jpeg_Decode.h"
+//extern unsigned char *buffer;
 /// END TEST
 
 #ifdef RTE_CMSIS_RTOS_RTX
@@ -120,19 +121,9 @@ int main (void) {
 	Camera_Config();
 	SDCard_Config();
 	
-	uint16_t width, height;
-	SDCard_loadJPEG(buffer, "Media/image1.jpg", &width, &height);
-	GLCD_DrawBitmap(0, 
-									0, 
-									width, 
-									height, 
-									buffer);
-	while(1)
-	{}
-	
 	// Camera
-	//Camera_initalise();
-	//Camera_run();
+	Camera_initalise();
+	Camera_run();
 	
 	
 	for (;;) {					/* loop forever */

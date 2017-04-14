@@ -49,20 +49,17 @@ typedef struct BitMap
 }BitMap;
 #pragma pack(pop)
 
-typedef struct RGB
-{
-  uint8_t B;
-  uint8_t G;
-  uint8_t R;
-}RGB_typedef;
-
 void SDCard_Config(void);
 
 int SDCard_IsDetected(void);
 
 int SDCard_loadBMP(unsigned char *buffer, const char* filePath);
 int SDCard_GetBMPFileName(const char* DirName, char* Files[], const unsigned int maxFiles, const unsigned int maxFileName, const unsigned int startIndex);
-int SDCard_loadJPEG(unsigned char *buff, const char* filePath, uint16_t *imgWidth,uint16_t *imgHeight);
+//int SDCard_loadJPEG(unsigned char *buff, const char* filePath, uint16_t *imgWidth,uint16_t *imgHeight);
+
+// NEW
+int SDCard_OpenFile(FIL *file, const char *filePath);
+int SDCard_CloseFile(FIL *file);
 	
 
 #endif /* _SDCARD_MODULE_H */

@@ -46,32 +46,32 @@
   */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __DECODE_H
-#define __DECODE_H
+//#ifndef __DECODE_H
+//#define __DECODE_H
 
-/* Includes ------------------------------------------------------------------*/
-/* Includes ------------------------------------------------------------------*/
-#include "stm32f7xx_hal.h"
-#include "stm32746g_discovery.h"
-#include "stm32746g_discovery_lcd.h"
-#include "stm32746g_discovery_sdram.h"
+///* Includes ------------------------------------------------------------------*/
+///* Includes ------------------------------------------------------------------*/
+//#include "stm32f7xx_hal.h"
+//#include "stm32746g_discovery.h"
+//#include "stm32746g_discovery_lcd.h"
+//#include "stm32746g_discovery_sdram.h"
 
-/* FatFs includes component */
-#include "ff_gen_drv.h"
-#include "sd_diskio.h"
+///* FatFs includes component */
+//#include "ff_gen_drv.h"
+//#include "sd_diskio.h"
 
-/* Jpeg includes component */
-#include <stdint.h>
-#include <string.h>
-#include "jpeglib.h"
+///* Jpeg includes component */
+//#include <stdint.h>
+//#include <string.h>
+//#include "jpeglib.h"
 
-#define IMAGE_HEIGHT 240
-#define IMAGE_WIDTH  320
-#define IMAGE_QUALITY 90
-#define LCD_FRAME_BUFFER 0xC0000000
+//#define IMAGE_HEIGHT 240
+//#define IMAGE_WIDTH  320
+//#define IMAGE_QUALITY 90
+//#define LCD_FRAME_BUFFER 0xC0000000
 
-#define USE_DMA2D
-#define SWAP_RB 
+//#define USE_DMA2D
+//#define SWAP_RB 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -80,8 +80,8 @@
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
-void jpeg_decode(JFILE *file, uint16_t *img_width, uint16_t *img_height, uint8_t * buff, uint8_t (*callback)(uint8_t*, uint32_t, uint16_t, uint16_t));
+//void jpeg_decode(JFILE *file, uint16_t *img_width, uint16_t *img_height, uint8_t * buff, uint8_t (*callback)(uint8_t*, uint32_t, uint16_t, uint16_t));
 
-#endif /* __DECODE_H */
+//#endif /* __DECODE_H */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

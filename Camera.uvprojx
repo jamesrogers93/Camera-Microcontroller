@@ -277,8 +277,8 @@
               </OCR_RVCT4>
               <OCR_RVCT5>
                 <Type>1</Type>
-                <StartAddress>0x0</StartAddress>
-                <Size>0x0</Size>
+                <StartAddress>0x200000</StartAddress>
+                <Size>0x100000</Size>
               </OCR_RVCT5>
               <OCR_RVCT6>
                 <Type>0</Type>
@@ -793,6 +793,26 @@
               <FileName>jutils.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Third_Party\LibJPEG\source\jutils.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>JPEG_Module</GroupName>
+          <Files>
+            <File>
+              <FileName>Jpeg_Decode.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Jpeg_Decode.c</FilePath>
+            </File>
+            <File>
+              <FileName>Jpeg_Decode.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Jpeg_Decode.h</FilePath>
+            </File>
+            <File>
+              <FileName>Jpeg_RGB.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Jpeg_RGB.h</FilePath>
             </File>
           </Files>
         </Group>
