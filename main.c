@@ -90,6 +90,7 @@ static void GLCD_Config()
 {
 	GLCD_Initialize();
   GLCD_SetBackgroundColor (GLCD_COLOR_WHITE);
+	GLCD_FrameBufferAccess(true);
   GLCD_ClearScreen(); 
 }
 
