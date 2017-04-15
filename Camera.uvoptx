@@ -150,18 +150,18 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>214</LineNumber>
+          <LineNumber>43</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134218636</Address>
+          <Address>134224402</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>RTE\Device\STM32F746NGHx\startup_stm32f746xx.s</Filename>
+          <Filename>.\Camera_View.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\Camera\RTE/Device/STM32F746NGHx/startup_stm32f746xx.s\214</Expression>
+          <Expression>\\Camera\Camera_View.c\43</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -457,7 +457,7 @@
 
   <Group>
     <GroupName>Camera_Module</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -489,7 +489,7 @@
 
   <Group>
     <GroupName>SDCard_Module</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
