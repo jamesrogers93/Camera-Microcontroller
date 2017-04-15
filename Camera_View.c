@@ -4,6 +4,9 @@
 #include "Board_GLCD.h"
 #include "GLCD_Config.h"
 
+// Camera
+#include "Camera_Module.h"
+
 // Touch
 #include "Touch_Handler.h"
 
@@ -19,6 +22,8 @@ Entity Camera_ViewEntities[1];
 unsigned int num_viewEntities;
 
 
+
+
 void Camera_View_Initalise(void)
 {
 	
@@ -32,6 +37,7 @@ void Camera_View_Initalise(void)
 
 enum CAMERA_STATE Camera_View_Run(void)
 {
+
 	// Check if we can draw to screen.
 	// This prevents us from drawing the same thing to the screen every cycle.
 	if(Camera_Global_DrawToScreen == CAMERA_GLOBAL_DRAWON)
@@ -40,7 +46,7 @@ enum CAMERA_STATE Camera_View_Run(void)
 		Camera_Global_DrawToScreen = CAMERA_GLOBAL_DRAWOFF;
 		
 		// Draw the state string to the screen.
-		GLCD_SetForegroundColor(GLCD_COLOR_BLACK);
+		/*GLCD_SetForegroundColor(GLCD_COLOR_BLACK);
 		GLCD_SetFont (&GLCD_Font_16x24);
 		GLCD_DrawString(GLCD_CAMERA_EDGE_PADDING, GLCD_CAMERA_EDGE_PADDING, "Camera State");
 		
@@ -50,7 +56,12 @@ enum CAMERA_STATE Camera_View_Run(void)
 										Camera_ViewEntities[0].position.y, 
 										Camera_ViewEntities[0].image->width,
 										Camera_ViewEntities[0].image->height, 
-										Camera_ViewEntities[0].image->pixel_data);
+										Camera_ViewEntities[0].image->pixel_data);*/
+		
+		Camera_Start();
+		Camera_Stop();
+		Camera_Start();
+		//while(1){}
 	}
 	
 	// Check if the photos icon has been pressed.
@@ -58,8 +69,13 @@ enum CAMERA_STATE Camera_View_Run(void)
 	if(Screen_Touched(&point))
 	{
 		// Check if the touch position collides with the entities.
-		if(Point_Entity_Collision(&point, Camera_ViewEntities, num_viewEntities) != 0)
-		{
+		//if(Point_Entity_Collision(&point, Camera_ViewEntities, num_viewEntities) != 0)
+	//	{
+		
+			// Turn off the camera
+		Camera_Stop();
+		
+		// Clear the screen
 			GLCD_ClearScreen();
 			
 			// Release the draw to screen flag, enabling items to be drawn again.
@@ -67,7 +83,7 @@ enum CAMERA_STATE Camera_View_Run(void)
 			
 			// Return the next state.
 			return CAMERA_PHOTOS;
-		}
+		//}
 	}
 	
 	// Remain in the same state/
