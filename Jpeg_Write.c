@@ -74,7 +74,7 @@ void jpeg_write(JFILE *file, uint8_t *buffer, uint16_t img_width, uint16_t img_h
 	uint16_t green_mask = 0x7E0;
 	uint16_t blue_mask = 0x1F;
 	
-	uint16_t *pixel = (uint16_t *)buffer + 480*271;
+	uint16_t *pixel = (uint16_t *)buffer + img_width*img_height;
 	
   while (cinfo.next_scanline < cinfo.image_height) {
     /* jpeg_write_scanlines expects an array of pointers to scanlines.
@@ -83,10 +83,11 @@ void jpeg_write(JFILE *file, uint8_t *buffer, uint16_t img_width, uint16_t img_h
      */
 		
 		// Convert row of buffer from RGB565 to RGB888
-		uint8_t Pixels_RGB888[480 * 3] = {0};
+		uint8_t *Pixels_RGB888 = (uint8_t *)malloc(img_width * 3);
+		//uint8_t Pixels_RGB888[480 * 3] = {0};
 		//uint16_t *pixel = (uint16_t *)(buffer + cinfo.next_scanline * img_width * 2);
 		int i;
-		for(i = 0; i < 480; i++)
+		for(i = 0; i < img_width; i++)
 		{
 			
 			// Convert RGB16 to RGB888
@@ -108,10 +109,13 @@ void jpeg_write(JFILE *file, uint8_t *buffer, uint16_t img_width, uint16_t img_h
 		}
 		
 		// To flip the image
-		pixel -= 480 * 2;
+		pixel -= img_width * 2;
 		
     row_pointer[0] = Pixels_RGB888;
     (void) jpeg_write_scanlines(&cinfo, row_pointer, 1);
+		
+		// Delete pixels
+		free(Pixels_RGB888);
   }
 	
 	/* Step 6: Finish compression */

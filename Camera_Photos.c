@@ -23,10 +23,6 @@
 #include "Icons/Icon_Camera.c"
 #include "Error_Message.h"
 
-
-#define PHOTO_DIRECTORY "/Media/Images"
-#define PHOTO_ICONDIRECTORY "/Media/Icons"
-
 #define PHOTO_PREVIEWSIZE 48
 #define PHOTO_PREVIEW_HEIGHT_PADDING 40
 #define PHOTO_PREVIEW_WIDTH_PADDING 20
@@ -287,7 +283,7 @@ int Camera_Photos_DrawPhoto(const unsigned int index)
 	
 	// Open File
 	FIL file;
-	if(!SDCard_OpenFile(&file, "Media/test.jpg", FA_READ))
+	if(!SDCard_OpenFile(&file, (char*)str, FA_READ))
 	{
 		return 0;
 	}

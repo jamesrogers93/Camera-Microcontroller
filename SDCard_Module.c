@@ -141,3 +141,66 @@ int SDCard_GetBMPFileName(const char* DirName, char* Files[], const unsigned int
   f_mount(NULL, (TCHAR const*)"",0);
   return index;
 }
+
+int SDCard_GetNumFileType(const char* DirName, const char* FileType, const uint8_t FileTypeLen)
+{
+  FILINFO fno;
+  DIR dir;
+  uint32_t counter = 0;//, index = 0;
+  FRESULT res;
+	
+	uint16_t fileCount = 0;
+
+  /* Open filesystem */
+  if(f_mount(&fs, (TCHAR const*)"",0) != FR_OK)
+  {
+    return 0;
+  }
+
+  /* Open directory */
+  res = f_opendir(&dir, (TCHAR const*)DirName);
+  
+  if (res == FR_OK)
+  {
+    for (;;)
+    {
+			// Read the file
+      res = f_readdir(&dir, &fno);
+      if (res != FR_OK || fno.fname[0] == 0)
+        break;
+			
+			// Check if the begining of the file name = . or _
+			// IF true, skip this file
+      if (fno.fname[0] == '.' || fno.fname[0] == '_')
+        continue;
+
+      if (!(fno.fattrib & AM_DIR))
+      {
+				// Iterate over file name untill we reach . i.e. the extension
+        do
+        {
+          counter++;
+        }
+        while (fno.fname[counter] != 0x2E); /* . */
+
+				// Check if the file extension matches
+				int i;
+				uint8_t status = 1;
+				for(i = 0; i < FileTypeLen; i++)
+				{
+					if(fno.fname[counter + 1 + i] != FileType[i])
+					{
+						status = 0;
+						break;
+					}
+				}
+				
+				// We have found a file, increment the counter
+				fileCount++;
+      }
+    }
+  }
+	
+  f_mount(NULL, (TCHAR const*)"",0);
+  return fileCount;
+}

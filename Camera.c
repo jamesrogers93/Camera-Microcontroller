@@ -15,6 +15,9 @@
 // SDCard
 #include "SDCard_Module.h"
 
+// Camera
+#include "Camera_Module.h"
+
 // Camera application
 #include "Camera_Defines.h"
 #include "Camera_Globals.h"
@@ -59,6 +62,8 @@ void Camera_run(void)
 				
 				// Reset the SDCard Configuration
 				SDCard_Config();
+				
+				Camera_State = CAMERA_PHOTOS;
 			}
 
 			// Now go into the cameras current state
@@ -91,6 +96,9 @@ void Camera_run(void)
 			// there is no need to draw the prompt to screen again
 			if(!SDCardPrompted)
 			{	
+				// Stop the Camera
+				Camera_Pause();
+				
 				// Clear the screen
 				GLCD_ClearScreen(); 
 				
