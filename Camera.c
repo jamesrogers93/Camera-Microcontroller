@@ -8,6 +8,10 @@
 #include "Board_Touch.h"
 #include "Touch_Handler.h"
 
+// Button
+#include "Board_Buttons.h"
+#include "Button_Handler.h"
+
 // SDCard
 #include "SDCard_Module.h"
 
@@ -101,8 +105,9 @@ void Camera_run(void)
 			}
 		}
 		
-		// Update the touch handler
+		// Update the input handlers
 		Touch_Handler_Update();
+		Button_Handler_Update();
 		
 	}
 }

@@ -4,11 +4,6 @@
 #include "Board_GLCD.h"
 #include "GLCD_Config.h"
 
-// BSP Camera
-#include "stm32f7xx_hal.h"
-#include "stm32746g_discovery.h"
-#include "stm32746g_discovery_camera.h"
-
 // Camera Application
 #include "Camera_Globals.h"
 #include "Error_Message.h"
@@ -22,19 +17,45 @@ void Camera_Config(void)
 		Error_DisplayMessage("Error: Camera Module");
 	}
 	
-	BSP_CAMERA_ContinuousStart((uint8_t *)GLCD_FrameBufferAddress());
+	Camera_Continuous((uint8_t *)GLCD_FrameBufferAddress());
 	BSP_CAMERA_Suspend();
 }
 
-void Camera_Start(void)
+void Camera_Resume(void)
 {
 	BSP_CAMERA_Resume();
-	//BSP_CAMERA_ContinuousStart((uint8_t *)GLCD_FrameBufferAddress());
 }
 
-void Camera_Stop(void)
+void Camera_Pause(void)
 {
 	BSP_CAMERA_Suspend();
+}
+
+void Camera_Continuous(uint8_t *buffer)
+{
+	BSP_CAMERA_ContinuousStart(buffer);
+}
+
+void Camera_Snapshot(uint8_t *buffer)
+{
+	Camera_Pause();
+	
+	uint16_t *Camera_ptr = (uint16_t *)Camera_BufferAddress();
+	uint16_t *GLCD_ptr = (uint16_t *)GLCD_FrameBufferAddress() + 480*271;
+	int i;
+	for(i = 0; i < 272; i++)
+	{
+		int j;
+		for(j = 0; j < 480; j++)
+		{
+			*Camera_ptr++ = *GLCD_ptr++;
+		}	
+		
+		// To flip the image
+		GLCD_ptr -= 480 * 2;
+	}
+	
+	Camera_Resume();
 }
 
 /**

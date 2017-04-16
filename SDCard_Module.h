@@ -26,7 +26,7 @@
 
 void SDCard_Config(void);
 int SDCard_IsDetected(void);
-int SDCard_OpenFile(FIL *file, const char *filePath);
+int SDCard_OpenFile(FIL *file, const char *filePath, uint8_t mode);
 int SDCard_CloseFile(FIL *file);
 
 int SDCard_GetBMPFileName(const char* DirName, char* Files[], const unsigned int maxFiles, const unsigned int maxFileName, const unsigned int startIndex);

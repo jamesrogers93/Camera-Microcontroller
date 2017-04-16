@@ -5,6 +5,7 @@
 #include "Data_Types.h"
 #include "Board_Touch.h"
 
+
 void Touch_Handler_Update(void);
 
 int Screen_Touched(Point_2D *position);

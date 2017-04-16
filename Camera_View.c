@@ -7,13 +7,26 @@
 // Camera
 #include "Camera_Module.h"
 
+// SDCard
+#include "SDCard_Module.h"
+
 // Touch
 #include "Touch_Handler.h"
+
+// Buttons
+#include "Button_Handler.h"
+
+// JPEG
+#include "Jpeg_Write.h"
+
+// BMP
+#include "Bmp_Write.h"
 
 // Camera application
 #include "Camera_Defines.h"
 #include "Camera_Globals.h"
 #include "Icons/Icon_Photos.c"
+#include "Error_Message.h"
 
 extern GLCD_FONT     GLCD_Font_16x24;
 extern int Camera_Global_DrawToScreen;
@@ -58,32 +71,64 @@ enum CAMERA_STATE Camera_View_Run(void)
 										Camera_ViewEntities[0].image->height, 
 										Camera_ViewEntities[0].image->pixel_data);*/
 		
-		Camera_Start();
-		Camera_Stop();
-		Camera_Start();
-		//while(1){}
+		Camera_Resume();
 	}
 	
 	// Check if the photos icon has been pressed.
 	Point_2D point;
 	if(Screen_Touched(&point))
 	{
-		// Check if the touch position collides with the entities.
-		//if(Point_Entity_Collision(&point, Camera_ViewEntities, num_viewEntities) != 0)
-	//	{
-		
-			// Turn off the camera
-		Camera_Stop();
+		// Turn off the camera
+		Camera_Pause();
 		
 		// Clear the screen
-			GLCD_ClearScreen();
+		GLCD_ClearScreen();
 			
-			// Release the draw to screen flag, enabling items to be drawn again.
-			Camera_Global_DrawToScreen = CAMERA_GLOBAL_DRAWON;
+		// Release the draw to screen flag, enabling items to be drawn again.
+		Camera_Global_DrawToScreen = CAMERA_GLOBAL_DRAWON;
 			
-			// Return the next state.
-			return CAMERA_PHOTOS;
-		//}
+		// Return the next state.
+		return CAMERA_PHOTOS;
+	}
+	
+	// Check if the button is pressed
+	if(Button_Pressed())
+	{
+		// Take a snapshot and store in buffer
+		Camera_Snapshot((uint8_t *)Camera_BufferAddress());
+		
+		//
+		// Save the image as a JPEG
+		//
+		
+		FIL file;
+		if(!SDCard_OpenFile(&file, "Media/Photos/12.jpg", FA_WRITE | FA_CREATE_ALWAYS))
+		{
+			while(1){}
+		}
+		
+		jpeg_write(&file, (uint8_t *)Camera_BufferAddress(), 480, 272);
+
+		// Close the file
+		SDCard_CloseFile(&file);
+		
+		//
+		// Save a 48x48 bmp version of the image
+		//
+		
+		if(!SDCard_OpenFile(&file, "Media/Icons/12.bmp", FA_WRITE | FA_CREATE_ALWAYS))
+		{
+			while(1){}
+		}
+		
+		// Write buffer to bmp
+		bmp_write(&file, (uint8_t *)Camera_BufferAddress(), 480, 272, 48, 48);
+		
+		// Close the file
+		SDCard_CloseFile(&file);
+		
+		// Resume camera stream
+		//Camera_Continuous((uint8_t *)GLCD_FrameBufferAddress());
 	}
 	
 	// Remain in the same state/

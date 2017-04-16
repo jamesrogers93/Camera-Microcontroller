@@ -4,7 +4,6 @@
 #include "Camera_Globals.h"
 #include "Jpeg_RGB.h"
 
-//extern unsigned char *buffer;
 uint32_t  offset = 0;
 RGB_typedef *RGB_matrix;
 

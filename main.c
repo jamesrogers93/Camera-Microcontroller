@@ -22,6 +22,7 @@
 #include "Board_GLCD.h"
 #include "GLCD_Config.h"
 #include "Board_Touch.h"
+#include "Board_Buttons.h"
 #include "Camera.h"
 #include "Camera_Module.h"
 #include "SDCard_Module.h"
@@ -112,6 +113,7 @@ int main (void) {
 	
 	//ADC_Initialize();
   Touch_Initialize();                            /* Touchscrn Controller Init */
+	Buttons_Initialize();
 	GLCD_Config();
 	Camera_Config();
 	SDCard_Config();
