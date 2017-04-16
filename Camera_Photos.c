@@ -39,7 +39,6 @@
 
 extern GLCD_FONT     GLCD_Font_16x24;
 extern int Camera_Global_DrawToScreen;
-extern unsigned char *buffer;
 
 Entity Camera_PhotosEntities[1];
 unsigned int num_PhotosEntities;
@@ -222,14 +221,14 @@ int Camera_Photos_DrawPreviewPhotos(const unsigned int page)
 					
 			// Open file from SD Card
 			FIL file;
-			if(!SDCard_OpenFile(&file, (char*)str))
+			if(!SDCard_OpenFile(&file, (char*)str, FA_READ))
 			{
 				return 0;
 			}
 			
 			// Load bmp from file
 			uint16_t width, height;
-			if(!bmp_process(&file, buffer, &width, &height))
+			if(!bmp_process(&file, (uint8_t *)Camera_BufferAddress(), &width, &height))
 			{
 				return 0;
 			}
@@ -254,7 +253,7 @@ int Camera_Photos_DrawPreviewPhotos(const unsigned int page)
 											y, 
 											PHOTO_PREVIEWSIZE, 
 											PHOTO_PREVIEWSIZE, 
-											buffer);
+											(uint8_t *)Camera_BufferAddress());
 		}
 	}
 
@@ -288,14 +287,14 @@ int Camera_Photos_DrawPhoto(const unsigned int index)
 	
 	// Open File
 	FIL file;
-	if(!SDCard_OpenFile(&file, "Media/test.jpg"))
+	if(!SDCard_OpenFile(&file, "Media/test.jpg", FA_READ))
 	{
 		return 0;
 	}
 	
 	// Decode jpeg image and store in buffer
 	uint16_t width, height;
-	jpeg_decode(&file, buffer, &width, &height);
+	jpeg_decode(&file, (uint8_t *)Camera_BufferAddress(), &width, &height);
 	
 	// Close File
 	if(!SDCard_CloseFile(&file))
@@ -308,7 +307,7 @@ int Camera_Photos_DrawPhoto(const unsigned int index)
 									0, 
 									width, 
 									height, 
-									buffer);
+									(uint8_t *)Camera_BufferAddress());
 	
 	return 1;
 }

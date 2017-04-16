@@ -44,7 +44,7 @@ int SDCard_IsDetected(void)
 	return BSP_SD_IsDetected() == SD_PRESENT;
 }
 
-int SDCard_OpenFile(FIL *file, const char *filePath)
+int SDCard_OpenFile(FIL *file, const char *filePath, uint8_t mode)
 {
 	  // Open filesystem
   if(f_mount(&fs, (TCHAR const*)"",0) != FR_OK)
@@ -53,7 +53,7 @@ int SDCard_OpenFile(FIL *file, const char *filePath)
   }
 	
 	// Open file
-	FRESULT res = f_open(file, (TCHAR const*)filePath, FA_READ);
+	FRESULT res = f_open(file, (TCHAR const*)filePath, mode);
 	if( res != FR_OK)
   {
 		return 0;

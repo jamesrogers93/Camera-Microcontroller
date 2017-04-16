@@ -425,16 +425,6 @@
               <FilePath>.\Data_types.c</FilePath>
             </File>
             <File>
-              <FileName>Touch_Handler.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Touch_Handler.h</FilePath>
-            </File>
-            <File>
-              <FileName>Touch_Handler.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Touch_Handler.c</FilePath>
-            </File>
-            <File>
               <FileName>Camera_Photos.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Camera_Photos.c</FilePath>
@@ -804,6 +794,16 @@
               <FileType>5</FileType>
               <FilePath>.\Jpeg_RGB.h</FilePath>
             </File>
+            <File>
+              <FileName>Jpeg_Write.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Jpeg_Write.h</FilePath>
+            </File>
+            <File>
+              <FileName>Jpeg_Write.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Jpeg_Write.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -824,6 +824,41 @@
               <FileType>1</FileType>
               <FilePath>.\Bmp_Load.c</FilePath>
             </File>
+            <File>
+              <FileName>Bmp_Write.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Bmp_Write.h</FilePath>
+            </File>
+            <File>
+              <FileName>Bmp_Write.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Bmp_Write.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Input_Module</GroupName>
+          <Files>
+            <File>
+              <FileName>Touch_Handler.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Touch_Handler.c</FilePath>
+            </File>
+            <File>
+              <FileName>Touch_Handler.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Touch_Handler.h</FilePath>
+            </File>
+            <File>
+              <FileName>Button_Handler.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Button_Handler.h</FilePath>
+            </File>
+            <File>
+              <FileName>Button_Handler.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Button_Handler.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -841,6 +876,12 @@
 
   <RTE>
     <apis>
+      <api Capiversion="1.0.0" Cclass="Board Support" Cgroup="Buttons" exclusive="0">
+        <package name="MDK-Middleware" schemaVersion="1.4" url="http://www.keil.com/pack/" vendor="Keil" version="7.4.0"/>
+        <targetInfos>
+          <targetInfo name="Target 1"/>
+        </targetInfos>
+      </api>
       <api Capiversion="1.0.0" Cclass="Board Support" Cgroup="Graphic LCD" exclusive="0">
         <package name="MDK-Middleware" schemaVersion="1.4" url="http://www.keil.com/pack/" vendor="Keil" version="7.4.0"/>
         <targetInfos>
@@ -875,6 +916,12 @@
       </component>
       <component Capiversion="1.0.0" Cclass="CMSIS" Cgroup="RTOS" Csub="Keil RTX" Cvendor="ARM" Cversion="4.81.0" condition="RTOS RTX">
         <package name="CMSIS" schemaVersion="1.3" url="http://www.keil.com/pack/" vendor="ARM" version="5.0.1"/>
+        <targetInfos>
+          <targetInfo name="Target 1"/>
+        </targetInfos>
+      </component>
+      <component Capiversion="1.0.0" Cbundle="STM32F746G-Discovery" Cclass="Board Support" Cgroup="Buttons" Cvendor="Keil" Cversion="1.1.1" condition="STM32F7 HAL GPIO">
+        <package name="STM32F7xx_DFP" schemaVersion="1.3" url="http://www.keil.com/pack" vendor="Keil" version="2.9.0"/>
         <targetInfos>
           <targetInfo name="Target 1"/>
         </targetInfos>
