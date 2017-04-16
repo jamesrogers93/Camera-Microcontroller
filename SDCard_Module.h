@@ -30,6 +30,7 @@ int SDCard_OpenFile(FIL *file, const char *filePath, uint8_t mode);
 int SDCard_CloseFile(FIL *file);
 
 int SDCard_GetBMPFileName(const char* DirName, char* Files[], const unsigned int maxFiles, const unsigned int maxFileName, const unsigned int startIndex);
+int SDCard_GetNumFileType(const char* DirName, const char* FileType, const uint8_t FileTypeLen);
 	
 
 #endif /* _SDCARD_MODULE_H */

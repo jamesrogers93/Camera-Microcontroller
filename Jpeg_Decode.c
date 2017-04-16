@@ -62,7 +62,7 @@ void jpeg_decode(JFILE *file, uint8_t *buffer, uint16_t *img_width, uint16_t *im
 
   /* Step 7: Release JPEG decompression object */
   jpeg_destroy_decompress(&cinfo);
-    
+  free(jBuffer[0]);
 }
 
 static uint8_t processBuffer(uint8_t* Row, uint8_t *buffer, uint32_t rowNum, uint16_t width, uint16_t height)

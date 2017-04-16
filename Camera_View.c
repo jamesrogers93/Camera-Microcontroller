@@ -35,7 +35,7 @@ Entity Camera_ViewEntities[1];
 unsigned int num_viewEntities;
 
 
-
+void Camera_View_TakePhoto(void);
 
 void Camera_View_Initalise(void)
 {
@@ -94,43 +94,57 @@ enum CAMERA_STATE Camera_View_Run(void)
 	// Check if the button is pressed
 	if(Button_Pressed())
 	{
-		// Take a snapshot and store in buffer
-		Camera_Snapshot((uint8_t *)Camera_BufferAddress());
-		
-		//
-		// Save the image as a JPEG
-		//
-		
-		FIL file;
-		if(!SDCard_OpenFile(&file, "Media/Photos/12.jpg", FA_WRITE | FA_CREATE_ALWAYS))
-		{
-			while(1){}
-		}
-		
-		jpeg_write(&file, (uint8_t *)Camera_BufferAddress(), 480, 272);
-
-		// Close the file
-		SDCard_CloseFile(&file);
-		
-		//
-		// Save a 48x48 bmp version of the image
-		//
-		
-		if(!SDCard_OpenFile(&file, "Media/Icons/12.bmp", FA_WRITE | FA_CREATE_ALWAYS))
-		{
-			while(1){}
-		}
-		
-		// Write buffer to bmp
-		bmp_write(&file, (uint8_t *)Camera_BufferAddress(), 480, 272, 48, 48);
-		
-		// Close the file
-		SDCard_CloseFile(&file);
-		
-		// Resume camera stream
-		//Camera_Continuous((uint8_t *)GLCD_FrameBufferAddress());
+			Camera_View_TakePhoto();
 	}
 	
 	// Remain in the same state/
 	return CAMERA_VIEW;
+}
+
+void Camera_View_TakePhoto(void)
+{
+	// Take a snapshot and store in buffer
+	Camera_Snapshot((uint8_t *)Camera_BufferAddress());
+		
+	// Find the number of photos on the sdcard so we know what to name this photo
+	uint16_t numFiles = SDCard_GetNumFileType(PHOTO_ICONDIRECTORY, "BMP", 3);
+		
+	// Create image file names by using the count of the number of images on the SD card
+	char file_jpg[30];
+		
+	sprintf(file_jpg, "%s/%d.jpg", PHOTO_DIRECTORY, numFiles+1);
+	//sprintf(file_jpg, "Media/Photos/%d.jpg", numFiles+1);
+	
+	char file_bmp[30];
+	sprintf(file_bmp, "%s/%d.bmp", PHOTO_ICONDIRECTORY, numFiles+1);
+	
+	//
+	// Save the image as a JPEG
+	//
+		
+	FIL file;
+	if(!SDCard_OpenFile(&file, file_jpg, FA_WRITE | FA_CREATE_NEW))
+	{
+		while(1){}
+	}
+		
+	jpeg_write(&file, (uint8_t *)Camera_BufferAddress(), 480, 272);
+
+	// Close the file
+	SDCard_CloseFile(&file);
+		
+	//
+	// Save a 48x48 bmp version of the image
+	//
+		
+	if(!SDCard_OpenFile(&file, file_bmp, FA_WRITE | FA_CREATE_NEW))
+	{
+		while(1){}
+	}
+		
+	// Write buffer to bmp
+	bmp_write(&file, (uint8_t *)Camera_BufferAddress(), 480, 272, 48, 48);
+		
+	// Close the file
+	SDCard_CloseFile(&file);
 }
