@@ -41,18 +41,18 @@ void Camera_Snapshot(uint8_t *buffer)
 	Camera_Pause();
 	
 	uint16_t *Camera_ptr = (uint16_t *)Camera_BufferAddress();
-	uint16_t *GLCD_ptr = (uint16_t *)GLCD_FrameBufferAddress() + 480*271;
+	uint16_t *GLCD_ptr = (uint16_t *)GLCD_FrameBufferAddress() + xsize*(ysize-1);
 	int i;
-	for(i = 0; i < 272; i++)
+	for(i = 0; i < ysize; i++)
 	{
 		int j;
-		for(j = 0; j < 480; j++)
+		for(j = 0; j < xsize; j++)
 		{
 			*Camera_ptr++ = *GLCD_ptr++;
 		}	
 		
 		// To flip the image
-		GLCD_ptr -= 480 * 2;
+		GLCD_ptr -= xsize * 2;
 	}
 	
 	Camera_Resume();
