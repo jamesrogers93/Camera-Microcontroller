@@ -5,33 +5,31 @@
 #include "GLCD_Config.h"
 
 // Camera
-#include "Camera_Module.h"
+#include "camera_module.h"
 
 // SDCard
-#include "SDCard_Module.h"
+#include "sdcard_module.h"
 
 // Touch
-#include "Touch_Handler.h"
+#include "touch_handler.h"
 
 // Buttons
-#include "Button_Handler.h"
+#include "button_handler.h"
 
 // JPEG
-#include "Jpeg_Write.h"
+#include "jpeg_write.h"
 
 // BMP
-#include "Bmp_Write.h"
+#include "bmp_write.h"
 
 // Camera application
-#include "Camera_Defines.h"
-#include "Camera_Globals.h"
-#include "Icons/Icon_Photos.c"
-#include "Error_Message.h"
+#include "camera_globals.h"
+#include "../icons/icon_photos.c"
+#include "error_message.h"
 
 extern GLCD_FONT     GLCD_Font_16x24;
 extern int Camera_Global_DrawToScreen;
 
-Entity Camera_ViewEntities[1];
 unsigned int num_viewEntities;
 
 
@@ -40,12 +38,6 @@ void Camera_View_TakePhoto(void);
 void Camera_View_Initalise(void)
 {
 	
-	Camera_ViewEntities[0] = Entity_Make(
-																				Point_2D_Make(
-																											GLCD_CAMERA_WIDTH-Icon_Photos.width - GLCD_CAMERA_EDGE_PADDING, 
-																											GLCD_CAMERA_HEIGHT-Icon_Photos.height - GLCD_CAMERA_EDGE_PADDING), 
-																				&Icon_Photos);
-	num_viewEntities = 1;
 }
 
 enum CAMERA_STATE Camera_View_Run(void)
@@ -76,8 +68,11 @@ enum CAMERA_STATE Camera_View_Run(void)
 	
 	// Check if the photos icon has been pressed.
 	Point_2D point;
-	if(Screen_Touched(&point))
+	if(Touch_Handler_Touched(&point.x, &point.y))
 	{
+		// Reset the touch timer
+		Touch_Handler_Reset();
+		
 		// Turn off the camera
 		Camera_Pause();
 		
@@ -104,16 +99,19 @@ enum CAMERA_STATE Camera_View_Run(void)
 void Camera_View_TakePhoto(void)
 {
 	// Take a snapshot and store in buffer
-	Camera_Snapshot((uint8_t *)Camera_BufferAddress());
+	Camera_Snapshot((uint16_t *)Camera_BufferAddress());
 		
 	// Find the number of photos on the sdcard so we know what to name this photo
-	uint16_t numFiles = SDCard_GetNumFileType(PHOTO_ICONDIRECTORY, "BMP", 3);
+	uint16_t numFiles;
+	if(SDCard_GetNumFileType(&numFiles, PHOTO_ICONDIRECTORY, "BMP", 3) != SDCARD_OK)
+	{
+		while(1){}
+	}
 		
 	// Create image file names by using the count of the number of images on the SD card
 	char file_jpg[30];
 		
 	sprintf(file_jpg, "%s/%d.jpg", PHOTO_DIRECTORY, numFiles+1);
-	//sprintf(file_jpg, "Media/Photos/%d.jpg", numFiles+1);
 	
 	char file_bmp[30];
 	sprintf(file_bmp, "%s/%d.bmp", PHOTO_ICONDIRECTORY, numFiles+1);
@@ -123,7 +121,7 @@ void Camera_View_TakePhoto(void)
 	//
 		
 	FIL file;
-	if(!SDCard_OpenFile(&file, file_jpg, FA_WRITE | FA_CREATE_NEW))
+	if(SDCard_OpenFile(&file, file_jpg, FA_WRITE | FA_CREATE_NEW) != SDCARD_OK)
 	{
 		while(1){}
 	}
@@ -131,20 +129,29 @@ void Camera_View_TakePhoto(void)
 	jpeg_write(&file, (uint8_t *)Camera_BufferAddress(), 480, 272);
 
 	// Close the file
-	SDCard_CloseFile(&file);
+	if(SDCard_CloseFile(&file)!= SDCARD_OK)
+	{
+		while(1){}
+	}
 		
 	//
 	// Save a 48x48 bmp version of the image
 	//
 		
-	if(!SDCard_OpenFile(&file, file_bmp, FA_WRITE | FA_CREATE_NEW))
+	if(SDCard_OpenFile(&file, file_bmp, FA_WRITE | FA_CREATE_NEW) != SDCARD_OK)
 	{
 		while(1){}
 	}
 		
 	// Write buffer to bmp
-	bmp_write(&file, (uint8_t *)Camera_BufferAddress(), 480, 272, 48, 48);
+	if(bmp_write(&file, (uint8_t *)Camera_BufferAddress(), 480, 272, 48, 48) != BMPWRITE_OK)
+	{
+		while(1){}
+	}
 		
 	// Close the file
-	SDCard_CloseFile(&file);
+	if(SDCard_CloseFile(&file)!= SDCARD_OK)
+	{
+		while(1){}
+	}
 }

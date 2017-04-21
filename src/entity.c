@@ -1,4 +1,4 @@
-#include "Data_Types.h"
+#include "entity.h"
 
 Entity Entity_Make(const Point_2D _p, Icon *_i)
 {
@@ -30,4 +30,16 @@ Icon Icon_Make(const unsigned int _width, const unsigned int _height, const unsi
 	icon.pixel_data = _pixel_data;
 	
 	return icon;
+}
+
+uint8_t Entity_Point_Collision(const Entity *entity, const Point_2D *point)
+{
+	if(point->x > entity->position.x 
+		&& point->x < entity->position.x + entity->image->width 
+	  && point->y > entity->position.y
+		&& point->y < entity->position.y + entity->image->height )
+	{
+		return 1;
+	}
+	return 0;
 }

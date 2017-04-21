@@ -1,13 +1,19 @@
 
-#include "Bmp_Load.h"
-#include "Bmp_FileHeader.h"
+#include "bmp_read.h"
+
+#include "bmp_fileHeader.h"
+
+/* FatFs includes component */
+#include "ff_gen_drv.h"
+#include "sd_diskio.h"
+
 
 uint8_t sector[512];
 uint32_t BytesRead = 0;
 
-int bmp_process(FIL *file, uint8_t *buffer, uint16_t *img_width, uint16_t *img_height)
+uint8_t bmp_read(FIL *file, uint8_t *buffer, uint16_t *img_width, uint16_t *img_height)
 {
-	uint8_t status;
+	uint8_t status = BMPREAD_ERROR;
 	BitMap bitMapHeader;
 	
 	// Read bmp header
@@ -16,7 +22,7 @@ int bmp_process(FIL *file, uint8_t *buffer, uint16_t *img_width, uint16_t *img_h
 		// Check if file loaded is a bitmap
 		if(bitMapHeader.Signature != 0x4D42)
 		{
-			return 0;
+			return status;
 		}
 	}
 	
@@ -24,7 +30,6 @@ int bmp_process(FIL *file, uint8_t *buffer, uint16_t *img_width, uint16_t *img_h
 	*(img_width) = (uint16_t)bitMapHeader.Width;
 	*(img_height) = (uint16_t)bitMapHeader.Height;
 	
-	status = 0;
 	// Move file pointer to bmp pixel data
 	if(f_lseek(file, bitMapHeader.DataOffSet) == FR_OK)
 	{
@@ -56,7 +61,7 @@ int bmp_process(FIL *file, uint8_t *buffer, uint16_t *img_width, uint16_t *img_h
 		}
 		while (size > 0);
 			
-		status = 1;
+		status = BMPREAD_OK;
 
 	}
 	

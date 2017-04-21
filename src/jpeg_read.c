@@ -1,19 +1,26 @@
 
+#include <stdlib.h>
 
-#include "Jpeg_Decode.h"
-#include "Camera_Globals.h"
-#include "Jpeg_RGB.h"
+/* FatFs includes component */
+#include "ff_gen_drv.h"
+#include "sd_diskio.h"
 
-uint32_t  offset = 0;
-RGB_typedef *RGB_matrix;
+/* Jpeg includes component */
+#include <stdint.h>
+#include <string.h>
+#include "jpeglib.h"
 
- struct jpeg_decompress_struct cinfo;
- struct jpeg_error_mgr jerr;
-  
-	
-void jpeg_decode(JFILE *file, uint8_t *buffer, uint16_t *img_width, uint16_t *img_height)
+#include "jpeg_read.h"
+#include "jpeg_rgb.h"
+
+struct jpeg_decompress_struct cinfo;
+struct jpeg_error_mgr jerr;
+ 
+static uint8_t processBuffer(uint8_t* Row, uint8_t *buffer, uint32_t rowNum, uint16_t width, uint16_t height);
+
+void jpeg_read(FIL *file, uint8_t *buffer, uint16_t *img_width, uint16_t *img_height)
 { 
-    
+	
   /* Decode JPEG Image */
   JSAMPROW jBuffer[2] = {0}; /* Output row buffer */
   uint32_t row_stride = 0; /* physical row width in image buffer */
@@ -67,6 +74,9 @@ void jpeg_decode(JFILE *file, uint8_t *buffer, uint16_t *img_width, uint16_t *im
 
 static uint8_t processBuffer(uint8_t* Row, uint8_t *buffer, uint32_t rowNum, uint16_t width, uint16_t height)
 {
+	uint32_t  offset = 0;
+	RGB_typedef *RGB_matrix;
+	
 	offset = ((uint32_t)buffer + (width * (height - rowNum) * 2));
 	RGB_matrix =  (RGB_typedef*)Row;
 	int index = 0;

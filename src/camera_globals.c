@@ -10,6 +10,5 @@ static uint16_t buffer[GLCD_WIDTH*GLCD_HEIGHT] __attribute__((at(0xC0260000)));
 
 uint32_t Camera_BufferAddress(void)
 {
-//	return 0xC0260000;
 	return ((uint32_t)buffer);
 }

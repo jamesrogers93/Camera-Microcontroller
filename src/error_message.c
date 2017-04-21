@@ -4,7 +4,7 @@
 #include <string.h>
 #include "Board_GLCD.h"
 #include "GLCD_Config.h"
-#include "Camera_Defines.h"
+#include "Camera_Globals.h"
 
 extern GLCD_FONT     GLCD_Font_16x24;
 void Error_DisplayMessage(const char *message)

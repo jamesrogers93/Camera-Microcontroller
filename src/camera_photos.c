@@ -1,5 +1,7 @@
 #include "Camera_Photos.h"
 
+#include <stdlib.h>
+
 // GLCD
 #include "Board_GLCD.h"
 #include "GLCD_Config.h"
@@ -8,20 +10,19 @@
 #include "Touch_Handler.h"
 
 // SDCard
-#include "SDCard_Module.h"
+#include "sdcard_module.h"
 
 // JPEG
-#include "Jpeg_Decode.h"
+#include "jpeg_read.h"
 
 // BMP
-#include "Bmp_Load.h"
+#include "bmp_read.h"
 
 // Camera application
-#include "Camera_Defines.h"
-#include "Camera_Globals.h"
-#include "Data_Types.h"
-#include "Icons/Icon_Camera.c"
-#include "Error_Message.h"
+#include "camera_globals.h"
+#include "entity.h"
+#include "../icons/icon_camera.c"
+#include "error_message.h"
 
 #define PHOTO_PREVIEWSIZE 48
 #define PHOTO_PREVIEW_HEIGHT_PADDING 40
@@ -36,8 +37,7 @@
 extern GLCD_FONT     GLCD_Font_16x24;
 extern int Camera_Global_DrawToScreen;
 
-Entity Camera_PhotosEntities[1];
-unsigned int num_PhotosEntities;
+Entity Camera_Button;
 
 char* rowPreviewFiles[PHOTO_PREVIEW_MAX_COLUMN];
 unsigned int Camera_Photos_Page;
@@ -48,12 +48,11 @@ int imageTouched = 0;
 
 void Camera_Photos_Initalise(void)
 {
-	Camera_PhotosEntities[0] = Entity_Make(
-																				Point_2D_Make(
-																											GLCD_CAMERA_WIDTH-Icon_Camera.width - GLCD_CAMERA_EDGE_PADDING, 
-																											GLCD_CAMERA_HEIGHT-Icon_Camera.height - GLCD_CAMERA_EDGE_PADDING), 
-																				&Icon_Camera);
-	num_PhotosEntities = 1;
+	Camera_Button = Entity_Make(
+															Point_2D_Make(
+																						GLCD_CAMERA_WIDTH-Icon_Camera.width - GLCD_CAMERA_EDGE_PADDING, 
+																						GLCD_CAMERA_HEIGHT-Icon_Camera.height - GLCD_CAMERA_EDGE_PADDING), 
+															&Icon_Camera);
 	
 	// Reserve memory to store directories of row of image previews  
 	int i;
@@ -92,13 +91,13 @@ enum CAMERA_STATE Camera_Photos_Run(void)
 				GLCD_SetFont (&GLCD_Font_16x24);
 				GLCD_DrawString(GLCD_CAMERA_EDGE_PADDING, GLCD_CAMERA_EDGE_PADDING, "Photos State");
 				
-				// Draw the photos icon to the screen.
+				// Draw the photo icon to the screen.
 				GLCD_DrawBitmap( 
-												Camera_PhotosEntities[0].position.x, 
-												Camera_PhotosEntities[0].position.y, 
-												Camera_PhotosEntities[0].image->width,
-												Camera_PhotosEntities[0].image->height, 
-												Camera_PhotosEntities[0].image->pixel_data);
+												Camera_Button.position.x, 
+												Camera_Button.position.y, 
+												Camera_Button.image->width,
+												Camera_Button.image->height, 
+												Camera_Button.image->pixel_data);
 				
 				// Draw the preview photos.
 				if(!Camera_Photos_DrawPreviewPhotos(Camera_Photos_Page))
@@ -109,11 +108,16 @@ enum CAMERA_STATE Camera_Photos_Run(void)
 		
 		
 			// Check if screen is touched.
-			if(Screen_Touched(&point))
+			if(Touch_Handler_Touched(&point.x, &point.y))
 			{
 				// Check if entity is touched
-				if(Point_Entity_Collision(&point, Camera_PhotosEntities, num_PhotosEntities) != 0)
+				if(Entity_Point_Collision(&Camera_Button, &point) != 0)
 				{
+					
+					// Reset the touch timer
+					Touch_Handler_Reset();
+					
+					// Clear the screen
 					GLCD_ClearScreen();
 					
 					// Release the draw to screen flag, enabling items to be drawn again.
@@ -172,11 +176,15 @@ enum CAMERA_STATE Camera_Photos_Run(void)
 			}
 			
 			// Check if screen is touched.
-			if(Screen_Touched(&point))
+			if(Touch_Handler_Touched(&point.y, &point.y))
 			{
+				// Reset the touch timer
+				Touch_Handler_Reset();
+				
 				// Release the draw to screen flag, enabling items to be drawn again.
 				Camera_Global_DrawToScreen = CAMERA_GLOBAL_DRAWON;
 							
+				// Clear the screen
 				GLCD_ClearScreen();
 			
 				// Switch back to displaying the previews.
@@ -203,8 +211,11 @@ int Camera_Photos_DrawPreviewPhotos(const unsigned int page)
 		
 		// Load image preview directories for this row
 		unsigned int startIndex = PHOTO_PREVIEW_MAX_COLUMN*i;
-		unsigned int numPreviewsInRow;
-		numPreviewsInRow = SDCard_GetBMPFileName(PHOTO_ICONDIRECTORY, rowPreviewFiles, PHOTO_PREVIEW_MAX_COLUMN, MAX_PHOTOFILENAME, startIndex);
+		uint16_t numPreviewsInRow;
+		if(SDCard_GetBMPFileName(&numPreviewsInRow, PHOTO_ICONDIRECTORY, rowPreviewFiles, PHOTO_PREVIEW_MAX_COLUMN, MAX_PHOTOFILENAME, startIndex) != SDCARD_OK)
+		{
+			while(1){}
+		}
 		
 		// Count the total number of previews loaded 
 		numPreviewsOnScreen += numPreviewsInRow;
@@ -217,14 +228,14 @@ int Camera_Photos_DrawPreviewPhotos(const unsigned int page)
 					
 			// Open file from SD Card
 			FIL file;
-			if(!SDCard_OpenFile(&file, (char*)str, FA_READ))
+			if(SDCard_OpenFile(&file, (char*)str, FA_READ) != SDCARD_OK)
 			{
 				return 0;
 			}
 			
 			// Load bmp from file
 			uint16_t width, height;
-			if(!bmp_process(&file, (uint8_t *)Camera_BufferAddress(), &width, &height))
+			if(bmp_read(&file, (uint8_t *)Camera_BufferAddress(), &width, &height) != BMPREAD_OK)
 			{
 				return 0;
 			}
@@ -236,7 +247,7 @@ int Camera_Photos_DrawPreviewPhotos(const unsigned int page)
 			}
 			
 			// Close File
-			if(!SDCard_CloseFile(&file))
+			if(SDCard_CloseFile(&file) != SDCARD_OK)
 			{
 				return 0;
 			}
@@ -261,8 +272,11 @@ int Camera_Photos_DrawPhoto(const unsigned int index)
 	// Load the bmp buffer into memory from SDCard
 	
 	// Get the file name of the imageTouched bmp
-	unsigned int numPreviewsInRow;
-	numPreviewsInRow = SDCard_GetBMPFileName(PHOTO_ICONDIRECTORY, rowPreviewFiles, 1, MAX_PHOTOFILENAME, index);
+	uint16_t numPreviewsInRow;
+	if(SDCard_GetBMPFileName(&numPreviewsInRow, PHOTO_ICONDIRECTORY, rowPreviewFiles, 1, MAX_PHOTOFILENAME, index) != SDCARD_OK)
+	{
+		while(1){}
+	}
 	
 	if(numPreviewsInRow != 1)
 		return 0;
@@ -283,17 +297,17 @@ int Camera_Photos_DrawPhoto(const unsigned int index)
 	
 	// Open File
 	FIL file;
-	if(!SDCard_OpenFile(&file, (char*)str, FA_READ))
+	if(SDCard_OpenFile(&file, (char*)str, FA_READ) != SDCARD_OK)
 	{
 		return 0;
 	}
 	
 	// Decode jpeg image and store in buffer
 	uint16_t width, height;
-	jpeg_decode(&file, (uint8_t *)Camera_BufferAddress(), &width, &height);
+	jpeg_read(&file, (uint8_t *)Camera_BufferAddress(), &width, &height);
 	
 	// Close File
-	if(!SDCard_CloseFile(&file))
+	if(SDCard_CloseFile(&file) != SDCARD_OK)
 	{
 		return 0;
 	}
