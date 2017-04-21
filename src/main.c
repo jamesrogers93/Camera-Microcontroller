@@ -24,8 +24,8 @@
 #include "Board_Touch.h"
 #include "Board_Buttons.h"
 #include "Camera.h"
-#include "Camera_Module.h"
-#include "SDCard_Module.h"
+#include "camera_module.h"
+#include "sdcard_module.h"
 #include "main.h"
 
 #ifdef RTE_CMSIS_RTOS_RTX
@@ -89,6 +89,18 @@ static void GLCD_Config()
   GLCD_ClearScreen(); 
 }
 
+static void Camera_Config(void)
+{
+	Camera_Initalise();
+	Camera_Continuous((uint8_t *)GLCD_FrameBufferAddress());
+	Camera_Pause();
+}
+
+static void SDCard_Config(void)
+{
+	SDCard_Initalise();
+}
+
 /**
   * CPU L1-Cache enable
   */
@@ -119,7 +131,7 @@ int main (void) {
 	SDCard_Config();
 	
 	// Camera
-	Camera_initalise();
+	CameraApp_initalise();
 	Camera_run();
 	
 	

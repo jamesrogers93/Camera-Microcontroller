@@ -1,18 +1,26 @@
 
+#include <stdlib.h>
 
-#include "Jpeg_Write.h"
-#include "Camera_Globals.h"
-#include "Jpeg_RGB.h"
+/* FatFs includes component */
+#include "ff_gen_drv.h"
+#include "sd_diskio.h"
+
+/* Jpeg includes component */
+#include <stdint.h>
+#include <string.h>
+#include "jpeglib.h"
+
+#include "jpeg_write.h"
+#include "jpeg_rgb.h"
   
 	
-void jpeg_write(JFILE *file, uint8_t *buffer, uint16_t img_width, uint16_t img_height)
+void jpeg_write(FIL *file, uint8_t *buffer, uint16_t img_width, uint16_t img_height)
 { 
     
   struct jpeg_compress_struct cinfo;
 	struct jpeg_error_mgr jerr;
 	
 	JSAMPROW row_pointer[1];		/* pointer to JSAMPLE row[s] */
-	int row_stride;							/* physical row width in image buffer */
 	
 	/* Step 1: allocate and initialize JPEG compression object */
 	
@@ -66,9 +74,7 @@ void jpeg_write(JFILE *file, uint8_t *buffer, uint16_t img_width, uint16_t img_h
    * To keep things simple, we pass one scanline per call; you can pass
    * more if you wish, though.
    */
-  row_stride = (unsigned int)img_width * 3;	/* JSAMPLEs per row in image_buffer */
-	
-	
+	 
 	// RGB masks for conversion
 	uint16_t red_mask = 0xF800;
 	uint16_t green_mask = 0x7E0;

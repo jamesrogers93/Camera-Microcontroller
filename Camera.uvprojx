@@ -335,7 +335,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F746xx,USE_STM32746G_DISCO</Define>
               <Undefine></Undefine>
-              <IncludePath>Third_Party/FatFs/src/;Third_Party/FatFs/src/drivers;Third_Party/LibJPEG/include;../../../</IncludePath>
+              <IncludePath>Third_Party/FatFs/src/;Third_Party/FatFs/src/drivers;Third_Party/LibJPEG/include;../../../;headers/;src/</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -377,82 +377,77 @@
       </TargetOption>
       <Groups>
         <Group>
-          <GroupName>Main</GroupName>
+          <GroupName>main</GroupName>
           <Files>
             <File>
               <FileName>main.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\main.h</FilePath>
+              <FilePath>.\headers\main.h</FilePath>
+            </File>
+            <File>
+              <FileName>camera.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\headers\camera.h</FilePath>
+            </File>
+            <File>
+              <FileName>camera_view.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\headers\camera_view.h</FilePath>
+            </File>
+            <File>
+              <FileName>camera_photos.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\headers\camera_photos.h</FilePath>
+            </File>
+            <File>
+              <FileName>camera_globals.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\headers\camera_globals.h</FilePath>
+            </File>
+            <File>
+              <FileName>entity.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\headers\entity.h</FilePath>
+            </File>
+            <File>
+              <FileName>error_message.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\headers\error_message.h</FilePath>
             </File>
             <File>
               <FileName>main.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\main.c</FilePath>
+              <FilePath>.\src\main.c</FilePath>
             </File>
             <File>
-              <FileName>Camera.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Camera.h</FilePath>
-            </File>
-            <File>
-              <FileName>Camera.c</FileName>
+              <FileName>camera.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\Camera.c</FilePath>
+              <FilePath>.\src\camera.c</FilePath>
             </File>
             <File>
-              <FileName>Data_Types.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Data_Types.h</FilePath>
-            </File>
-            <File>
-              <FileName>Camera_View.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Camera_View.h</FilePath>
-            </File>
-            <File>
-              <FileName>Camera_View.c</FileName>
+              <FileName>camera_view.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\Camera_View.c</FilePath>
+              <FilePath>.\src\camera_view.c</FilePath>
             </File>
             <File>
-              <FileName>Camera_Defines.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Camera_Defines.h</FilePath>
-            </File>
-            <File>
-              <FileName>Data_types.c</FileName>
+              <FileName>camera_photos.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\Data_types.c</FilePath>
+              <FilePath>.\src\camera_photos.c</FilePath>
             </File>
             <File>
-              <FileName>Camera_Photos.c</FileName>
+              <FileName>camera_globals.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\Camera_Photos.c</FilePath>
+              <FilePath>.\src\camera_globals.c</FilePath>
             </File>
             <File>
-              <FileName>Camera_Photos.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Camera_Photos.h</FilePath>
-            </File>
-            <File>
-              <FileName>Error_Message.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Error_Message.h</FilePath>
-            </File>
-            <File>
-              <FileName>Error_Message.c</FileName>
+              <FileName>entity.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\Error_Message.c</FilePath>
+              <FilePath>.\src\entity.c</FilePath>
             </File>
             <File>
-              <FileName>Camera_Globals.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Camera_Globals.h</FilePath>
-            </File>
-            <File>
-              <FileName>Camera_Globals.c</FileName>
+              <FileName>error_message.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\Camera_Globals.c</FilePath>
+              <FilePath>.\src\error_message.c</FilePath>
             </File>
             <File>
               <FileName>jdata_conf.c</FileName>
@@ -462,37 +457,122 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Camera_Module</GroupName>
+          <GroupName>camera_module</GroupName>
           <Files>
             <File>
-              <FileName>Camera_Module.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Camera_Module.c</FilePath>
+              <FileName>camera_module.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\headers\camera_module.h</FilePath>
             </File>
             <File>
-              <FileName>Camera_Module.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Camera_Module.h</FilePath>
+              <FileName>camera_module.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\camera_module.c</FilePath>
             </File>
           </Files>
         </Group>
         <Group>
-          <GroupName>SDCard_Module</GroupName>
+          <GroupName>sdcard_module</GroupName>
           <Files>
             <File>
-              <FileName>SDCard_Module.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\SDCard_Module.c</FilePath>
+              <FileName>sdcard_module.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\headers\sdcard_module.h</FilePath>
             </File>
             <File>
-              <FileName>SDCard_Module.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\SDCard_Module.h</FilePath>
+              <FileName>sdcard_module.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\sdcard_module.c</FilePath>
             </File>
           </Files>
         </Group>
         <Group>
-          <GroupName>Bitmaps</GroupName>
+          <GroupName>jpeg_module</GroupName>
+          <Files>
+            <File>
+              <FileName>jpeg_read.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\headers\jpeg_read.h</FilePath>
+            </File>
+            <File>
+              <FileName>jpeg_write.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\headers\jpeg_write.h</FilePath>
+            </File>
+            <File>
+              <FileName>jpeg_rgb.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\headers\jpeg_rgb.h</FilePath>
+            </File>
+            <File>
+              <FileName>jpeg_read.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\jpeg_read.c</FilePath>
+            </File>
+            <File>
+              <FileName>jpeg_write.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\jpeg_write.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>bmp_module</GroupName>
+          <Files>
+            <File>
+              <FileName>bmp_read.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\headers\bmp_read.h</FilePath>
+            </File>
+            <File>
+              <FileName>bmp_write.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\headers\bmp_write.h</FilePath>
+            </File>
+            <File>
+              <FileName>bmp_fileheader.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\headers\bmp_fileheader.h</FilePath>
+            </File>
+            <File>
+              <FileName>bmp_read.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\bmp_read.c</FilePath>
+            </File>
+            <File>
+              <FileName>bmp_write.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\bmp_write.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>input_module</GroupName>
+          <Files>
+            <File>
+              <FileName>touch_handler.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\headers\touch_handler.h</FilePath>
+            </File>
+            <File>
+              <FileName>button_handler.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\headers\button_handler.h</FilePath>
+            </File>
+            <File>
+              <FileName>touch_handler.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\touch_handler.c</FilePath>
+            </File>
+            <File>
+              <FileName>button_handler.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\button_handler.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>bitmaps</GroupName>
           <Files>
             <File>
               <FileName>Icon_Browse.c</FileName>
@@ -773,91 +853,6 @@
               <FileName>jutils.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Third_Party\LibJPEG\source\jutils.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>JPEG_Module</GroupName>
-          <Files>
-            <File>
-              <FileName>Jpeg_Decode.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Jpeg_Decode.c</FilePath>
-            </File>
-            <File>
-              <FileName>Jpeg_Decode.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Jpeg_Decode.h</FilePath>
-            </File>
-            <File>
-              <FileName>Jpeg_RGB.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Jpeg_RGB.h</FilePath>
-            </File>
-            <File>
-              <FileName>Jpeg_Write.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Jpeg_Write.h</FilePath>
-            </File>
-            <File>
-              <FileName>Jpeg_Write.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Jpeg_Write.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>BMP_Module</GroupName>
-          <Files>
-            <File>
-              <FileName>Bmp_FileHeader.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Bmp_FileHeader.h</FilePath>
-            </File>
-            <File>
-              <FileName>Bmp_Load.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Bmp_Load.h</FilePath>
-            </File>
-            <File>
-              <FileName>Bmp_Load.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Bmp_Load.c</FilePath>
-            </File>
-            <File>
-              <FileName>Bmp_Write.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Bmp_Write.h</FilePath>
-            </File>
-            <File>
-              <FileName>Bmp_Write.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Bmp_Write.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Input_Module</GroupName>
-          <Files>
-            <File>
-              <FileName>Touch_Handler.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Touch_Handler.c</FilePath>
-            </File>
-            <File>
-              <FileName>Touch_Handler.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Touch_Handler.h</FilePath>
-            </File>
-            <File>
-              <FileName>Button_Handler.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Button_Handler.h</FilePath>
-            </File>
-            <File>
-              <FileName>Button_Handler.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Button_Handler.c</FilePath>
             </File>
           </Files>
         </Group>

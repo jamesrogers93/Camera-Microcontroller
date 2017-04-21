@@ -1,6 +1,6 @@
 /* GIMP RGBA C-Source image dump (Icon_Browse.c) */
 
-#include "../Data_Types.h"
+#include "Entity.h"
 
 static Icon Icon_Browse = {
   24, 24, 2,

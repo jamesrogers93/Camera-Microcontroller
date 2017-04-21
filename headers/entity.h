@@ -1,9 +1,7 @@
+#ifndef _ENTITY_H
+#define _ENTITY_H
 
-#ifndef _DATA_TYPES_H
-#define _DATA_TYPES_H
-
-enum CAMERA_STATE {CAMERA_VIEW, CAMERA_PHOTOS};
-enum CAMERA_PHOTOS_STATE {CAMERA_PHOTOS_PREVIEWS, CAMERA_PHOTOS_PHOTO};
+#include <stdint.h>
 
 typedef struct
 {
@@ -24,12 +22,12 @@ typedef struct
 	Icon *image;
 } Entity;
 
-
-
 Entity Entity_Make(const Point_2D _p, Icon *_i);
 
 Point_2D Point_2D_Make(const int _x, const int _y);
 
 Icon Icon_Make(const unsigned int _width, const unsigned int _height, const unsigned int _bytes_per_pixel, unsigned char *_pixel_data);
 
-#endif /* _DATA_TYPES_H */
+uint8_t Entity_Point_Collision(const Entity *entity, const Point_2D *point);
+
+#endif /* _ENTITY_H */

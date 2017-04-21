@@ -1,20 +1,13 @@
-#include "Bmp_Write.h"
-#include "Bmp_FileHeader.h"
+#include "bmp_write.h"
+#include "bmp_fileheader.h"
 
-int bmp_write(FIL *file, uint8_t *buffer, uint16_t img_width, uint16_t img_height, uint16_t target_width, uint16_t target_height)
+/* FatFs includes component */
+#include "ff_gen_drv.h"
+#include "sd_diskio.h"
+
+uint8_t bmp_write(FIL *file, uint8_t *buffer, uint16_t img_width, uint16_t img_height, uint16_t target_width, uint16_t target_height)
 {
-	
-	/*uint16_t *Camera_ptr = (uint16_t *)buffer;
-	int t;
-	for(t = 0; t < 272; t++)
-	{
-		int j;
-		for(j = 0; j < 480; j++)
-		{
-			*Camera_ptr++ = 0xF800;
-		}	
-	}*/
-	
+	uint8_t status = BMPWRITE_ERROR;
 	BitMap bitMapHeader;
 	
 	// Fill header
@@ -34,8 +27,6 @@ int bmp_write(FIL *file, uint8_t *buffer, uint16_t img_width, uint16_t img_heigh
 	bitMapHeader.YPixelsPreMeter = 0x00000B13;
 	bitMapHeader.ColorsUsed = 0x00000000;
 	bitMapHeader.ColorsImportant = 0x00000000;
-	//bitMapHeader.pixel_data = 
-	
 	
 	// image is 480 x 272.
 	// we want to resize it to 48x48 without warping it.
@@ -132,18 +123,21 @@ int bmp_write(FIL *file, uint8_t *buffer, uint16_t img_width, uint16_t img_heigh
 	uint32_t BytesRead = 0;
 	if(f_write(file, &bitMapHeader, sizeof(bitMapHeader), &BytesRead) != FR_OK)
 	{
-		while(1){}
+		return status;
 	}
 	
 	// Move file pointer to bmp pixel data
 	if(f_lseek(file, bitMapHeader.DataOffSet) != FR_OK)
 	{
-		while(1){}
+		return status;
 	}
 	
 	// Write bitmap to bmp file
 	if(f_write(file, &pixels, bitMapHeader.Width * bitMapHeader.Height * 2, &BytesRead) != FR_OK)
 	{
-		while(1){}
+		return status;
 	}
+	
+	status = BMPWRITE_OK;
+	return status;
 }

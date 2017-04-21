@@ -9,80 +9,78 @@
   */
 
 /* Includes ------------------------------------------------------------------*/
-#include "SDCard_Module.h"
+#include "sdcard_module.h"
 
-#include "Camera_Defines.h"
-#include "Board_GLCD.h"
-#include "GLCD_Config.h"
-#include "Jpeg_Decode.h"
+#include "stm32746g_discovery.h"
 
-extern GLCD_FONT     GLCD_Font_16x24;
+// FatFs
+#include "ff.h"
+#include "ff_gen_drv.h"
+#include "sd_diskio.h"
 
 char SD_Path[4];
-//uint8_t sector[512];
 FATFS fs;
-//uint32_t BytesRead = 0;
 
-void SDCard_Config(void)
+uint8_t SDCard_Initalise(void)
 {
-	BSP_SD_Init();
+	if(BSP_SD_Init() != MSD_OK)
+	{
+		return SDCARD_ERROR_INITALISE;
+	}
 	
 	// Link the SD Card disk I/O driver
   if(FATFS_LinkDriver(&SD_Driver, SD_Path) != 0)
   {
-		// Draw the state string to the screen
-		GLCD_SetForegroundColor(GLCD_COLOR_BLACK);
-		GLCD_SetFont (&GLCD_Font_16x24);
-		GLCD_DrawString(GLCD_CAMERA_EDGE_PADDING, GLCD_CAMERA_EDGE_PADDING, "SDCard Driver Error");
-	
-		while(1){}
+		return SDCARD_ERROR_DRIVER;
 	}
+	
+	return SDCARD_OK;
 }
 
-int SDCard_IsDetected(void)
+uint8_t SDCard_IsDetected(void)
 {
 	return BSP_SD_IsDetected() == SD_PRESENT;
 }
 
-int SDCard_OpenFile(FIL *file, const char *filePath, uint8_t mode)
+uint8_t SDCard_OpenFile(FIL *file, const char *filePath, uint8_t mode)
 {
 	  // Open filesystem
   if(f_mount(&fs, (TCHAR const*)"",0) != FR_OK)
   {
-    return 0;
+    return SDCARD_ERROR_FILE;
   }
 	
 	// Open file
 	FRESULT res = f_open(file, (TCHAR const*)filePath, mode);
 	if( res != FR_OK)
   {
-		return 0;
+		return SDCARD_ERROR_FILE;
 	}
 	
-	return 1;
+	return SDCARD_OK;
 }
 
-int SDCard_CloseFile(FIL *file)
+uint8_t SDCard_CloseFile(FIL *file)
 {
 	f_close (file);
 	f_mount(NULL, (TCHAR const*)"",0);
 	
-	return 1;
+	return SDCARD_OK;
 }
 
-int SDCard_GetBMPFileName(const char* DirName, char* Files[], const unsigned int maxFiles, const unsigned int maxFileName, const unsigned int startIndex)
+uint8_t SDCard_GetBMPFileName(uint16_t *numFiles, const char* DirName, char* Files[], const unsigned int maxFiles, const unsigned int maxFileName, const unsigned int startIndex)
 {
   FILINFO fno;
   DIR dir;
-  uint32_t counter = 0, index = 0;
+  uint16_t counter = 0, index = 0;
   FRESULT res;
 	
-	unsigned int bmpCount = 0;
+	uint8_t bmpCount = 0;
 
   /* Open filesystem */
   if(f_mount(&fs, (TCHAR const*)"",0) != FR_OK)
   {
-    return 0;
+    return SDCARD_ERROR_FILE;
   }
 
   /* Open directory */
@@ -139,10 +137,13 @@ int SDCard_GetBMPFileName(const char* DirName, char* Files[], const unsigned int
   }
 	
   f_mount(NULL, (TCHAR const*)"",0);
-  return index;
+	
+	*(numFiles) = index;
+	
+  return SDCARD_OK;
 }
 
-int SDCard_GetNumFileType(const char* DirName, const char* FileType, const uint8_t FileTypeLen)
+uint8_t SDCard_GetNumFileType(uint16_t *numFiles, const char* DirName, const char* FileType, const uint8_t FileTypeLen)
 {
   FILINFO fno;
   DIR dir;
@@ -154,7 +155,7 @@ int SDCard_GetNumFileType(const char* DirName, const char* FileType, const uint8
   /* Open filesystem */
   if(f_mount(&fs, (TCHAR const*)"",0) != FR_OK)
   {
-    return 0;
+    return SDCARD_ERROR_FILE;
   }
 
   /* Open directory */
@@ -185,12 +186,10 @@ int SDCard_GetNumFileType(const char* DirName, const char* FileType, const uint8
 
 				// Check if the file extension matches
 				int i;
-				uint8_t status = 1;
 				for(i = 0; i < FileTypeLen; i++)
 				{
 					if(fno.fname[counter + 1 + i] != FileType[i])
 					{
-						status = 0;
 						break;
 					}
 				}
@@ -202,5 +201,8 @@ int SDCard_GetNumFileType(const char* DirName, const char* FileType, const uint8
   }
 	
   f_mount(NULL, (TCHAR const*)"",0);
-  return fileCount;
+	
+	*(numFiles) = fileCount;
+	
+  return SDCARD_OK;
 }

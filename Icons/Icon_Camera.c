@@ -1,6 +1,6 @@
 /* GIMP RGBA C-Source image dump (Icon_Camera.c) */
 
-#include "../Data_Types.h"
+#include "Entity.h"
 
 static Icon Icon_Camera = {
   24, 24, 2,
