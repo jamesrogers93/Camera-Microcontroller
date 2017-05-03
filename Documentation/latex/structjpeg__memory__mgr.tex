@@ -1,0 +1,52 @@
+\hypertarget{structjpeg__memory__mgr}{}\section{jpeg\+\_\+memory\+\_\+mgr Struct Reference}
+\label{structjpeg__memory__mgr}\index{jpeg\+\_\+memory\+\_\+mgr@{jpeg\+\_\+memory\+\_\+mgr}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structjpeg__memory__mgr_ab0d14a0c933c68a7b41ce19339955df5}\label{structjpeg__memory__mgr_ab0d14a0c933c68a7b41ce19339955df5}} 
+{\bfseries J\+M\+E\+T\+H\+OD} (void $\ast$, alloc\+\_\+small,(\hyperlink{structjpeg__common__struct}{j\+\_\+common\+\_\+ptr} cinfo, int pool\+\_\+id, size\+\_\+t sizeofobject))
+\item 
+\mbox{\Hypertarget{structjpeg__memory__mgr_a2bd073feebce4e1952f2dabd97a0f4dd}\label{structjpeg__memory__mgr_a2bd073feebce4e1952f2dabd97a0f4dd}} 
+{\bfseries J\+M\+E\+T\+H\+OD} (void F\+AR $\ast$, alloc\+\_\+large,(\hyperlink{structjpeg__common__struct}{j\+\_\+common\+\_\+ptr} cinfo, int pool\+\_\+id, size\+\_\+t sizeofobject))
+\item 
+\mbox{\Hypertarget{structjpeg__memory__mgr_aa6b3873ddd822e040e8e43da68641244}\label{structjpeg__memory__mgr_aa6b3873ddd822e040e8e43da68641244}} 
+{\bfseries J\+M\+E\+T\+H\+OD} (J\+S\+A\+M\+P\+A\+R\+R\+AY, alloc\+\_\+sarray,(\hyperlink{structjpeg__common__struct}{j\+\_\+common\+\_\+ptr} cinfo, int pool\+\_\+id, J\+D\+I\+M\+E\+N\+S\+I\+ON samplesperrow, J\+D\+I\+M\+E\+N\+S\+I\+ON numrows))
+\item 
+\mbox{\Hypertarget{structjpeg__memory__mgr_a653df295835648406eeb70e2d67b607f}\label{structjpeg__memory__mgr_a653df295835648406eeb70e2d67b607f}} 
+{\bfseries J\+M\+E\+T\+H\+OD} (J\+B\+L\+O\+C\+K\+A\+R\+R\+AY, alloc\+\_\+barray,(\hyperlink{structjpeg__common__struct}{j\+\_\+common\+\_\+ptr} cinfo, int pool\+\_\+id, J\+D\+I\+M\+E\+N\+S\+I\+ON blocksperrow, J\+D\+I\+M\+E\+N\+S\+I\+ON numrows))
+\item 
+\mbox{\Hypertarget{structjpeg__memory__mgr_af03ebb0e1791eaae53d7b98ed16b52a1}\label{structjpeg__memory__mgr_af03ebb0e1791eaae53d7b98ed16b52a1}} 
+{\bfseries J\+M\+E\+T\+H\+OD} (\hyperlink{structjvirt__sarray__control}{jvirt\+\_\+sarray\+\_\+ptr}, request\+\_\+virt\+\_\+sarray,(\hyperlink{structjpeg__common__struct}{j\+\_\+common\+\_\+ptr} cinfo, int pool\+\_\+id, boolean pre\+\_\+zero, J\+D\+I\+M\+E\+N\+S\+I\+ON samplesperrow, J\+D\+I\+M\+E\+N\+S\+I\+ON numrows, J\+D\+I\+M\+E\+N\+S\+I\+ON maxaccess))
+\item 
+\mbox{\Hypertarget{structjpeg__memory__mgr_a975788a0a9a41972f2ff64736ee5751c}\label{structjpeg__memory__mgr_a975788a0a9a41972f2ff64736ee5751c}} 
+{\bfseries J\+M\+E\+T\+H\+OD} (\hyperlink{structjvirt__barray__control}{jvirt\+\_\+barray\+\_\+ptr}, request\+\_\+virt\+\_\+barray,(\hyperlink{structjpeg__common__struct}{j\+\_\+common\+\_\+ptr} cinfo, int pool\+\_\+id, boolean pre\+\_\+zero, J\+D\+I\+M\+E\+N\+S\+I\+ON blocksperrow, J\+D\+I\+M\+E\+N\+S\+I\+ON numrows, J\+D\+I\+M\+E\+N\+S\+I\+ON maxaccess))
+\item 
+\mbox{\Hypertarget{structjpeg__memory__mgr_a35e7cf4ab5070a3f1f9dbda939e5ea75}\label{structjpeg__memory__mgr_a35e7cf4ab5070a3f1f9dbda939e5ea75}} 
+{\bfseries J\+M\+E\+T\+H\+OD} (void, realize\+\_\+virt\+\_\+arrays,(\hyperlink{structjpeg__common__struct}{j\+\_\+common\+\_\+ptr} cinfo))
+\item 
+\mbox{\Hypertarget{structjpeg__memory__mgr_a4719a214970e8b5a9816c8124caa4c20}\label{structjpeg__memory__mgr_a4719a214970e8b5a9816c8124caa4c20}} 
+{\bfseries J\+M\+E\+T\+H\+OD} (J\+S\+A\+M\+P\+A\+R\+R\+AY, access\+\_\+virt\+\_\+sarray,(\hyperlink{structjpeg__common__struct}{j\+\_\+common\+\_\+ptr} cinfo, \hyperlink{structjvirt__sarray__control}{jvirt\+\_\+sarray\+\_\+ptr} ptr, J\+D\+I\+M\+E\+N\+S\+I\+ON start\+\_\+row, J\+D\+I\+M\+E\+N\+S\+I\+ON num\+\_\+rows, boolean writable))
+\item 
+\mbox{\Hypertarget{structjpeg__memory__mgr_a27ee820a8888f09c8c62eed62bb0e556}\label{structjpeg__memory__mgr_a27ee820a8888f09c8c62eed62bb0e556}} 
+{\bfseries J\+M\+E\+T\+H\+OD} (J\+B\+L\+O\+C\+K\+A\+R\+R\+AY, access\+\_\+virt\+\_\+barray,(\hyperlink{structjpeg__common__struct}{j\+\_\+common\+\_\+ptr} cinfo, \hyperlink{structjvirt__barray__control}{jvirt\+\_\+barray\+\_\+ptr} ptr, J\+D\+I\+M\+E\+N\+S\+I\+ON start\+\_\+row, J\+D\+I\+M\+E\+N\+S\+I\+ON num\+\_\+rows, boolean writable))
+\item 
+\mbox{\Hypertarget{structjpeg__memory__mgr_ad4c16a945a0405cc2389c4a2c61bde1d}\label{structjpeg__memory__mgr_ad4c16a945a0405cc2389c4a2c61bde1d}} 
+{\bfseries J\+M\+E\+T\+H\+OD} (void, free\+\_\+pool,(\hyperlink{structjpeg__common__struct}{j\+\_\+common\+\_\+ptr} cinfo, int pool\+\_\+id))
+\item 
+\mbox{\Hypertarget{structjpeg__memory__mgr_a5ff35cbfa35e6794733b42fb37e9509d}\label{structjpeg__memory__mgr_a5ff35cbfa35e6794733b42fb37e9509d}} 
+{\bfseries J\+M\+E\+T\+H\+OD} (void, self\+\_\+destruct,(\hyperlink{structjpeg__common__struct}{j\+\_\+common\+\_\+ptr} cinfo))
+\end{DoxyCompactItemize}
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structjpeg__memory__mgr_a73f56026eac1a0bd4f9f748f49754fa2}\label{structjpeg__memory__mgr_a73f56026eac1a0bd4f9f748f49754fa2}} 
+long {\bfseries max\+\_\+memory\+\_\+to\+\_\+use}
+\item 
+\mbox{\Hypertarget{structjpeg__memory__mgr_a271a4a9278d21c5a90ef8daf944b21a7}\label{structjpeg__memory__mgr_a271a4a9278d21c5a90ef8daf944b21a7}} 
+long {\bfseries max\+\_\+alloc\+\_\+chunk}
+\end{DoxyCompactItemize}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+James/\+Documents/\+Camera-\/\+Microcontroller/\+Third\+\_\+\+Party/\+Lib\+J\+P\+E\+G/include/jpeglib.\+h\end{DoxyCompactItemize}

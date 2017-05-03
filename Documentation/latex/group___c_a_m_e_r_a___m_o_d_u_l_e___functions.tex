@@ -1,0 +1,140 @@
+\hypertarget{group___c_a_m_e_r_a___m_o_d_u_l_e___functions}{}\section{C\+A\+M\+E\+R\+A\+\_\+\+M\+O\+D\+U\+L\+E\+\_\+\+Functions}
+\label{group___c_a_m_e_r_a___m_o_d_u_l_e___functions}\index{C\+A\+M\+E\+R\+A\+\_\+\+M\+O\+D\+U\+L\+E\+\_\+\+Functions@{C\+A\+M\+E\+R\+A\+\_\+\+M\+O\+D\+U\+L\+E\+\_\+\+Functions}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+uint8\+\_\+t \hyperlink{group___c_a_m_e_r_a___m_o_d_u_l_e___functions_ga25ba046b6cf761dd2b1813740277f30c}{Camera\+\_\+\+Initalise} (void)
+\begin{DoxyCompactList}\small\item\em Initializes the camera. \end{DoxyCompactList}\item 
+void \hyperlink{group___c_a_m_e_r_a___m_o_d_u_l_e___functions_gab3250105511ee890c3047100eea0c3e7}{Camera\+\_\+\+Resume} (void)
+\begin{DoxyCompactList}\small\item\em Resumes the camera stream. \end{DoxyCompactList}\item 
+void \hyperlink{group___c_a_m_e_r_a___m_o_d_u_l_e___functions_ga60e0802ecd6407c7f68ede1eec94276c}{Camera\+\_\+\+Pause} (void)
+\begin{DoxyCompactList}\small\item\em Pauses the camera stream. \end{DoxyCompactList}\item 
+void \hyperlink{group___c_a_m_e_r_a___m_o_d_u_l_e___functions_ga54aa8bb67e77b0ce7b12d4686c923480}{Camera\+\_\+\+Continuous} (uint8\+\_\+t $\ast$buffer)
+\begin{DoxyCompactList}\small\item\em Starts the camera in continuous mode. \end{DoxyCompactList}\item 
+void \hyperlink{group___c_a_m_e_r_a___m_o_d_u_l_e___functions_gaad66df57dbd5546f0a8dbe4a4d88fcf6}{Camera\+\_\+\+Snapshot} (uint16\+\_\+t $\ast$buffer)
+\begin{DoxyCompactList}\small\item\em Captures a snapshot of the camera. \end{DoxyCompactList}\item 
+void \hyperlink{group___c_a_m_e_r_a___m_o_d_u_l_e___functions_ga23ee2565a63761a4c740d9805d6c35b4}{B\+S\+P\+\_\+\+C\+A\+M\+E\+R\+A\+\_\+\+I\+R\+Q\+Handler} (void)
+\begin{DoxyCompactList}\small\item\em Handles D\+C\+MI interrupt request. \end{DoxyCompactList}\item 
+void \hyperlink{group___c_a_m_e_r_a___m_o_d_u_l_e___functions_gac6fe6acda16e566362b2281a855871ca}{B\+S\+P\+\_\+\+C\+A\+M\+E\+R\+A\+\_\+\+D\+M\+A\+\_\+\+I\+R\+Q\+Handler} (void)
+\begin{DoxyCompactList}\small\item\em Handles D\+MA interrupt request. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group___c_a_m_e_r_a___m_o_d_u_l_e___functions_gac6fe6acda16e566362b2281a855871ca}\label{group___c_a_m_e_r_a___m_o_d_u_l_e___functions_gac6fe6acda16e566362b2281a855871ca}} 
+\index{C\+A\+M\+E\+R\+A\+\_\+\+M\+O\+D\+U\+L\+E\+\_\+\+Functions@{C\+A\+M\+E\+R\+A\+\_\+\+M\+O\+D\+U\+L\+E\+\_\+\+Functions}!B\+S\+P\+\_\+\+C\+A\+M\+E\+R\+A\+\_\+\+D\+M\+A\+\_\+\+I\+R\+Q\+Handler@{B\+S\+P\+\_\+\+C\+A\+M\+E\+R\+A\+\_\+\+D\+M\+A\+\_\+\+I\+R\+Q\+Handler}}
+\index{B\+S\+P\+\_\+\+C\+A\+M\+E\+R\+A\+\_\+\+D\+M\+A\+\_\+\+I\+R\+Q\+Handler@{B\+S\+P\+\_\+\+C\+A\+M\+E\+R\+A\+\_\+\+D\+M\+A\+\_\+\+I\+R\+Q\+Handler}!C\+A\+M\+E\+R\+A\+\_\+\+M\+O\+D\+U\+L\+E\+\_\+\+Functions@{C\+A\+M\+E\+R\+A\+\_\+\+M\+O\+D\+U\+L\+E\+\_\+\+Functions}}
+\subsubsection{\texorpdfstring{B\+S\+P\+\_\+\+C\+A\+M\+E\+R\+A\+\_\+\+D\+M\+A\+\_\+\+I\+R\+Q\+Handler()}{BSP\_CAMERA\_DMA\_IRQHandler()}}
+{\footnotesize\ttfamily void B\+S\+P\+\_\+\+C\+A\+M\+E\+R\+A\+\_\+\+D\+M\+A\+\_\+\+I\+R\+Q\+Handler (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Handles D\+MA interrupt request. 
+
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+\mbox{\Hypertarget{group___c_a_m_e_r_a___m_o_d_u_l_e___functions_ga23ee2565a63761a4c740d9805d6c35b4}\label{group___c_a_m_e_r_a___m_o_d_u_l_e___functions_ga23ee2565a63761a4c740d9805d6c35b4}} 
+\index{C\+A\+M\+E\+R\+A\+\_\+\+M\+O\+D\+U\+L\+E\+\_\+\+Functions@{C\+A\+M\+E\+R\+A\+\_\+\+M\+O\+D\+U\+L\+E\+\_\+\+Functions}!B\+S\+P\+\_\+\+C\+A\+M\+E\+R\+A\+\_\+\+I\+R\+Q\+Handler@{B\+S\+P\+\_\+\+C\+A\+M\+E\+R\+A\+\_\+\+I\+R\+Q\+Handler}}
+\index{B\+S\+P\+\_\+\+C\+A\+M\+E\+R\+A\+\_\+\+I\+R\+Q\+Handler@{B\+S\+P\+\_\+\+C\+A\+M\+E\+R\+A\+\_\+\+I\+R\+Q\+Handler}!C\+A\+M\+E\+R\+A\+\_\+\+M\+O\+D\+U\+L\+E\+\_\+\+Functions@{C\+A\+M\+E\+R\+A\+\_\+\+M\+O\+D\+U\+L\+E\+\_\+\+Functions}}
+\subsubsection{\texorpdfstring{B\+S\+P\+\_\+\+C\+A\+M\+E\+R\+A\+\_\+\+I\+R\+Q\+Handler()}{BSP\_CAMERA\_IRQHandler()}}
+{\footnotesize\ttfamily void B\+S\+P\+\_\+\+C\+A\+M\+E\+R\+A\+\_\+\+I\+R\+Q\+Handler (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Handles D\+C\+MI interrupt request. 
+
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+\mbox{\Hypertarget{group___c_a_m_e_r_a___m_o_d_u_l_e___functions_ga54aa8bb67e77b0ce7b12d4686c923480}\label{group___c_a_m_e_r_a___m_o_d_u_l_e___functions_ga54aa8bb67e77b0ce7b12d4686c923480}} 
+\index{C\+A\+M\+E\+R\+A\+\_\+\+M\+O\+D\+U\+L\+E\+\_\+\+Functions@{C\+A\+M\+E\+R\+A\+\_\+\+M\+O\+D\+U\+L\+E\+\_\+\+Functions}!Camera\+\_\+\+Continuous@{Camera\+\_\+\+Continuous}}
+\index{Camera\+\_\+\+Continuous@{Camera\+\_\+\+Continuous}!C\+A\+M\+E\+R\+A\+\_\+\+M\+O\+D\+U\+L\+E\+\_\+\+Functions@{C\+A\+M\+E\+R\+A\+\_\+\+M\+O\+D\+U\+L\+E\+\_\+\+Functions}}
+\subsubsection{\texorpdfstring{Camera\+\_\+\+Continuous()}{Camera\_Continuous()}}
+{\footnotesize\ttfamily void Camera\+\_\+\+Continuous (\begin{DoxyParamCaption}\item[{uint8\+\_\+t $\ast$}]{buffer }\end{DoxyParamCaption})}
+
+
+
+Starts the camera in continuous mode. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em buffer} & pointer to the camera output buffer \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+\mbox{\Hypertarget{group___c_a_m_e_r_a___m_o_d_u_l_e___functions_ga25ba046b6cf761dd2b1813740277f30c}\label{group___c_a_m_e_r_a___m_o_d_u_l_e___functions_ga25ba046b6cf761dd2b1813740277f30c}} 
+\index{C\+A\+M\+E\+R\+A\+\_\+\+M\+O\+D\+U\+L\+E\+\_\+\+Functions@{C\+A\+M\+E\+R\+A\+\_\+\+M\+O\+D\+U\+L\+E\+\_\+\+Functions}!Camera\+\_\+\+Initalise@{Camera\+\_\+\+Initalise}}
+\index{Camera\+\_\+\+Initalise@{Camera\+\_\+\+Initalise}!C\+A\+M\+E\+R\+A\+\_\+\+M\+O\+D\+U\+L\+E\+\_\+\+Functions@{C\+A\+M\+E\+R\+A\+\_\+\+M\+O\+D\+U\+L\+E\+\_\+\+Functions}}
+\subsubsection{\texorpdfstring{Camera\+\_\+\+Initalise()}{Camera\_Initalise()}}
+{\footnotesize\ttfamily uint8\+\_\+t Camera\+\_\+\+Initalise (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Initializes the camera. 
+
+
+\begin{DoxyRetVals}{Return values}
+{\em Status} & Camera status \\
+\hline
+\end{DoxyRetVals}
+\mbox{\Hypertarget{group___c_a_m_e_r_a___m_o_d_u_l_e___functions_ga60e0802ecd6407c7f68ede1eec94276c}\label{group___c_a_m_e_r_a___m_o_d_u_l_e___functions_ga60e0802ecd6407c7f68ede1eec94276c}} 
+\index{C\+A\+M\+E\+R\+A\+\_\+\+M\+O\+D\+U\+L\+E\+\_\+\+Functions@{C\+A\+M\+E\+R\+A\+\_\+\+M\+O\+D\+U\+L\+E\+\_\+\+Functions}!Camera\+\_\+\+Pause@{Camera\+\_\+\+Pause}}
+\index{Camera\+\_\+\+Pause@{Camera\+\_\+\+Pause}!C\+A\+M\+E\+R\+A\+\_\+\+M\+O\+D\+U\+L\+E\+\_\+\+Functions@{C\+A\+M\+E\+R\+A\+\_\+\+M\+O\+D\+U\+L\+E\+\_\+\+Functions}}
+\subsubsection{\texorpdfstring{Camera\+\_\+\+Pause()}{Camera\_Pause()}}
+{\footnotesize\ttfamily void Camera\+\_\+\+Pause (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Pauses the camera stream. 
+
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+\mbox{\Hypertarget{group___c_a_m_e_r_a___m_o_d_u_l_e___functions_gab3250105511ee890c3047100eea0c3e7}\label{group___c_a_m_e_r_a___m_o_d_u_l_e___functions_gab3250105511ee890c3047100eea0c3e7}} 
+\index{C\+A\+M\+E\+R\+A\+\_\+\+M\+O\+D\+U\+L\+E\+\_\+\+Functions@{C\+A\+M\+E\+R\+A\+\_\+\+M\+O\+D\+U\+L\+E\+\_\+\+Functions}!Camera\+\_\+\+Resume@{Camera\+\_\+\+Resume}}
+\index{Camera\+\_\+\+Resume@{Camera\+\_\+\+Resume}!C\+A\+M\+E\+R\+A\+\_\+\+M\+O\+D\+U\+L\+E\+\_\+\+Functions@{C\+A\+M\+E\+R\+A\+\_\+\+M\+O\+D\+U\+L\+E\+\_\+\+Functions}}
+\subsubsection{\texorpdfstring{Camera\+\_\+\+Resume()}{Camera\_Resume()}}
+{\footnotesize\ttfamily void Camera\+\_\+\+Resume (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Resumes the camera stream. 
+
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+\mbox{\Hypertarget{group___c_a_m_e_r_a___m_o_d_u_l_e___functions_gaad66df57dbd5546f0a8dbe4a4d88fcf6}\label{group___c_a_m_e_r_a___m_o_d_u_l_e___functions_gaad66df57dbd5546f0a8dbe4a4d88fcf6}} 
+\index{C\+A\+M\+E\+R\+A\+\_\+\+M\+O\+D\+U\+L\+E\+\_\+\+Functions@{C\+A\+M\+E\+R\+A\+\_\+\+M\+O\+D\+U\+L\+E\+\_\+\+Functions}!Camera\+\_\+\+Snapshot@{Camera\+\_\+\+Snapshot}}
+\index{Camera\+\_\+\+Snapshot@{Camera\+\_\+\+Snapshot}!C\+A\+M\+E\+R\+A\+\_\+\+M\+O\+D\+U\+L\+E\+\_\+\+Functions@{C\+A\+M\+E\+R\+A\+\_\+\+M\+O\+D\+U\+L\+E\+\_\+\+Functions}}
+\subsubsection{\texorpdfstring{Camera\+\_\+\+Snapshot()}{Camera\_Snapshot()}}
+{\footnotesize\ttfamily void Camera\+\_\+\+Snapshot (\begin{DoxyParamCaption}\item[{uint16\+\_\+t $\ast$}]{buffer }\end{DoxyParamCaption})}
+
+
+
+Captures a snapshot of the camera. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em buffer} & pointer to the camera output buffer \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}

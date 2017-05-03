@@ -1,0 +1,61 @@
+\hypertarget{structjpeg__error__mgr}{}\section{jpeg\+\_\+error\+\_\+mgr Struct Reference}
+\label{structjpeg__error__mgr}\index{jpeg\+\_\+error\+\_\+mgr@{jpeg\+\_\+error\+\_\+mgr}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structjpeg__error__mgr_a0c05a9190ca968926282812fa0e5bdfe}\label{structjpeg__error__mgr_a0c05a9190ca968926282812fa0e5bdfe}} 
+{\bfseries J\+M\+E\+T\+H\+OD} (void, error\+\_\+exit,(\hyperlink{structjpeg__common__struct}{j\+\_\+common\+\_\+ptr} cinfo))
+\item 
+\mbox{\Hypertarget{structjpeg__error__mgr_a50af831b472f19f50782e113652db477}\label{structjpeg__error__mgr_a50af831b472f19f50782e113652db477}} 
+{\bfseries J\+M\+E\+T\+H\+OD} (void, emit\+\_\+message,(\hyperlink{structjpeg__common__struct}{j\+\_\+common\+\_\+ptr} cinfo, int msg\+\_\+level))
+\item 
+\mbox{\Hypertarget{structjpeg__error__mgr_aa8271bf787f32d4605f5fa84793e6c81}\label{structjpeg__error__mgr_aa8271bf787f32d4605f5fa84793e6c81}} 
+{\bfseries J\+M\+E\+T\+H\+OD} (void, output\+\_\+message,(\hyperlink{structjpeg__common__struct}{j\+\_\+common\+\_\+ptr} cinfo))
+\item 
+\mbox{\Hypertarget{structjpeg__error__mgr_adb6450d2eddd917ba14ae0a58d439061}\label{structjpeg__error__mgr_adb6450d2eddd917ba14ae0a58d439061}} 
+{\bfseries J\+M\+E\+T\+H\+OD} (void, format\+\_\+message,(\hyperlink{structjpeg__common__struct}{j\+\_\+common\+\_\+ptr} cinfo, char $\ast$buffer))
+\item 
+\mbox{\Hypertarget{structjpeg__error__mgr_a7eb28e10bfc179c1d09becadd9446cf0}\label{structjpeg__error__mgr_a7eb28e10bfc179c1d09becadd9446cf0}} 
+{\bfseries J\+M\+E\+T\+H\+OD} (void, reset\+\_\+error\+\_\+mgr,(\hyperlink{structjpeg__common__struct}{j\+\_\+common\+\_\+ptr} cinfo))
+\end{DoxyCompactItemize}
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structjpeg__error__mgr_ad6ade3e336c32f7e17f1d5d008299ce4}\label{structjpeg__error__mgr_ad6ade3e336c32f7e17f1d5d008299ce4}} 
+int {\bfseries msg\+\_\+code}
+\item 
+\mbox{\Hypertarget{structjpeg__error__mgr_a271d8836513226e685b4858ad3068ef9}\label{structjpeg__error__mgr_a271d8836513226e685b4858ad3068ef9}} 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+union \{\\
+\>int {\bfseries i} \mbox{[}8\mbox{]}\\
+\>char {\bfseries s} \mbox{[}JMSG\_STR\_PARM\_MAX\mbox{]}\\
+\} {\bfseries msg\_parm}\\
+
+\end{tabbing}\item 
+\mbox{\Hypertarget{structjpeg__error__mgr_a5a9bb49b93f61cb0227d351713cfe8ea}\label{structjpeg__error__mgr_a5a9bb49b93f61cb0227d351713cfe8ea}} 
+int {\bfseries trace\+\_\+level}
+\item 
+\mbox{\Hypertarget{structjpeg__error__mgr_a102ca7eee046f7755e58cc06c98d3717}\label{structjpeg__error__mgr_a102ca7eee046f7755e58cc06c98d3717}} 
+long {\bfseries num\+\_\+warnings}
+\item 
+\mbox{\Hypertarget{structjpeg__error__mgr_aad9c671fbd6a86f22d3ec0f08ade8062}\label{structjpeg__error__mgr_aad9c671fbd6a86f22d3ec0f08ade8062}} 
+const char $\ast$const  $\ast$ {\bfseries jpeg\+\_\+message\+\_\+table}
+\item 
+\mbox{\Hypertarget{structjpeg__error__mgr_a4aed1a44cf42578bfdc886cceeb373a9}\label{structjpeg__error__mgr_a4aed1a44cf42578bfdc886cceeb373a9}} 
+int {\bfseries last\+\_\+jpeg\+\_\+message}
+\item 
+\mbox{\Hypertarget{structjpeg__error__mgr_a6df0306d10dc559dc3732f9c3cd30096}\label{structjpeg__error__mgr_a6df0306d10dc559dc3732f9c3cd30096}} 
+const char $\ast$const  $\ast$ {\bfseries addon\+\_\+message\+\_\+table}
+\item 
+\mbox{\Hypertarget{structjpeg__error__mgr_a788ee77db4c9a5ae6ca7130e6b22222b}\label{structjpeg__error__mgr_a788ee77db4c9a5ae6ca7130e6b22222b}} 
+int {\bfseries first\+\_\+addon\+\_\+message}
+\item 
+\mbox{\Hypertarget{structjpeg__error__mgr_a8032b6191616d1c2864901939aa9c1ec}\label{structjpeg__error__mgr_a8032b6191616d1c2864901939aa9c1ec}} 
+int {\bfseries last\+\_\+addon\+\_\+message}
+\end{DoxyCompactItemize}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+James/\+Documents/\+Camera-\/\+Microcontroller/\+Third\+\_\+\+Party/\+Lib\+J\+P\+E\+G/include/jpeglib.\+h\end{DoxyCompactItemize}

@@ -1,23 +1,61 @@
-
+/**
+  ******************************************************************************
+  * @file    jpeg_read.c
+  * @author  j.rogers2@uea.ac.uk
+  * @version V1.0.0
+  * @date    25-March-2017
+  * @brief   Methods to read a jpeg image from a file.
+  ******************************************************************************
+  */
+	
+/* Includes ------------------------------------------------------------------*/
 #include <stdlib.h>
-
-/* FatFs includes component */
 #include "ff_gen_drv.h"
 #include "sd_diskio.h"
-
-/* Jpeg includes component */
 #include <stdint.h>
 #include <string.h>
 #include "jpeglib.h"
-
 #include "jpeg_read.h"
 #include "jpeg_rgb.h"
 
+/** @defgroup JPEG_READ
+  * @{
+  */
+
+/** @defgroup JPEG_READE_Private_Variables
+  * @{
+  */
+	
 struct jpeg_decompress_struct cinfo;
 struct jpeg_error_mgr jerr;
+
+/**
+  * @}
+  */ 
+	
+/** @addtogroup JPEG_READ_Functions
+  * @{
+  */
  
+ /**
+  * @brief  Converts a 24 bit image buffer row to a 16 bit image buffer
+	* @param	row: A pointer to an image buffer row
+	* @param	buffer: Pointer to an image buffer
+	*	@param 	rowNum: The row number
+	* @param  width: width of the image
+	* @param  height: eight of the image
+  * @retval Status: Read status
+  */
 static uint8_t processBuffer(uint8_t* Row, uint8_t *buffer, uint32_t rowNum, uint16_t width, uint16_t height);
 
+/**
+  * @brief  Reads a jpeg image from a fil.
+	* @param	file: A pointer to a FIL object
+	* @param	buffer: Pointer to an image buffer
+	* @param  img_width: pointer to the width of the image
+	* @param  img_height: pointer to the height of the image
+  * @retval None
+  */
 void jpeg_read(FIL *file, uint8_t *buffer, uint16_t *img_width, uint16_t *img_height)
 { 
 	
@@ -72,6 +110,15 @@ void jpeg_read(FIL *file, uint8_t *buffer, uint16_t *img_width, uint16_t *img_he
   free(jBuffer[0]);
 }
 
+ /**
+  * @brief  Converts a 24 bit image buffer row to a 16 bit image buffer
+	* @param	row: A pointer to an image buffer row
+	* @param	buffer: Pointer to an image buffer
+	*	@param 	rowNum: The row number
+	* @param  width: width of the image
+	* @param  height: eight of the image
+  * @retval Status: Read status
+  */
 static uint8_t processBuffer(uint8_t* Row, uint8_t *buffer, uint32_t rowNum, uint16_t width, uint16_t height)
 {
 	uint32_t  offset = 0;
@@ -98,3 +145,8 @@ static uint8_t processBuffer(uint8_t* Row, uint8_t *buffer, uint32_t rowNum, uin
 	
 	return 1;
 }
+
+/**
+  * @}
+  */ 
+
