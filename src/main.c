@@ -28,6 +28,11 @@
 #include "sdcard_module.h"
 #include "main.h"
 
+void Thread (void const *arg)
+{
+	
+}
+
 #ifdef RTE_CMSIS_RTOS_RTX
 extern uint32_t os_time;
 
@@ -133,7 +138,6 @@ int main (void) {
 	// Camera
 	CameraApp_initalise();
 	Camera_run();
-	
 	
 	for (;;) {					/* loop forever */
 			

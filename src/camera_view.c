@@ -33,7 +33,7 @@ extern int Camera_Global_DrawToScreen;
 unsigned int num_viewEntities;
 
 
-void Camera_View_TakePhoto(void);
+uint8_t Camera_View_TakePhoto(void);
 
 void Camera_View_Initalise(void)
 {
@@ -89,14 +89,18 @@ enum CAMERA_STATE Camera_View_Run(void)
 	// Check if the button is pressed
 	if(Button_Pressed())
 	{
-			Camera_View_TakePhoto();
+			if(!Camera_View_TakePhoto())
+			{
+				Camera_Pause();
+				Error_DisplayMessage("Failed to take Photo");
+			}
 	}
 	
 	// Remain in the same state/
 	return CAMERA_VIEW;
 }
 
-void Camera_View_TakePhoto(void)
+uint8_t Camera_View_TakePhoto(void)
 {
 	// Take a snapshot and store in buffer
 	Camera_Snapshot((uint16_t *)Camera_BufferAddress());
@@ -105,7 +109,7 @@ void Camera_View_TakePhoto(void)
 	uint16_t numFiles;
 	if(SDCard_GetNumFileType(&numFiles, PHOTO_ICONDIRECTORY, "BMP", 3) != SDCARD_OK)
 	{
-		while(1){}
+		return 0;
 	}
 		
 	// Create image file names by using the count of the number of images on the SD card
@@ -121,9 +125,9 @@ void Camera_View_TakePhoto(void)
 	//
 		
 	FIL file;
-	if(SDCard_OpenFile(&file, file_jpg, FA_WRITE | FA_CREATE_NEW) != SDCARD_OK)
+	if(SDCard_OpenFile(&file, file_jpg, FA_WRITE | FA_CREATE_ALWAYS) != SDCARD_OK)
 	{
-		while(1){}
+		return 0;
 	}
 		
 	jpeg_write(&file, (uint8_t *)Camera_BufferAddress(), 480, 272);
@@ -131,7 +135,7 @@ void Camera_View_TakePhoto(void)
 	// Close the file
 	if(SDCard_CloseFile(&file)!= SDCARD_OK)
 	{
-		while(1){}
+		return 0;
 	}
 		
 	//
@@ -140,18 +144,20 @@ void Camera_View_TakePhoto(void)
 		
 	if(SDCard_OpenFile(&file, file_bmp, FA_WRITE | FA_CREATE_NEW) != SDCARD_OK)
 	{
-		while(1){}
+		return 0;
 	}
 		
 	// Write buffer to bmp
 	if(bmp_write(&file, (uint8_t *)Camera_BufferAddress(), 480, 272, 48, 48) != BMPWRITE_OK)
 	{
-		while(1){}
+		return 0;
 	}
 		
 	// Close the file
 	if(SDCard_CloseFile(&file)!= SDCARD_OK)
 	{
-		while(1){}
+		return 0;
 	}
+	
+	return 1;
 }
