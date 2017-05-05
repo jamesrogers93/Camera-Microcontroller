@@ -4,7 +4,7 @@
   * @author  j.rogers2@uea.ac.uk
   * @version V1.0.0
   * @date    25-March-2017
-  * @brief   Methods to read a jpeg image from a file.
+  * @brief   An interface to read a jpeg image from a file.
   ******************************************************************************
   */
 	
@@ -15,11 +15,19 @@
 /* Includes ------------------------------------------------------------------*/
 #include "ff.h"
 
+/** @addtogroup JPEG_MODULE
+  * @{
+  */
+
 /** @defgroup JPEG_READ
   * @{
   */
 	
-/** @defgroup JPEG_READ_STATUS
+/** @defgroup JPEG_READ_Public_Defines
+  * @{
+  */
+	
+/** @defgroup JPEG_READ_Status
   * @{
   */
 	
@@ -30,7 +38,11 @@
   * @}
   */ 
 	
-/** @defgroup JPEG_READ_Functions
+/**
+  * @}
+  */ 
+	
+/** @defgroup JPEG_READ_Public_Functions
   * @{
   */
 
@@ -48,6 +60,10 @@ void jpeg_read(FIL *file, uint8_t *buffer, uint16_t *img_width, uint16_t *img_he
   * @}
   */ 
 
+/**
+  * @}
+  */ 
+	
 /**
   * @}
   */ 

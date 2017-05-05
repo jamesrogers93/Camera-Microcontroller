@@ -4,7 +4,7 @@
   * @author  j.rogers2@uea.ac.uk
   * @version V1.0.0
   * @date    03-05-2017
-  * @brief   An interface for communicating with a camera connected through DCMI.
+  * @brief   An implementation for communicating with a camera connected through DCMI.
 	*
   ******************************************************************************
   */ 
@@ -15,6 +15,10 @@
 #include "stm32746g_discovery.h"
 #include "stm32746g_discovery_camera.h"
 #include "Board_GLCD.h"
+
+/** @addtogroup CAMERA_MODULE
+  * @{
+  */
 
 /** @defgroup CAMERA_MODULE_Private_Defines
   * @{
@@ -46,7 +50,7 @@
 
 extern DCMI_HandleTypeDef  hDcmiHandler;
 
-/** @addtogroup CAMERA_MODULE_Functions
+/** @addtogroup CAMERA_MODULE_Public_Functions
   * @{
   */
 	
@@ -119,6 +123,14 @@ void Camera_Snapshot(uint16_t *buffer)
 }
 
 /**
+  * @}
+  */ 
+
+/** @addtogroup CAMERA_MODULE_Private_Functions
+  * @{
+  */
+
+/**
   * @brief  Handles DCMI interrupt request.
   * @retval None
   */
@@ -135,6 +147,10 @@ void BSP_CAMERA_DMA_IRQHandler(void)
 {
   HAL_DMA_IRQHandler(hDcmiHandler.DMA_Handle);
 }
+
+/**
+  * @}
+  */ 
 
 /**
   * @}

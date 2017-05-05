@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    sdcard.h 
+  * @file    sdcard_module.h 
   * @author  j.rogers2@uea.ac.uk
   * @version V1.0.0
   * @date    25-March-2017
@@ -20,7 +20,11 @@
   * @{
   */
 	
-/** @defgroup SDCARD_MODULE_STATUS
+/** @defgroup SDCARD_MODULE_Public_Defines
+  * @{
+  */
+	
+/** @defgroup SDCARD_MODULE_Status
   * @{
   */
  
@@ -33,7 +37,11 @@
   * @}
   */ 
 	
-/** @defgroup SDCARD_MODULE_Functions
+/**
+  * @}
+  */ 
+	
+/** @defgroup SDCARD_MODULE_Public_Functions
   * @{
   */
 

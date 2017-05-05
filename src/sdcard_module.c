@@ -1,10 +1,10 @@
 /**
   ******************************************************************************
-  * @file    sdcard.c
+  * @file    sdcard_module.c
   * @author  j.rogers2@uea.ac.uk
   * @version V1.0.0
   * @date    25-March-2017
-  * @brief   An interface for communicating with an SD card.
+  * @brief   An implementation for communicating with an SD card.
   ******************************************************************************
   */
 
@@ -15,6 +15,10 @@
 #include "ff_gen_drv.h"
 #include "sd_diskio.h"
 
+/** @addtogroup SDCARD_MODULE
+  * @{
+  */
+	
 /** @defgroup SDCARD_MODULE_Private_Variables
   * @{
   */
@@ -33,7 +37,7 @@ FATFS fs;
   * @}
   */
 	
-/** @addtogroup SDCARD_MODULE_Functions
+/** @addtogroup SDCARD_MODULE_Public_Functions
   * @{
   */
 
@@ -260,6 +264,10 @@ uint8_t SDCard_GetNumFileType(uint16_t *numFiles, const char* DirName, const cha
 	
   return SDCARD_OK;
 }
+
+/**
+  * @}
+  */ 
 
 /**
   * @}

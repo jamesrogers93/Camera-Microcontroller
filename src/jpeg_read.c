@@ -4,7 +4,7 @@
   * @author  j.rogers2@uea.ac.uk
   * @version V1.0.0
   * @date    25-March-2017
-  * @brief   Methods to read a jpeg image from a file.
+  * @brief   An implementation to read a jpeg image from a file.
   ******************************************************************************
   */
 	
@@ -18,11 +18,15 @@
 #include "jpeg_read.h"
 #include "jpeg_rgb.h"
 
+/** @addtogroup JPEG_MODULE
+  * @{
+  */
+
 /** @defgroup JPEG_READ
   * @{
   */
 
-/** @defgroup JPEG_READE_Private_Variables
+/** @defgroup JPEG_READ_Private_Variables
   * @{
   */
 	
@@ -33,7 +37,7 @@ struct jpeg_error_mgr jerr;
   * @}
   */ 
 	
-/** @addtogroup JPEG_READ_Functions
+/** @addtogroup JPEG_READ_Private_Functions
   * @{
   */
  
@@ -47,6 +51,40 @@ struct jpeg_error_mgr jerr;
   * @retval Status: Read status
   */
 static uint8_t processBuffer(uint8_t* Row, uint8_t *buffer, uint32_t rowNum, uint16_t width, uint16_t height);
+static uint8_t processBuffer(uint8_t* Row, uint8_t *buffer, uint32_t rowNum, uint16_t width, uint16_t height)
+{
+	uint32_t  offset = 0;
+	RGB_typedef *RGB_matrix;
+	
+	offset = ((uint32_t)buffer + (width * (height - rowNum) * 2));
+	RGB_matrix =  (RGB_typedef*)Row;
+	int index = 0;
+	for (index = 0; index < width; index++)
+  {
+		// Convert RGB888 to RGB565.
+		// Also swap RB.
+		uint8_t Red16   = RGB_matrix[index].B  >> 3;  // 5-bit red
+    uint8_t Green16 = RGB_matrix[index].G  >> 2;  // 6-bit green
+    uint8_t Blue16  = RGB_matrix[index].R  >> 3;  // 5-bit blue
+		
+		unsigned short col = (unsigned short) Blue16 + (Green16<<5) + (Red16<<(5+6));
+
+		*(__IO uint8_t*) (offset) = *((uint8_t *)&col);
+		offset++;
+		*(__IO uint8_t*) (offset) = *((uint8_t *)&col+1); 
+		offset++;
+	}  
+	
+	return 1;
+}
+
+/**
+  * @}
+  */
+
+/** @addtogroup JPEG_READ_Public_Functions
+  * @{
+  */
 
 /**
   * @brief  Reads a jpeg image from a fil.
@@ -110,41 +148,13 @@ void jpeg_read(FIL *file, uint8_t *buffer, uint16_t *img_width, uint16_t *img_he
   free(jBuffer[0]);
 }
 
- /**
-  * @brief  Converts a 24 bit image buffer row to a 16 bit image buffer
-	* @param	row: A pointer to an image buffer row
-	* @param	buffer: Pointer to an image buffer
-	*	@param 	rowNum: The row number
-	* @param  width: width of the image
-	* @param  height: eight of the image
-  * @retval Status: Read status
-  */
-static uint8_t processBuffer(uint8_t* Row, uint8_t *buffer, uint32_t rowNum, uint16_t width, uint16_t height)
-{
-	uint32_t  offset = 0;
-	RGB_typedef *RGB_matrix;
-	
-	offset = ((uint32_t)buffer + (width * (height - rowNum) * 2));
-	RGB_matrix =  (RGB_typedef*)Row;
-	int index = 0;
-	for (index = 0; index < width; index++)
-  {
-		// Convert RGB888 to RGB565.
-		// Also swap RB.
-		uint8_t Red16   = RGB_matrix[index].B  >> 3;  // 5-bit red
-    uint8_t Green16 = RGB_matrix[index].G  >> 2;  // 6-bit green
-    uint8_t Blue16  = RGB_matrix[index].R  >> 3;  // 5-bit blue
-		
-		unsigned short col = (unsigned short) Blue16 + (Green16<<5) + (Red16<<(5+6));
+/**
+  * @}
+  */ 
 
-		*(__IO uint8_t*) (offset) = *((uint8_t *)&col);
-		offset++;
-		*(__IO uint8_t*) (offset) = *((uint8_t *)&col+1); 
-		offset++;
-	}  
-	
-	return 1;
-}
+/**
+  * @}
+  */
 
 /**
   * @}

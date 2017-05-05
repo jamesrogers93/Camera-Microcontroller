@@ -20,7 +20,11 @@
   * @{
   */
 	
-/** @defgroup CAMERA_MODULE_STATUS
+/** @defgroup CAMERA_MODULE_Public_Defines
+  * @{
+  */
+	
+/** @defgroup CAMERA_MODULE_Status
   * @{
   */
 	
@@ -30,8 +34,12 @@
 /**
   * @}
   */ 
+	
+/**
+  * @}
+  */ 
 
-/** @defgroup CAMERA_MODULE_Functions
+/** @defgroup CAMERA_MODULE_Public_Functions
   * @{
   */
 	

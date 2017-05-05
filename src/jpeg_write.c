@@ -1,17 +1,35 @@
-
+/**
+  ******************************************************************************
+  * @file    jpeg_write.c 
+  * @author  j.rogers2@uea.ac.uk
+  * @version V1.0.0
+  * @date    05-05-2017
+  * @brief   An implementation to write a 16bit rgb image buffer to a jpeg file.
+	*
+  ******************************************************************************
+  */ 
+	
+/* Includes ------------------------------------------------------------------*/
 #include <stdlib.h>
-
-/* FatFs includes component */
 #include "ff_gen_drv.h"
 #include "sd_diskio.h"
-
-/* Jpeg includes component */
 #include <stdint.h>
 #include <string.h>
 #include "jpeglib.h"
-
 #include "jpeg_write.h"
 #include "jpeg_rgb.h"
+
+/** @addtogroup JPEG_MODULE
+  * @{
+  */
+
+/** @defgroup JPEG_WRITE
+  * @{
+  */
+	
+/** @defgroup JPEG_WRITE_Public_Functions
+  * @{
+  */
   
 	
 void jpeg_write(FIL *file, uint8_t *buffer, uint16_t img_width, uint16_t img_height)
@@ -132,3 +150,15 @@ void jpeg_write(FIL *file, uint8_t *buffer, uint16_t img_width, uint16_t img_hei
   jpeg_destroy_compress(&cinfo);
 	
 }
+
+/**
+  * @}
+  */ 
+	
+/**
+  * @}
+  */ 
+
+/**
+  * @}
+  */ 

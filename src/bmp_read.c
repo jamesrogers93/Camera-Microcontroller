@@ -1,16 +1,50 @@
-
+/**
+  ******************************************************************************
+  * @file    bmp_read.c
+  * @author  j.rogers2@uea.ac.uk
+  * @version V1.0.0
+  * @date    25-March-2017
+  * @brief   An implementation to read a bmp image from a file.
+  ******************************************************************************
+  */
+	
+/* Includes ------------------------------------------------------------------*/
 #include "bmp_read.h"
-
 #include "bmp_fileHeader.h"
-
-/* FatFs includes component */
 #include "ff_gen_drv.h"
 #include "sd_diskio.h"
 
+/** @addtogroup BMP_MODULE
+  * @{
+  */
+
+/** @defgroup BMP_READ
+  * @{
+  */
+	
+/** @defgroup BMP_READ_Private_Variables
+  * @{
+  */
 
 uint8_t sector[512];
 uint32_t BytesRead = 0;
 
+/**
+  * @}
+  */ 
+	
+/** @defgroup BMP_READ_Public_Functions
+  * @{
+  */
+
+/**
+  * @brief  Reads a bmp image from a fil.
+	* @param	file: A pointer to a FIL object
+	* @param	buffer: Pointer to an image buffer
+	* @param  img_width: pointer to the width of the image
+	* @param  img_height: pointer to the height of the image
+  * @retval status: The status of the bmp reader
+  */
 uint8_t bmp_read(FIL *file, uint8_t *buffer, uint16_t *img_width, uint16_t *img_height)
 {
 	uint8_t status = BMPREAD_ERROR;
@@ -67,3 +101,15 @@ uint8_t bmp_read(FIL *file, uint8_t *buffer, uint16_t *img_width, uint16_t *img_
 	
 	return status;
 }
+
+/**
+  * @}
+  */ 
+
+/**
+  * @}
+  */ 
+	
+/**
+  * @}
+  */ 

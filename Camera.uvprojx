@@ -385,6 +385,41 @@
               <FilePath>.\headers\main.h</FilePath>
             </File>
             <File>
+              <FileName>entity.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\headers\entity.h</FilePath>
+            </File>
+            <File>
+              <FileName>error_message.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\headers\error_message.h</FilePath>
+            </File>
+            <File>
+              <FileName>main.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\main.c</FilePath>
+            </File>
+            <File>
+              <FileName>entity.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\entity.c</FilePath>
+            </File>
+            <File>
+              <FileName>error_message.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\error_message.c</FilePath>
+            </File>
+            <File>
+              <FileName>jdata_conf.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\jdata_conf.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>camera_application</GroupName>
+          <Files>
+            <File>
               <FileName>camera.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\headers\camera.h</FilePath>
@@ -405,21 +440,6 @@
               <FilePath>.\headers\camera_globals.h</FilePath>
             </File>
             <File>
-              <FileName>entity.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\headers\entity.h</FilePath>
-            </File>
-            <File>
-              <FileName>error_message.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\headers\error_message.h</FilePath>
-            </File>
-            <File>
-              <FileName>main.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\main.c</FilePath>
-            </File>
-            <File>
               <FileName>camera.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\src\camera.c</FilePath>
@@ -438,21 +458,6 @@
               <FileName>camera_globals.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\src\camera_globals.c</FilePath>
-            </File>
-            <File>
-              <FileName>entity.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\entity.c</FilePath>
-            </File>
-            <File>
-              <FileName>error_message.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\error_message.c</FilePath>
-            </File>
-            <File>
-              <FileName>jdata_conf.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\jdata_conf.c</FilePath>
             </File>
           </Files>
         </Group>
