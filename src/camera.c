@@ -21,6 +21,9 @@
 #include "Camera_View.h"
 #include "Camera_Photos.h"
 
+// RTOS
+#include "cmsis_os.h"
+
 extern GLCD_FONT     GLCD_Font_16x24;
 extern int Camera_Global_DrawToScreen;
 
@@ -30,6 +33,9 @@ enum CAMERA_STATE Camera_State = CAMERA_VIEW;
 
 void Camera_PromptSDCard(void);
 
+void Camera_runThread(void const *arg);
+osThreadDef(Camera_runThread, osPriorityNormal, 1, 0);
+
 void CameraApp_initalise(void)
 {
 	Camera_View_Initalise();
@@ -37,6 +43,17 @@ void CameraApp_initalise(void)
 }
 
 void Camera_run(void)
+{
+	Camera_runThread(0);
+	//osThreadId id1;
+	//id1 = osThreadCreate(osThread(Camera_runThread), NULL);
+	//if(id1 == NULL)
+	//{
+		 //Failed to create thread
+	//}
+}
+
+void Camera_runThread(void const *arg)
 {
 	while(RUN)
 	{

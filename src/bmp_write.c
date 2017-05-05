@@ -1,10 +1,41 @@
+/**
+  ******************************************************************************
+  * @file    bmp_write.c
+  * @author  j.rogers2@uea.ac.uk
+  * @version V1.0.0
+  * @date    25-March-2017
+  * @brief   An implementation to write a bmp image to a file.
+  ******************************************************************************
+  */
+	
+/* Includes ------------------------------------------------------------------*/
 #include "bmp_write.h"
 #include "bmp_fileheader.h"
-
-/* FatFs includes component */
 #include "ff_gen_drv.h"
 #include "sd_diskio.h"
 
+/** @addtogroup BMP_MODULE
+  * @{
+  */
+
+/** @defgroup BMP_WRITE
+  * @{
+  */
+	
+/** @defgroup BMP_WRITE_Public_Functions
+  * @{
+  */
+	
+/**
+  * @brief  Writes a bmp image to a FIL.
+	* @param	file: A pointer to a FIL object
+	* @param	buffer: Pointer to an image buffer
+	* @param  img_width: width of the image
+	* @param  img_height: height of the image
+	* @param  target_width: target width of the image to be written
+	* @param  target_height: target height of the image to be written
+  * @retval status: The status of the bmp reader
+  */
 uint8_t bmp_write(FIL *file, uint8_t *buffer, uint16_t img_width, uint16_t img_height, uint16_t target_width, uint16_t target_height)
 {
 	uint8_t status = BMPWRITE_ERROR;
@@ -141,3 +172,15 @@ uint8_t bmp_write(FIL *file, uint8_t *buffer, uint16_t img_width, uint16_t img_h
 	status = BMPWRITE_OK;
 	return status;
 }
+
+/**
+  * @}
+  */ 
+
+/**
+  * @}
+  */ 
+	
+/**
+  * @}
+  */ 

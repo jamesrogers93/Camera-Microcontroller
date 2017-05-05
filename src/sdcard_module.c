@@ -1,26 +1,50 @@
 /**
   ******************************************************************************
-  * @file    SDCard.c
+  * @file    sdcard_module.c
   * @author  j.rogers2@uea.ac.uk
   * @version V1.0.0
   * @date    25-March-2017
-  * @brief   This file provides functions for the SDCard
+  * @brief   An implementation for communicating with an SD card.
   ******************************************************************************
   */
 
 /* Includes ------------------------------------------------------------------*/
 #include "sdcard_module.h"
-
 #include "stm32746g_discovery.h"
-
-// FatFs
 #include "ff.h"
 #include "ff_gen_drv.h"
 #include "sd_diskio.h"
 
+/** @addtogroup SDCARD_MODULE
+  * @{
+  */
+	
+/** @defgroup SDCARD_MODULE_Private_Variables
+  * @{
+  */
+
+/**
+  * @brief The path to the SD card
+  */
 char SD_Path[4];
+
+/**
+  * @brief The FatFS file system
+  */
 FATFS fs;
 
+/**
+  * @}
+  */
+	
+/** @addtogroup SDCARD_MODULE_Public_Functions
+  * @{
+  */
+
+/**
+  * @brief  Initializes the SD card.
+  * @retval Status: SD card status
+  */
 uint8_t SDCard_Initalise(void)
 {
 	if(BSP_SD_Init() != MSD_OK)
@@ -37,11 +61,22 @@ uint8_t SDCard_Initalise(void)
 	return SDCARD_OK;
 }
 
+/**
+  * @brief  Checks if the SD card is detected.
+  * @retval Status: SD card status
+  */
 uint8_t SDCard_IsDetected(void)
 {
 	return BSP_SD_IsDetected() == SD_PRESENT;
 }
 
+/**
+  * @brief  Opens a file from the SD card.
+	* @param	Fil: A pointer to a file object
+	* @param	filePath: The file path to the file
+	* @param	mode: The file open mode
+  * @retval Status: SD card status
+  */
 uint8_t SDCard_OpenFile(FIL *file, const char *filePath, uint8_t mode)
 {
 	  // Open filesystem
@@ -60,6 +95,11 @@ uint8_t SDCard_OpenFile(FIL *file, const char *filePath, uint8_t mode)
 	return SDCARD_OK;
 }
 
+/**
+  * @brief  Closes a file in the SD card.
+	* @param	Fil: A pointer to a file object
+  * @retval Status: SD card status
+  */
 uint8_t SDCard_CloseFile(FIL *file)
 {
 	f_close (file);
@@ -68,6 +108,16 @@ uint8_t SDCard_CloseFile(FIL *file)
 	return SDCARD_OK;
 }
 
+/**
+  * @brief  Gets BMP file names from the SD card.
+	* @param	numFiles: Will equal to the number of bmp files found
+	* @param	DirName: The directory path
+	* @param	Files: An array which will be filled of bmp file names found
+	* @param	maxFiles: The max number of files to be read
+	* @param	maxFileName: The max size of the file names
+	* @param 	startIndex: The files index to start navigating
+  * @retval Status: SD card status
+  */
 uint8_t SDCard_GetBMPFileName(uint16_t *numFiles, const char* DirName, char* Files[], const unsigned int maxFiles, const unsigned int maxFileName, const unsigned int startIndex)
 {
   FILINFO fno;
@@ -143,6 +193,14 @@ uint8_t SDCard_GetBMPFileName(uint16_t *numFiles, const char* DirName, char* Fil
   return SDCARD_OK;
 }
 
+/**
+  * @brief  Gets BMP file names from the SD card.
+	* @param	numFiles: Will equal to the number of bmp files found
+	* @param	DirName: The directory path
+	* @param	FileType: The file type to be found
+	* @param	FileTypeLen: The max length of the files retrieved
+  * @retval Status: SD card status
+  */
 uint8_t SDCard_GetNumFileType(uint16_t *numFiles, const char* DirName, const char* FileType, const uint8_t FileTypeLen)
 {
   FILINFO fno;
@@ -206,3 +264,11 @@ uint8_t SDCard_GetNumFileType(uint16_t *numFiles, const char* DirName, const cha
 	
   return SDCARD_OK;
 }
+
+/**
+  * @}
+  */ 
+
+/**
+  * @}
+  */ 
