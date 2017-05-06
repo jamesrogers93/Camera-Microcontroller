@@ -29,9 +29,10 @@
   */
  
 #define SDCARD_OK								((uint8_t)0x00)
-#define SDCARD_ERROR_INITALISE  ((uint8_t)0x01)
-#define SDCARD_ERROR_DRIVER  		((uint8_t)0x02)
-#define SDCARD_ERROR_FILE  			((uint8_t)0x03)
+#define SDCARD_ERROR_DETECTED		((uint8_t)0x01)
+#define SDCARD_ERROR_INITALISE  ((uint8_t)0x02)
+#define SDCARD_ERROR_DRIVER  		((uint8_t)0x03)
+#define SDCARD_ERROR_FILE  			((uint8_t)0x04)
 
 /**
   * @}

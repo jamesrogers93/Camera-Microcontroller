@@ -23,10 +23,10 @@
 #include "GLCD_Config.h"
 #include "Board_Touch.h"
 #include "Board_Buttons.h"
-#include "Camera.h"
 #include "camera_module.h"
 #include "sdcard_module.h"
 #include "main.h"
+#include "camera_main.h"
 
 void Thread (void const *arg)
 {
@@ -99,6 +99,7 @@ static void Camera_Config(void)
 	Camera_Initalise();
 	Camera_Continuous((uint8_t *)GLCD_FrameBufferAddress());
 	Camera_Pause();
+	GLCD_ClearScreen();
 }
 
 static void SDCard_Config(void)
@@ -136,8 +137,7 @@ int main (void) {
 	SDCard_Config();
 	
 	// Camera
-	CameraApp_initalise();
-	Camera_run();
+	camera_run();
 	
 	for (;;) {					/* loop forever */
 			

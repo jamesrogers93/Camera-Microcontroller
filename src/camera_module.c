@@ -102,7 +102,7 @@ void Camera_Continuous(uint8_t *buffer)
   */
 void Camera_Snapshot(uint16_t *buffer)
 {
-	Camera_Pause();
+	//Camera_Pause();
 	
 	uint16_t *Camera_ptr = buffer;
 	uint16_t *GLCD_ptr = (uint16_t *)GLCD_FrameBufferAddress() + CAMERA_WIDTH*(CAMERA_HEIGHT-1);
@@ -119,7 +119,7 @@ void Camera_Snapshot(uint16_t *buffer)
 		GLCD_ptr -= CAMERA_WIDTH * CAMREA_BYTESPERPIXEL;
 	}
 	
-	Camera_Resume();
+	//Camera_Resume();
 }
 
 /**

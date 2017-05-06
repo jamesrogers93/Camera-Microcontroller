@@ -1,0 +1,10 @@
+
+#ifndef _CAMERA_OPTIONS_H
+#define _CAMERA_OPTIONS_H
+
+#define PHOTO_DIRECTORY "Media/Photos"
+#define PREVIEW_DIRECTORY "Media/Previews"
+#define MAX_DIRECTORYNAME_LENGTH 30
+#define MAX_FILENAME_LENGTH 12
+
+#endif /* _CAMERA_OPTIONS_H */

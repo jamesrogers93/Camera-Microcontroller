@@ -67,7 +67,14 @@ uint8_t SDCard_Initalise(void)
   */
 uint8_t SDCard_IsDetected(void)
 {
-	return BSP_SD_IsDetected() == SD_PRESENT;
+	if(BSP_SD_IsDetected() == SD_PRESENT)
+	{
+		return SDCARD_OK;
+	}
+	else
+	{	
+		return SDCARD_ERROR_DETECTED;
+	}
 }
 
 /**
