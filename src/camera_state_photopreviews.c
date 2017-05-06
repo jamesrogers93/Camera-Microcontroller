@@ -12,7 +12,6 @@
 #include "../icons/icon_camera.c"
 
 #include "touch_handler.h"
-#include "button_handler.h"
 
 #define PADDING 5
 #define MAX_COLUMN 10
@@ -86,27 +85,25 @@ uint8_t camera_photopreviews_run(void)
 										cameraButton.image->pixel_data);
 	}
 	
-	// Check if screen is touched.
+	// Check if screen is touched.	
 	Point_2D point;
-	if(Touch_Handler_Touched(&point.x, &point.y))
+	if(TouchHandler_touchPosition(&point.x, &point.y) == TOUCHSCREEN_TOUCHED)
 	{
+		
 		// Check if entity is touched
 		if(Entity_Point_Collision(&cameraButton, &point) != 0)
 		{
-					
-			// Reset the touch timer
-			Touch_Handler_Reset();
-					
+							
 			// Clear the screen
 			GLCD_ClearScreen();
-					
+						
 			// Release the draw to screen flag, enabling items to be drawn again.
 			Camera_DrawToScreen = CAMERA_DRAWON;
-					
+						
 			// Make cameraview the next state
 			camera_state_ptr = &camera_cameraview_run;
 		}
-		
+			
 		// Check if picture is touched.
 		int x = point.x / PREVIEW_SIZE+1;
 		if(point.y > PREVIEW_HEIGHT_PADDING)
@@ -115,21 +112,21 @@ uint8_t camera_photopreviews_run(void)
 			if(y < MAX_ROW)
 			{
 				// Touched in the preview zone.
-						
+							
 				// Now check if touched a image.
 				int imgTouched = MAX_COLUMN * y + x;
 				if(imgTouched <= numPreviewsOnScreen1)
 				{
 					// Collision with image.
-							
+								
 					// Store the image touched.
 					photoSpecificID = imgTouched;
-							
+								
 					// Release the draw to screen flag, enabling items to be drawn again.
 					Camera_DrawToScreen = CAMERA_DRAWON;
-							
+								
 					GLCD_ClearScreen();
-							
+								
 					// Switch to displaying a full image.
 					camera_state_ptr = &camera_photospecific_run;
 				}						

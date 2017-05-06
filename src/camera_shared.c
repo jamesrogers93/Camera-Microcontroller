@@ -3,7 +3,6 @@
 
 #include "GLCD_Config.h"
 
-uint8_t(*camera_state_ptr)(void);
 uint8_t Camera_DrawToScreen = CAMERA_DRAWON;
 
 uint32_t photoSpecificID = 0;

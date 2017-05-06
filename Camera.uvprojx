@@ -390,11 +390,6 @@
               <FilePath>.\headers\entity.h</FilePath>
             </File>
             <File>
-              <FileName>error_message.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\headers\error_message.h</FilePath>
-            </File>
-            <File>
               <FileName>main.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\src\main.c</FilePath>
@@ -405,99 +400,19 @@
               <FilePath>.\src\entity.c</FilePath>
             </File>
             <File>
-              <FileName>error_message.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\error_message.c</FilePath>
-            </File>
-            <File>
               <FileName>jdata_conf.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\jdata_conf.c</FilePath>
             </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>camera_application_v2</GroupName>
-          <Files>
             <File>
-              <FileName>camera_main.h</FileName>
+              <FileName>stm32f7xx_it.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\headers\camera_main.h</FilePath>
+              <FilePath>.\stm32f7xx_it.h</FilePath>
             </File>
             <File>
-              <FileName>camera_state_cameraview.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\headers\camera_state_cameraview.h</FilePath>
-            </File>
-            <File>
-              <FileName>camera_state_photopreviews.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\headers\camera_state_photopreviews.h</FilePath>
-            </File>
-            <File>
-              <FileName>camera_state_sdprompt.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\headers\camera_state_sdprompt.h</FilePath>
-            </File>
-            <File>
-              <FileName>camera_state_takepicture.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\headers\camera_state_takepicture.h</FilePath>
-            </File>
-            <File>
-              <FileName>camera_shared.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\headers\camera_shared.h</FilePath>
-            </File>
-            <File>
-              <FileName>camera_main.c</FileName>
+              <FileName>stm32f7xx_it.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\src\camera_main.c</FilePath>
-            </File>
-            <File>
-              <FileName>camera_state_cameraview.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\camera_state_cameraview.c</FilePath>
-            </File>
-            <File>
-              <FileName>camera_state_photopreviews.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\camera_state_photopreviews.c</FilePath>
-            </File>
-            <File>
-              <FileName>camera_state_sdprompt.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\camera_state_sdprompt.c</FilePath>
-            </File>
-            <File>
-              <FileName>camera_state_takepicture.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\camera_state_takepicture.c</FilePath>
-            </File>
-            <File>
-              <FileName>camera_states.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\headers\camera_states.h</FilePath>
-            </File>
-            <File>
-              <FileName>camera_shared.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\camera_shared.c</FilePath>
-            </File>
-            <File>
-              <FileName>camera_options.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\camera_options.h</FilePath>
-            </File>
-            <File>
-              <FileName>camera_state_photospecific.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\headers\camera_state_photospecific.h</FilePath>
-            </File>
-            <File>
-              <FileName>camera_state_photospecific.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\camera_state_photospecific.c</FilePath>
+              <FilePath>.\stm32f7xx_it.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -505,44 +420,69 @@
           <GroupName>camera_application</GroupName>
           <Files>
             <File>
-              <FileName>camera.h</FileName>
+              <FileName>camera_main.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\headers\camera.h</FilePath>
+              <FilePath>.\headers\camera_main.h</FilePath>
             </File>
             <File>
-              <FileName>camera_view.h</FileName>
+              <FileName>camera_states.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\headers\camera_view.h</FilePath>
+              <FilePath>.\headers\camera_states.h</FilePath>
             </File>
             <File>
-              <FileName>camera_photos.h</FileName>
+              <FileName>camera_state_photopreviews.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\headers\camera_photos.h</FilePath>
+              <FilePath>.\headers\camera_state_photopreviews.h</FilePath>
             </File>
             <File>
-              <FileName>camera_globals.h</FileName>
+              <FileName>camera_shared.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\headers\camera_globals.h</FilePath>
+              <FilePath>.\headers\camera_shared.h</FilePath>
             </File>
             <File>
-              <FileName>camera.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\camera.c</FilePath>
+              <FileName>camera_options.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\camera_options.h</FilePath>
             </File>
             <File>
-              <FileName>camera_view.c</FileName>
+              <FileName>camera_main.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\src\camera_view.c</FilePath>
+              <FilePath>.\src\camera_main.c</FilePath>
             </File>
             <File>
-              <FileName>camera_photos.c</FileName>
+              <FileName>camera_states.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\src\camera_photos.c</FilePath>
+              <FilePath>.\src\camera_states.c</FilePath>
             </File>
             <File>
-              <FileName>camera_globals.c</FileName>
+              <FileName>camera_state_cameraview.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\src\camera_globals.c</FilePath>
+              <FilePath>.\src\camera_state_cameraview.c</FilePath>
+            </File>
+            <File>
+              <FileName>camera_state_takepicture.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\camera_state_takepicture.c</FilePath>
+            </File>
+            <File>
+              <FileName>camera_state_photopreviews.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\camera_state_photopreviews.c</FilePath>
+            </File>
+            <File>
+              <FileName>camera_state_photospecific.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\camera_state_photospecific.c</FilePath>
+            </File>
+            <File>
+              <FileName>camera_state_sdprompt.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\camera_state_sdprompt.c</FilePath>
+            </File>
+            <File>
+              <FileName>camera_shared.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\camera_shared.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -640,24 +580,14 @@
           <GroupName>input_module</GroupName>
           <Files>
             <File>
-              <FileName>touch_handler.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\headers\touch_handler.h</FilePath>
-            </File>
-            <File>
-              <FileName>button_handler.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\headers\button_handler.h</FilePath>
-            </File>
-            <File>
               <FileName>touch_handler.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\src\touch_handler.c</FilePath>
             </File>
             <File>
-              <FileName>button_handler.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\button_handler.c</FilePath>
+              <FileName>touch_handler.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\headers\touch_handler.h</FilePath>
             </File>
           </Files>
         </Group>

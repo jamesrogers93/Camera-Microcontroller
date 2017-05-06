@@ -5,7 +5,6 @@
 #include "jpeg_read.h"
 #include "Board_GLCD.h"
 #include "GLCD_Config.h"
-#include "entity.h"
 #include <stdlib.h>
 
 #include "touch_handler.h"
@@ -42,25 +41,22 @@ uint8_t camera_photospecific_run(void)
 			return CAMERA_ERROR;
 		}
 	}
-			
-	// Check if screen is touched.
-	Point_2D point;
-	if(Touch_Handler_Touched(&point.y, &point.y))
-	{
-		// Reset the touch timer
-		Touch_Handler_Reset();
-				
+	
+	int x = 0;
+	int y = 0;
+	if(TouchHandler_touchPosition(&x, &y) == TOUCHSCREEN_TOUCHED)
+	{		
 		// Release the draw to screen flag, enabling items to be drawn again.
 		Camera_DrawToScreen = CAMERA_DRAWON;
-							
+								
 		// Clear the screen
 		GLCD_ClearScreen();
-			
+				
 		// Switch state back to displaying the previews.
 		camera_state_ptr = &camera_photopreviews_run;
 	}
 			
-		return CAMERA_OK;
+	return CAMERA_OK;
 }
 
 uint8_t drawPhoto(const uint32_t index)

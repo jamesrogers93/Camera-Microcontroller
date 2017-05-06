@@ -28,16 +28,12 @@
 #include "main.h"
 #include "camera_main.h"
 
-void Thread (void const *arg)
-{
-	
-}
 
 #ifdef RTE_CMSIS_RTOS_RTX
 extern uint32_t os_time;
 
 uint32_t HAL_GetTick(void) { 
-  return os_time; 
+ return os_time; 
 }
 #endif
 
@@ -86,6 +82,32 @@ static void SystemClock_Config (void) {
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_6);
 }
 
+/** Configure pins as 
+        * Analog 
+        * Input 
+        * Output
+        * EVENT_OUT
+        * EXTI
+*/
+static void GPIO_Init(void)
+{
+
+	GPIO_InitTypeDef GPIO_InitStruct;
+
+  /* GPIO Ports Clock Enable */
+  __HAL_RCC_GPIOI_CLK_ENABLE();
+
+  /*Configure GPIO pins : PI11 PI13 */
+  GPIO_InitStruct.Pin = GPIO_PIN_11|GPIO_PIN_13;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING; //GPIO_MODE_IT_RISING_FALLING GPIO_MODE_IT_FALLING
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOI, &GPIO_InitStruct);
+
+  /* EXTI interrupt init*/
+  HAL_NVIC_SetPriority(EXTI15_10_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
+}
+
 static void GLCD_Config()
 {
 	GLCD_Initialize();
@@ -128,8 +150,8 @@ int main (void) {
   HAL_Init();                               /* Initialize the HAL Library     */
   BSP_SDRAM_Init();                         /* Initialize BSP SDRAM           */
   SystemClock_Config();                     /* Configure the System Clock     */
+	GPIO_Init();															/* Configure GPIO Pins 			   		*/
 	
-	//ADC_Initialize();
   Touch_Initialize();                            /* Touchscrn Controller Init */
 	Buttons_Initialize();
 	GLCD_Config();
