@@ -150,18 +150,66 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>160</LineNumber>
+          <LineNumber>50</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134223838</Address>
+          <Address>134251110</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\stm32f7xx_it.c</Filename>
+          <Filename>.\src\bmp_read.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\Camera\stm32f7xx_it.c\160</Expression>
+          <Expression>\\Camera\src/bmp_read.c\50</Expression>
+        </Bp>
+        <Bp>
+          <Number>1</Number>
+          <Type>0</Type>
+          <LineNumber>200</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134310894</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>.\src\camera_state_photopreviews.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\Camera\src/camera_state_photopreviews.c\200</Expression>
+        </Bp>
+        <Bp>
+          <Number>2</Number>
+          <Type>0</Type>
+          <LineNumber>191</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134310876</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>.\src\camera_state_photopreviews.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\Camera\src/camera_state_photopreviews.c\191</Expression>
+        </Bp>
+        <Bp>
+          <Number>3</Number>
+          <Type>0</Type>
+          <LineNumber>185</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134310856</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>.\src\camera_state_photopreviews.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\Camera\src/camera_state_photopreviews.c\185</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -230,7 +278,7 @@
 
   <Group>
     <GroupName>main</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -322,7 +370,7 @@
 
   <Group>
     <GroupName>camera_application</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -686,7 +734,7 @@
 
   <Group>
     <GroupName>input_module</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -806,7 +854,7 @@
 
   <Group>
     <GroupName>Third_Party/FatFs/Drivers</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1394,7 +1442,7 @@
 
   <Group>
     <GroupName>::CMSIS</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>1</RteFlg>

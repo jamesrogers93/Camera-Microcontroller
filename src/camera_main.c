@@ -2,21 +2,27 @@
 #include "camera_main.h"
 #include "camera_shared.h"
 #include "camera_states.h"
-
 #include "camera_state_photopreviews.h"
-
-#include "touch_handler.h"
+#include "cmsis_os.h"
+void camera_stateMachine(void const *argument);
+osThreadDef(camera_stateMachine, osPriorityNormal, 1, 0);
+osThreadId tid_taskA; 
 
 uint8_t status;
 
 
-void camera_stateMachine(void)
+void camera_stateMachine(void const *argument)
 {
+
 	// Run the state machine until ->
 		// The state function pointer is null. OR
 		// The state machine has finished. OR
 		// An error has occured.
-	while(camera_state_ptr != 0 && camera_state_ptr() == CAMERA_OK);
+	status = CAMERA_OK;
+	while(camera_state_ptr != 0 && status == CAMERA_OK)
+	{
+		status = camera_state_ptr();
+	}
 }
 
 uint8_t camera_run(void)
@@ -34,7 +40,11 @@ uint8_t camera_run(void)
 	camera_state_ptr = &camera_cameraview_run;
 	
 	// Run camera state machine
-	camera_stateMachine();
+	camera_stateMachine(0);
+
+	//tid_taskA = osThreadCreate(osThread(camera_stateMachine), NULL);
+	
+	for(;;);
 	
 	return status;
 }
