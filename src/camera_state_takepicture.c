@@ -28,6 +28,8 @@ uint8_t camera_takepicture_run(void)
 	// Take a snapshot and store in buffer
 	Camera_Snapshot((uint16_t *)ImageBufferAddress());
 	
+	Camera_Pause();
+	
 	// Clear screen and turn black for screen fe
 	GLCD_ClearScreen();
 	GLCD_SetBackgroundColor(GLCD_COLOR_BLACK);
@@ -92,6 +94,8 @@ uint8_t camera_takepicture_run(void)
 	
 	// Set the state back to camera view
 	camera_state_ptr = &camera_cameraview_run;
+	
+	Camera_Resume();
 	
 	return CAMERA_OK;
 }

@@ -14,6 +14,12 @@
 #include "ff_gen_drv.h"
 #include "sd_diskio.h"
 
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// DELETE BELOW
+#include "Board_GLCD.h"
+#include "GLCD_Config.h"
+/////////////////////////// END
+
 /** @addtogroup BMP_MODULE
   * @{
   */
@@ -62,39 +68,66 @@ uint8_t bmp_write(FIL *file, uint8_t *buffer, uint16_t img_width, uint16_t img_h
 	// image is 480 x 272.
 	// we want to resize it to 48x48 without warping it.
 	// sample from the center of the image or dims 272x272.
-	// for easy conversion to 48x48, we are instead going to sample from 240x240 as 48*5 < 272 && 48*6 > 272.
+	// for easy conversion to 48x48, we are instead going to sample from 240x240 as 48 is a multiple.
 	uint16_t resampleSize = 240;
 	uint16_t width = 480;
 	uint16_t height = 272;
 	
 	uint16_t discardRows = ((height - resampleSize) * 0.5);
-	uint16_t discardColums = ((width - resampleSize) * 0.5);
+	uint16_t discardColumns = ((width - resampleSize) * 0.5);
 	
-	// A pixel pointer to the start position in the image buffer
-	uint16_t *pixel = (uint16_t *)buffer + (discardRows * width + discardColums);
+	// Resize image to 240x240
 	
-	// A predefined array of neighbouring pixel indexes
-	int16_t pixelIndex[9] = {-2, -1, 1, 2, 0, -width*2, -width, width, width*2}; //{leftleft, left, right, rightright, center, belowbelow, below, aboveabove}
+	// Get pointer to the begining of the image
+	uint16_t *pixel_resize = (uint16_t *)buffer;
+	
+	// Get pointer to the begining of the image we want to sample
+	uint16_t *pixel_sample = (uint16_t *)buffer + ((width * discardRows) + discardColumns);
+	uint32_t counter = 0;
+	
+	int i;
+	for(i = 0; i < 240; i++)
+	{
+		int j;
+		for(j = 0; j < 240; j++)
+		{
+			*pixel_resize = *pixel_sample;
+			
+			pixel_resize++;
+			pixel_sample++;
+		}
+		
+		// Move pixel to starting point of next row.
+		// x2 because discard columns is only the amount of columns to be removed on one side.
+		pixel_sample += (discardColumns*2);
+	}
+	
+	// Now scale image down to 48x48
 	
 	// The new pixels array with the resized image.
 	uint16_t pixels[48 * 48] = {0};
-	uint32_t counter = 0;
+	
+	// Move pointer to the begining of the part where we want to sample
+	pixel_sample = (uint16_t *)buffer + ((resampleSize * 2) + 2);
+	
+	// Neighbouring pixel indexes
+	int pixelIndex[25] = {(-resampleSize*2)-2, (-resampleSize*2)-1, (-resampleSize*2), (-resampleSize*2)+1, (-resampleSize*2)+2,
+														(-resampleSize)-2, 	 (-resampleSize)-1,   (-resampleSize),   (-resampleSize)+1,   (-resampleSize)+2,
+														 -2, 							 	  -1, 								  0, 							   1, 								  2,
+														(resampleSize)-2, 	 (resampleSize)-1,   	 (resampleSize),    (resampleSize)+1,    (resampleSize)+2,
+													  (resampleSize*2)-2,  (resampleSize*2)-1,   (resampleSize*2),  (resampleSize*2)+1,  (resampleSize*2)+2};
 	
 	// RGB masks for conversion
 	uint16_t red_mask = 0xF800;
 	uint16_t green_mask = 0x7E0;
 	uint16_t blue_mask = 0x1F;
 	
-	int i;
 	for(i = 0; i < 48; i++)
 	{
-		
 		int j;
 		for(j = 0; j < 48; j++)
 		{
-			// Use 9 nearest neighbours to calculate colour
-
-			// Calculate 9 nearest neighbour average
+			// Sample neighbouring pixels
 			
 			// The RGB values that will be accumulated
 			uint16_t R = 0, G = 0, B = 0;
@@ -103,10 +136,11 @@ uint8_t bmp_write(FIL *file, uint8_t *buffer, uint16_t img_width, uint16_t img_h
 			uint16_t pix = 0;
 			
 			int k;
-			for(k = 0; k < 9; k++)
+			for(k = 0; k < 25; k++)
 			{
 				// Get a neighnouring pixel from the image buffer
-				pix = *(pixel + pixelIndex[k]);
+				int neighbour = pixelIndex[k];
+				pix = *(pixel_sample + neighbour);
 				
 				// Convert RGB16 to RGB888
 				uint8_t R5 = (pix & red_mask) >> 11;
@@ -123,11 +157,11 @@ uint8_t bmp_write(FIL *file, uint8_t *buffer, uint16_t img_width, uint16_t img_h
 				B += (uint16_t)B8;
 			}
 			
-			// Divide by nine for average.
+			// Divide by 25 for average.
 			//float i9 = 1/9;
-			R /= 9;
-			G /= 9;
-			B /= 9;
+			R /= 25;
+			G /= 25;
+			B /= 25;
 			
 			// Convert RGB88 back to RGB16
 			uint8_t R5 = R  >> 3;  // 5-bit red
@@ -141,13 +175,12 @@ uint8_t bmp_write(FIL *file, uint8_t *buffer, uint16_t img_width, uint16_t img_h
 			// Increment pixel index
 			counter++;
 			
-			// Increment pixel pointer
-			pixel += 5;
+			//Increment pixel sample pointer to correct column
+			pixel_sample += 5;
 		}
 		
-		// Move pixel pointer to next row
-		pixel += discardColums * 2; // times 2 for colums on both sides
-		
+		//Increment pixel sample pointer to correct row
+		pixel_sample += (resampleSize*4);
 	}
 	
 	// Write the header to file

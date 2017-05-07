@@ -11,6 +11,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "sdcard_module.h"
 #include "stm32746g_discovery.h"
+#include "stm32746g_discovery_sd.h"     // Keil.STM32F746G-Discovery::Board Support:Drivers:SD
 #include "ff.h"
 #include "ff_gen_drv.h"
 #include "sd_diskio.h"
