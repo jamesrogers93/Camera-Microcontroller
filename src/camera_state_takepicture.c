@@ -1,4 +1,15 @@
-
+/**
+  ******************************************************************************
+  * @file    camera_state_takepicture.c 
+  * @author  j.rogers2@uea.ac.uk
+  * @version V1.0.0
+  * @date    09-March-2017
+  * @brief   Defines the camera_takepicture_run() state.
+	* 
+  ******************************************************************************
+	*/
+	
+/* Includes ------------------------------------------------------------------*/
 #include "camera_states.h"
 #include "camera_shared.h"
 #include "../camera_options.h"
@@ -9,7 +20,30 @@
 #include "Board_GLCD.h"
 #include "GLCD_Config.h"
 
-
+/** @defgroup CAMERA_APPLICATION
+  * @{
+  */
+	
+/** @defgroup CAMERA_STATES
+  * @{
+  */
+	
+/** @defgroup CAMERA_STATES_TAKEPICTURE
+  * @{
+  */
+	
+/** @defgroup CAMERA_STATES_TAKEPICTURE_Public
+  * @{
+  */
+	
+/**
+  * @brief  Takes a picture.
+  * @retval status: The status of the camera
+	*
+	* This state will take a picture by storing a snapshot of the camera buffer to a BMP preview icon and a full size JPEG
+	* icon to the SD card.
+	* This state will transition to the camera_sdprompt_run() state if the SD card is not detected.
+  */
 uint8_t camera_takepicture_run(void)
 {
 	// Check if SD card is inserted
@@ -99,3 +133,19 @@ uint8_t camera_takepicture_run(void)
 	
 	return CAMERA_OK;
 }
+
+/**
+  * @}
+  */ 
+
+/**
+  * @}
+  */ 
+	
+/**
+  * @}
+  */ 
+	
+/**
+  * @}
+  */ 

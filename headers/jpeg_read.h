@@ -17,34 +17,23 @@
 
 /** @addtogroup JPEG_MODULE
   * @{
+	*
+	* Provides an interface to read and write JPEG files
   */
 
 /** @defgroup JPEG_READ
   * @{
+	*
+	*	Provides an interface to read JPEG files
   */
 	
-/** @defgroup JPEG_READ_Public_Defines
-  * @{
-  */
-	
-/** @defgroup JPEG_READ_Status
+/** @defgroup JPEG_READ_Public
   * @{
   */
 	
 #define JPGREAD_OK		((uint8_t)0x00)
 #define JPGREAD_ERROR	((uint8_t)0x01)
 
-/**
-  * @}
-  */ 
-	
-/**
-  * @}
-  */ 
-	
-/** @defgroup JPEG_READ_Public_Functions
-  * @{
-  */
 
 /**
   * @brief  Reads a jpeg image from a fil.

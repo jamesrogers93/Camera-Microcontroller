@@ -20,7 +20,7 @@
   * @{
   */
 
-/** @defgroup CAMERA_MODULE_Private_Defines
+/** @defgroup CAMERA_MODULE_Private
   * @{
   */
 
@@ -44,13 +44,13 @@
   */
 #define CAMREA_BYTESPERPIXEL		2
 
+extern DCMI_HandleTypeDef  hDcmiHandler;
+
 /**
   * @}
   */ 
 
-extern DCMI_HandleTypeDef  hDcmiHandler;
-
-/** @addtogroup CAMERA_MODULE_Public_Functions
+/** @addtogroup CAMERA_MODULE_Public
   * @{
   */
 	
@@ -126,7 +126,7 @@ void Camera_Snapshot(uint16_t *buffer)
   * @}
   */ 
 
-/** @addtogroup CAMERA_MODULE_Private_Functions
+/** @addtogroup CAMERA_MODULE_Private
   * @{
   */
 

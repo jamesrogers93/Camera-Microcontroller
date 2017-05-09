@@ -20,11 +20,7 @@
   * @{
   */
 	
-/** @defgroup SDCARD_MODULE_Public_Defines
-  * @{
-  */
-	
-/** @defgroup SDCARD_MODULE_Status
+/** @defgroup SDCARD_MODULE_Public
   * @{
   */
  
@@ -33,18 +29,6 @@
 #define SDCARD_ERROR_INITALISE  ((uint8_t)0x02)
 #define SDCARD_ERROR_DRIVER  		((uint8_t)0x03)
 #define SDCARD_ERROR_FILE  			((uint8_t)0x04)
-
-/**
-  * @}
-  */ 
-	
-/**
-  * @}
-  */ 
-	
-/** @defgroup SDCARD_MODULE_Public_Functions
-  * @{
-  */
 
 /**
   * @brief  Initializes the SD card.
@@ -99,6 +83,10 @@ uint8_t SDCard_GetNumFileType(uint16_t *numFiles, const char* DirName, const cha
 /**
   * @}
   */ 
+	
+/**
+  * @}
+  */
 	
 #endif /* _SDCARD_MODULE_H */
 

@@ -18,9 +18,11 @@
 
 /** @defgroup BMP_FILEHEADER
   * @{
+	*
+	* A data structure to contain the header of a bitmap file
   */
 	
-/** @defgroup BMP_FILEHEADER_Public_Types
+/** @defgroup BMP_FILEHEADER_Public
   * @{
   */
 	

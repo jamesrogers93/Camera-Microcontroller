@@ -27,7 +27,7 @@
   * @{
   */
 	
-/** @defgroup JPEG_WRITE_Public_Functions
+/** @defgroup JPEG_WRITE_Public
   * @{
   */
   

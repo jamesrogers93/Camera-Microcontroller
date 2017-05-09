@@ -19,9 +19,11 @@
 
 /** @defgroup JPEG_RGB
   * @{
+	*
+	*  A data structure to hold RGB components.
   */
 	
-/** @defgroup JPEG_RGB_Public_Types
+/** @defgroup JPEG_RGB_Public
   * @{
   */
 	

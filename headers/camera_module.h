@@ -18,30 +18,18 @@
 
 /** @defgroup CAMERA_MODULE
   * @{
+	*
+	* A set of functions to provide easy access to the camera.
   */
 	
-/** @defgroup CAMERA_MODULE_Public_Defines
+/** @defgroup CAMERA_MODULE_Public
   * @{
   */
 	
-/** @defgroup CAMERA_MODULE_Status
-  * @{
-  */
 	
 #define CAMERAMOD_OK		 ((uint8_t)0x00)
 #define CAMERAMOD_ERROR  ((uint8_t)0x01)
 
-/**
-  * @}
-  */ 
-	
-/**
-  * @}
-  */ 
-
-/** @defgroup CAMERA_MODULE_Public_Functions
-  * @{
-  */
 	
 /**
   * @brief  Initializes the camera.

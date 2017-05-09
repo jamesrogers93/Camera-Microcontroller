@@ -1,25 +1,33 @@
-/*--------------------------------------------------
- * Name:    main.h
- * Purpose: pong function prototypes and defs
- *--------------------------------------------------
+/**
+  ******************************************************************************
+  * @file    main.h 
+  * @author  j.rogers2@uea.ac.uk
+  * @version V1.0.0
+  * @date    09-May-2017
+  * @brief   Initalises and runs the camera application
+  ******************************************************************************
+  */
+	
+/*! \mainpage Camera Application on the STM32F746G Discovery board
  *
- * Modification History
- * 06.02.14 Created
- * 09.12.15 Updated (uVision5.17 + DFP2.6.0)
+ * \section intro_sec Introduction
  *
- * Dr Mark Fisher, CMP, UEA, Norwich, UK
- *--------------------------------------------------*/
+ * This application turns the STM32F746G Discovery board into a digital camera.
+ *
+ * The main features are:
+ *	- View the camera output on the screen in real-time
+ *  - Take photos and store them on an SD card
+ *	- Photos are saved as a JPEG and a BMP file for their miniture preview icon
+ *
+ * \section install_sec Installation
+ *
+ * \subsection step1 Step 1: Opening the box
+ *
+ * etc...
+ */
+	
+/* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef _MAIN_H
 #define _MAIN_H
-
-#define wait_delay HAL_Delay
-#define WIDTH		GLCD_WIDTH
-#define HEIGHT	GLCD_HEIGHT
-#define T_LONG	1000                /* Long delay */
-#define T_SHORT 5                   /* Short delay */
-
-
-/* Function Prototypes */
-	
 
 #endif /* _MAIN_H */

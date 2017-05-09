@@ -4,18 +4,11 @@
   * @author  j.rogers2@uea.ac.uk
   * @version V1.0.0
   * @date    25-03-2017
-  * @brief   Pong Game!
+  * @brief   Initalises and runs the camera application
   ******************************************************************************
-  * @attention
-  *
-  * Note: The functions:
-  *   SystemClock_Config ( )
-  *   CPU_CACHE_Enable ( )
-  * are copied from the uVision5 examples provided with DFP supporting the board.
-  *
-  ******************************************************************************
-  */
+*/
 	
+/* Includes ------------------------------------------------------------------*/
 #include "stm32f7xx_hal.h"
 #include "stm32746g_discovery_sdram.h"
 #include "RTE_Components.h"

@@ -1,16 +1,60 @@
-
+/**
+  ******************************************************************************
+  * @file    camera_main.c
+  * @author  j.rogers2@uea.ac.uk
+  * @version V1.0.0
+  * @date    09-May-2017
+  * @brief   Handles the camera application
+  ******************************************************************************
+  */
+		
+/* Includes ------------------------------------------------------------------*/
 #include "camera_main.h"
 #include "camera_shared.h"
 #include "camera_states.h"
 #include "camera_state_photopreviews.h"
 #include "cmsis_os.h"
-void camera_stateMachine(void const *argument);
-osThreadDef(camera_stateMachine, osPriorityNormal, 1, 0);
+
+/** @addtogroup CAMERA_APPLICATION
+  * @{
+  */
+	
+/** @addtogroup CAMERA_MAIN
+  * @{
+  */
+	
+/** @defgroup CAMERA_MAIN_Private
+  * @{
+  */
+	
+/**
+  * @brief  Holds the RTOS task ID for the state machine (NOT IN USE).
+  */
 osThreadId tid_taskA; 
 
+/**
+  * @brief  The status of the camera.
+  */
 uint8_t status;
 
+	
+/**
+  * @brief  Runs the camera state machine.
+  * @retval None:
+  */
+void camera_stateMachine(void const *argument);
 
+
+/**
+  * @brief  Defines the statemachine macro for RTOS tasks.
+  */
+osThreadDef(camera_stateMachine, osPriorityNormal, 1, 0);
+
+	
+/**
+  * @brief  Runs the camera state machine.
+  * @retval None:
+  */
 void camera_stateMachine(void const *argument)
 {
 
@@ -25,6 +69,18 @@ void camera_stateMachine(void const *argument)
 	}
 }
 
+/**
+  * @}
+  */ 
+
+/** @addtogroup CAMERA_MAIN_Public
+  * @{
+  */
+
+/**
+  * @brief  The main entry point to start the camera application.
+  * @retval status: The status of the camera
+  */
 uint8_t camera_run(void)
 {
 	
@@ -48,3 +104,15 @@ uint8_t camera_run(void)
 	
 	return status;
 }
+
+/**
+  * @}
+  */ 
+
+/**
+  * @}
+  */ 
+
+/**
+  * @}
+  */ 

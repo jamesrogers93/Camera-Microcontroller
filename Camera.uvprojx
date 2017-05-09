@@ -385,19 +385,9 @@
               <FilePath>.\headers\main.h</FilePath>
             </File>
             <File>
-              <FileName>entity.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\headers\entity.h</FilePath>
-            </File>
-            <File>
               <FileName>main.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\src\main.c</FilePath>
-            </File>
-            <File>
-              <FileName>entity.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\entity.c</FilePath>
             </File>
             <File>
               <FileName>jdata_conf.c</FileName>
@@ -592,22 +582,27 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>bitmaps</GroupName>
+          <GroupName>data_structures</GroupName>
           <Files>
             <File>
-              <FileName>Icon_Browse.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Icons\Icon_Browse.c</FilePath>
+              <FileName>entity.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\headers\entity.h</FilePath>
             </File>
+            <File>
+              <FileName>entity.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\entity.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>bitmaps</GroupName>
+          <Files>
             <File>
               <FileName>Icon_Camera.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Icons\Icon_Camera.c</FilePath>
-            </File>
-            <File>
-              <FileName>Icon_Photos.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Icons\Icon_Photos.c</FilePath>
             </File>
           </Files>
         </Group>

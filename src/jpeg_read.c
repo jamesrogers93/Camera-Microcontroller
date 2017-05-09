@@ -26,20 +26,20 @@
   * @{
   */
 
-/** @defgroup JPEG_READ_Private_Variables
+/** @defgroup JPEG_READ_Private
   * @{
   */
 	
+/**
+  * @brief  Information retrieved from the LibJPEG loader
+  */
 struct jpeg_decompress_struct cinfo;
-struct jpeg_error_mgr jerr;
 
 /**
-  * @}
-  */ 
-	
-/** @addtogroup JPEG_READ_Private_Functions
-  * @{
+  * @brief  Error retrieved from the LibJPEG loader
   */
+struct jpeg_error_mgr jerr;
+
  
  /**
   * @brief  Converts a 24 bit image buffer row to a 16 bit image buffer
@@ -82,7 +82,7 @@ static uint8_t processBuffer(uint8_t* Row, uint8_t *buffer, uint32_t rowNum, uin
   * @}
   */
 
-/** @addtogroup JPEG_READ_Public_Functions
+/** @addtogroup JPEG_READ_Public
   * @{
   */
 

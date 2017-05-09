@@ -18,34 +18,22 @@
 
 /** @addtogroup BMP_MODULE
   * @{
+	*
+	* Provides an interface to read and write BMP files
   */
 
 /** @defgroup BMP_READ
   * @{
+	*
+	*	Provides an interface to read BMP files
   */
 	
-/** @defgroup BMP_READ_Public_Defines
-  * @{
-  */
-	
-/** @defgroup BMP_READ_Status
+/** @defgroup BMP_READ_Public
   * @{
   */
 	
 #define BMPREAD_OK		((uint8_t)0x00)
 #define BMPREAD_ERROR	((uint8_t)0x01)
-
-/**
-  * @}
-  */ 
-	
-/**
-  * @}
-  */ 
-	
-/** @defgroup BMP_READ_Public_Functions
-  * @{
-  */
 
 /**
   * @brief  Reads a bmp image from a fil.

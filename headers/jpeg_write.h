@@ -22,30 +22,16 @@
 	
 /** @defgroup JPEG_WRITE
   * @{
+	*
+	* An interface to write an image buffer to a JPEG file.
   */
 	
-/** @defgroup JPEG_WRITE_Public_Defines
-  * @{
-  */
-	
-/** @defgroup JPEG_WRITE_Status
+/** @defgroup JPEG_WRITE_Public
   * @{
   */
 	
 #define JPGWRITE_OK			((uint8_t)0x00)
 #define JPGWRITE_ERROR	((uint8_t)0x01)
-
-/**
-  * @}
-  */ 
-	
-/**
-  * @}
-  */ 
-	
-/** @defgroup JPEG_WRITE_Public_Functions
-  * @{
-  */
 
 /**
   * @brief  Writes a jpeg image to a FIL.

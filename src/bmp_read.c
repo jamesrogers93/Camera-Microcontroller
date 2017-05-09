@@ -22,18 +22,25 @@
   * @{
   */
 	
-/** @defgroup BMP_READ_Private_Variables
+/** @defgroup BMP_READ_Private
   * @{
   */
 
+/**
+  * @brief Used to read 512 byte chunks from a file at a time.
+  */
 uint8_t sector[512];
+
+/**
+  * @brief Indicates the number of bytes read from the a file
+  */
 uint32_t BytesRead = 0;
 
 /**
   * @}
   */ 
 	
-/** @defgroup BMP_READ_Public_Functions
+/** @defgroup BMP_READ_Public
   * @{
   */
 

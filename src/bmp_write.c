@@ -14,12 +14,6 @@
 #include "ff_gen_drv.h"
 #include "sd_diskio.h"
 
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// DELETE BELOW
-#include "Board_GLCD.h"
-#include "GLCD_Config.h"
-/////////////////////////// END
-
 /** @addtogroup BMP_MODULE
   * @{
   */
@@ -28,7 +22,7 @@
   * @{
   */
 	
-/** @defgroup BMP_WRITE_Public_Functions
+/** @defgroup BMP_WRITE_Public
   * @{
   */
 	

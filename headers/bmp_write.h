@@ -22,30 +22,16 @@
 
 /** @defgroup BMP_WRITE
   * @{
+	*
+	* An interface to write an image buffer to a BMP file.
   */
 	
-/** @defgroup BMP_WRITE_Public_Defines
-  * @{
-  */
-	
-/** @defgroup BMP_WRITE_Status
+/** @defgroup BMP_WRITE_Public
   * @{
   */
 	
 #define BMPWRITE_OK			((uint8_t)0x00)
 #define BMPWRITE_ERROR	((uint8_t)0x01)
-
-/**
-  * @}
-  */ 
-	
-/**
-  * @}
-  */
-	
-/** @defgroup BMP_WRITE_Public_Functions
-  * @{
-  */
 
 /**
   * @brief  Writes a bmp image to a FIL.

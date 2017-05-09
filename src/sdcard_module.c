@@ -18,9 +18,10 @@
 
 /** @addtogroup SDCARD_MODULE
   * @{
+	* Provides functions to easily interact with files on an SD card.
   */
 	
-/** @defgroup SDCARD_MODULE_Private_Variables
+/** @defgroup SDCARD_MODULE_Private
   * @{
   */
 
@@ -38,7 +39,7 @@ FATFS fs;
   * @}
   */
 	
-/** @addtogroup SDCARD_MODULE_Public_Functions
+/** @addtogroup SDCARD_MODULE_Public
   * @{
   */
 
