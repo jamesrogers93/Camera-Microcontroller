@@ -18,7 +18,7 @@
 /** @addtogroup JPEG_MODULE
   * @{
 	*
-	* Provides an interface to read and write JPEG files
+	* This module allows JPEG images to be read and written to and from a FatFs FIL file.
   */
 
 /** @defgroup JPEG_READ

@@ -18,7 +18,7 @@
 
 /** @addtogroup SDCARD_MODULE
   * @{
-	* Provides functions to easily interact with files on an SD card.
+	* The SD card module provides an interface to handle all SD card related functionality.
   */
 	
 /** @defgroup SDCARD_MODULE_Private

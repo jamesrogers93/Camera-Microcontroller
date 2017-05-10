@@ -4,7 +4,7 @@
   * @author  j.rogers2@uea.ac.uk
   * @version V1.0.0
   * @date    03-05-2017
-  * @brief   An interface for communicating with a camera connected through DCMI.
+  * @brief   An interface for communicating with a camera.
 	*
   ******************************************************************************
   */ 

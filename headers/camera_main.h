@@ -17,6 +17,12 @@
 
 /** @defgroup CAMERA_APPLICATION
   * @{
+	* 
+	* The camera_run() function in the camera_main.h file is the entry point to the camera 
+	* application. This function is responsible for initialising the camera and executing the 
+	* state machine. The method will only return control to the calling function if the camera 
+	* has completed it's execution, or an error has occurred during initialisation or the 
+	* execution of the state machine.
   */
 	
 /** @defgroup CAMERA_MAIN

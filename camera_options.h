@@ -14,8 +14,6 @@
 
 /** @defgroup CAMERA_APPLICATION
   * @{
-	*
-	* Camera application specific functionality.
   */
 
 /** @defgroup CAMERA_OPTIONS
