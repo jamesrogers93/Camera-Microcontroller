@@ -1,1 +1,70 @@
 # Camera-Microcontroller
+
+## Introduction
+
+This application turns the STM32F746G Discovery board into a digital camera.
+
+The main features are:
+
+- View the camera output on the screen in real-time
+- Photos are saved as a JPEG file on the SD card
+- Photo preview icons are saved as a BMP file on the SD card
+- Load and display images from the SD card to the screen
+
+This chapter will provide an overview of the design for the application and each module. It will also discuss some of the key algorithms and highlight all third party libraries used.
+
+## Camera Application
+
+The camera application module contains the camera specific functionality. It consists of a main camera function which is the entry point to executing the application. It also has a state machine which controls the flow of the application, and a camera options file which provides customisation using pre processor directives.
+
+### Camera Main
+
+The camera_run() function in the camera_main.h file is the entry point to the camera application. This function is responsible for initialising the camera and executing the state machine. The method will only return control to the calling function if the camera has completed it's execution, or an error has occurred during initialisation or the execution of the state machine.
+
+### State Machine
+
+The state machine is used to control the flow and behaviour of the camera application. It includes the following states:
+
+- Camera View
+- Take Picture
+- Photo Previews
+- Photo Specific
+- SD Card Prompt
+
+The current state is executed using a function pointer. As default in the camera_run() function, the state function pointer is initialised to the Camera View state. States are changed from within the current state by modifying the function pointer to point to the next state based on certain conditions. Once the current state has finished, the next state will execute. Each state has access to a file named camera_shared.h, which contains resources that are shared amongst the states. An example of it's use is when the user presses a photo preview in the Photo Previews State. The ID of the photo is stored in the shared file, then the state is transitioned to the Photo Specific state, in which it will use the photo ID to retrieve the JPEG image from the SD card and display it to screen. Another example is a draw to screen flag. To prevent states from repeatedly drawing the same content to screen every frame, a flag is used which indicates whether the state is allowed to draw to screen. Once a state first draws to screen, it flips the flag. The flag will only be re set if graphical content in the state changes or the state transitions to a new one. Each state is independent from the others, this allows for easy expandability as new states can be added or existing ones can be removed. The function prototypes for all states are declared in the camera_states.h file; the definition for each state is defined in it's own c file. This allows for all states to know about each other in order to transition the state, but not depend on each other or share unwanted resources.
+
+### Camera Options
+
+In the camera_options.h file, there are four pre processor definitions that modify the behaviour of the application. In this version, the modifiable values include the directories of the JPEG full size photos, and the BMP preview photos on the SD card. When all states access images on the SD card, they will search for them using these specified directories. For future work, new definitions could be added to this file that specifies the resolution of the camera and the size of the JPEG images when saving them to file.
+
+### RTOS TASK
+
+The camera application runs on the main thread on the RTOS. Due to the nature of the camera, additional tasks are not used. This is because the camera application is sequential.
+
+### External Interrupts
+
+An external interrupt has been configured to trigger once the push button has been activated to prevent polling for user input. Once the interrupt has been triggered, the state machine function pointer is changed to point to the Take Picture state only if the current state is Camera View.
+
+## Supporting Modules
+
+This section will describe the supporting modules created to aid the camera application. Each module has been designed to provide an interface to specific functionality that can be reused across multiple applications. Each module consists of a header file and a source file. The header file contains all public preprocessor directives, variables and function prototypes that are meant to be utilised by the programmer. The source file contains all definitions of the public functions, as well as all private preprocessor directives, variables and functions which are not meant to be directly accessed by the programmer. All modules also return their own status codes to indicate if the function executed with or without errors
+
+### Camera Module
+
+The camera module's purpose is to provide a simple interface to accessing the physical camera connected to the board. The module uses the Camera BSP provided by ST to provide all camera related functionality.
+
+### SD Card Module
+
+The SD card module provides an interface to handle all SD card related functionality. To check the SD card is inserted, the SD BSP provided by ST is used. To initialise the SD card, the SD BSP is used along with the FatFs library. The module also allows files to be opened and closed using FatFs.
+
+### JPEG Module
+
+This module allows JPEG images to be read and written to and from a FatFs FIL file. As JPEG images are 24bit images (RGB888), and the camera application handles 16bit images (RGB565). This module handles conversion between the two formats when reading and writing. This allows 24bit images to be written to a JPEG file, and 24bit images to be retrieved from a JPEG file. No JPEG specific data is available outside of the module. To handle the reading and writing of JPEG files, the LibJPEG third party library is used to decode and encode the files respectively. Additionally, the LibJPEG library allows images to be resize when read and written.
+
+### BMP Module
+
+This modules is similar to the JPEG module, except it allows BMP images to be read and written to file. To read and write BMP images to file, a BMP file header has been specified in bmp_fileheader.h. This is used to retrieve and specify information related to the bitmap when reading and writing respectively. Unlike the JPEG image, BMP images are 16 bit, so no conversion is necessary. This module also supports images to be resized using nearest neighbour when writing them to file.
+
+### Touch Handler
+
+The touch handler module has been created to handle all touch screen related functionality. Specifically, it provides an interface to check if the screen was touched, and if so, provide screen coordinates.
