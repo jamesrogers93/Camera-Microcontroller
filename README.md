@@ -11,7 +11,7 @@ The main features are:
 - Photo preview icons are saved as a BMP file on the SD card
 - Load and display images from the SD card to the screen
 
-This chapter will provide an overview of the design for the application and each module. It will also discuss some of the key algorithms and highlight all third party libraries used.
+This will provide an overview of the design for the application and each module. It will also discuss some of the key algorithms and highlight all third party libraries used.
 
 ## Camera Application
 
